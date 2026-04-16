@@ -387,33 +387,6 @@
     /* ===== Portfolio ===== */
     .portfolio { background: var(--white); }
 
-    .portfolio-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .portfolio-tab {
-      padding: 0.5rem 1.5rem;
-      border: 2px solid var(--mint);
-      border-radius: 24px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: none;
-      color: var(--mint);
-      font-family: 'M PLUS Rounded 1c', sans-serif;
-      font-weight: 500;
-    }
-    .portfolio-tab.active,
-    .portfolio-tab:hover {
-      background: var(--mint);
-      color: var(--white);
-      border-color: var(--mint);
-      transform: scale(1.05);
-    }
-
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -423,26 +396,21 @@
     .portfolio-item {
       aspect-ratio: 1;
       border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: var(--text-mid);
+      overflow: hidden;
       cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
-      overflow: hidden;
-      font-weight: 500;
+      background: #f0f0f0;
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .portfolio-item:hover {
       transform: scale(1.08) translateY(-4px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }
-    .portfolio-item:nth-child(6n+1) { background: linear-gradient(135deg, #FF85C0, #FF1493); }
-    .portfolio-item:nth-child(6n+2) { background: linear-gradient(135deg, #66EAAA, #00C853); }
-    .portfolio-item:nth-child(6n+3) { background: linear-gradient(135deg, #FFE44D, #FFD700); }
-    .portfolio-item:nth-child(6n+4) { background: linear-gradient(135deg, #B07AFF, #8A2BE2); }
-    .portfolio-item:nth-child(6n+5) { background: linear-gradient(135deg, #5CB8FF, #1E90FF); }
-    .portfolio-item:nth-child(6n)   { background: linear-gradient(135deg, #FFA040, #FF6347); }
 
     .btn-more {
       display: block;
@@ -903,8 +871,9 @@
 
     /* ===== Footer ===== */
     .footer {
-      background: #2A2035;
-      color: rgba(255,255,255,0.6);
+      background: #fff;
+      color: var(--text-mid);
+      border-top: 2px solid #f0f0f0;
       padding: 3rem 1.5rem;
       text-align: center;
     }
@@ -917,13 +886,13 @@
     .footer-social a {
       width: 40px;
       height: 40px;
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 2px solid var(--lavender-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.7rem;
-      color: rgba(255,255,255,0.5);
+      color: var(--lavender);
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       letter-spacing: 0;
       font-weight: 600;
@@ -940,7 +909,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       font-family: 'Poppins', sans-serif;
-      color: rgba(255,255,255,0.35);
+      color: var(--text-light);
     }
   </style>
 </head>
@@ -1021,37 +990,70 @@
       <h2 class="section-title fade-in">Portfolio</h2>
       <p class="section-subtitle fade-in">SELECTED WORKS</p>
 
-      <div class="portfolio-tabs fade-in">
-        <button class="portfolio-tab active" data-filter="all">ALL</button>
-        <button class="portfolio-tab" data-filter="natural">ナチュラル</button>
-        <button class="portfolio-tab" data-filter="art">アート</button>
-        <button class="portfolio-tab" data-filter="cosplay">コスプレ</button>
-      </div>
-
       <div class="portfolio-grid fade-in">
-        <div class="portfolio-item" data-category="natural">Natural 01</div>
-        <div class="portfolio-item" data-category="art">Art 01</div>
-        <div class="portfolio-item" data-category="natural">Natural 02</div>
-        <div class="portfolio-item" data-category="cosplay">Cosplay 01</div>
-        <div class="portfolio-item" data-category="natural">Natural 03</div>
-        <div class="portfolio-item" data-category="art">Art 02</div>
-        <div class="portfolio-item" data-category="cosplay">Cosplay 02</div>
-        <div class="portfolio-item" data-category="natural">Natural 04</div>
-        <div class="portfolio-item" data-category="art">Art 03</div>
-        <div class="portfolio-item" data-category="natural">Natural 05</div>
-        <div class="portfolio-item" data-category="cosplay">Cosplay 03</div>
-        <div class="portfolio-item" data-category="natural">Natural 06</div>
-        <div class="portfolio-item" data-category="art">Art 04</div>
-        <div class="portfolio-item" data-category="natural">Natural 07</div>
-        <div class="portfolio-item" data-category="cosplay">Cosplay 04</div>
-        <div class="portfolio-item" data-category="art">Art 05</div>
-        <div class="portfolio-item" data-category="natural">Natural 08</div>
-        <div class="portfolio-item" data-category="cosplay">Cosplay 05</div>
-        <div class="portfolio-item" data-category="art">Art 06</div>
-        <div class="portfolio-item" data-category="natural">Natural 09</div>
+        <div class="portfolio-item"><img src="images/portfolio-01.jpg" alt="Portfolio 01" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-02.jpg" alt="Portfolio 02" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-03.jpg" alt="Portfolio 03" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-04.jpg" alt="Portfolio 04" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-05.jpg" alt="Portfolio 05" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-06.jpg" alt="Portfolio 06" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-07.jpg" alt="Portfolio 07" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-08.jpg" alt="Portfolio 08" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-09.jpg" alt="Portfolio 09" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-10.jpg" alt="Portfolio 10" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-11.jpg" alt="Portfolio 11" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-12.jpg" alt="Portfolio 12" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-13.jpg" alt="Portfolio 13" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-14.jpg" alt="Portfolio 14" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-15.jpg" alt="Portfolio 15" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-16.jpg" alt="Portfolio 16" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-17.jpg" alt="Portfolio 17" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-18.jpg" alt="Portfolio 18" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-19.jpg" alt="Portfolio 19" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-20.jpg" alt="Portfolio 20" loading="lazy"></div>
       </div>
 
-      <button class="btn-more fade-in">もっと見る</button>
+      <div class="portfolio-grid portfolio-grid-extra fade-in" style="display:none;">
+        <div class="portfolio-item"><img src="images/portfolio-21.jpg" alt="Portfolio 21" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-22.jpg" alt="Portfolio 22" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-23.jpg" alt="Portfolio 23" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-24.jpg" alt="Portfolio 24" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-25.jpg" alt="Portfolio 25" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-26.jpg" alt="Portfolio 26" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-28.jpg" alt="Portfolio 28" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-29.jpg" alt="Portfolio 29" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-30.jpg" alt="Portfolio 30" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-31.jpg" alt="Portfolio 31" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-32.jpg" alt="Portfolio 32" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-33.jpg" alt="Portfolio 33" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-34.jpg" alt="Portfolio 34" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-35.jpg" alt="Portfolio 35" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-36.jpg" alt="Portfolio 36" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-37.jpg" alt="Portfolio 37" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-38.jpg" alt="Portfolio 38" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-39.jpg" alt="Portfolio 39" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-40.jpg" alt="Portfolio 40" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-41.jpg" alt="Portfolio 41" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-42.jpg" alt="Portfolio 42" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-43.jpg" alt="Portfolio 43" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-44.jpg" alt="Portfolio 44" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-45.jpg" alt="Portfolio 45" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-46.jpg" alt="Portfolio 46" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-47.jpg" alt="Portfolio 47" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-48.jpg" alt="Portfolio 48" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-49.jpg" alt="Portfolio 49" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-50.jpg" alt="Portfolio 50" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-51.jpg" alt="Portfolio 51" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-52.jpg" alt="Portfolio 52" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-53.jpg" alt="Portfolio 53" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-54.jpg" alt="Portfolio 54" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-55.jpg" alt="Portfolio 55" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-56.jpg" alt="Portfolio 56" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-57.jpg" alt="Portfolio 57" loading="lazy"></div>
+        <div class="portfolio-item"><img src="images/portfolio-58.jpg" alt="Portfolio 58" loading="lazy"></div>
+      </div>
+
+      <button class="btn-more fade-in" id="btnMore">もっと見る</button>
 
       <div class="exhibition fade-in">
         <h4>PORTRAIT EXHIBITION</h4>
@@ -1452,25 +1454,16 @@
       observer.observe(el);
     });
 
-    // ===== Portfolio filter =====
-    const tabs = document.querySelectorAll('.portfolio-tab');
-    const items = document.querySelectorAll('.portfolio-item');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.dataset.filter;
-
-        items.forEach(item => {
-          if (filter === 'all' || item.dataset.category === filter) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
-        });
+    // ===== Portfolio "もっと見る" =====
+    const btnMore = document.getElementById('btnMore');
+    const extraGrid = document.querySelector('.portfolio-grid-extra');
+    if (btnMore && extraGrid) {
+      btnMore.addEventListener('click', () => {
+        extraGrid.style.display = '';
+        extraGrid.classList.add('visible');
+        btnMore.style.display = 'none';
       });
-    });
+    }
 
     // ===== Form submit =====
     document.getElementById('contactForm').addEventListener('submit', (e) => {
