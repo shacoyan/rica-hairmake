@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ===== Utility ===== */
+    .sp-only { display: none; }
+    @media (max-width: 768px) { .sp-only { display: inline; } }
+
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -207,8 +211,10 @@
       .hero::before { background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 35%, transparent 55%) !important; }
       .hero-content { position: absolute !important; bottom: 3vh !important; top: auto !important; left: 0; right: 0; }
       .hero-logo { max-width: 200px; width: 50vw; margin-bottom: 0.5rem; }
+      .hero-content { position: absolute !important; bottom: 1vh !important; top: auto !important; left: 0; right: 0; }
       .hero-catch { font-size: 1.2rem; margin-bottom: 0.2rem; }
       .hero-sub, .hero-name { font-size: 0.7rem; }
+      .scroll-indicator { display: none !important; }
     }
 
     /* ===== Hero ===== */
@@ -987,7 +993,7 @@
   <section class="hero" id="hero">
     <div class="hero-content">
       <img src="logo.png" alt="ひとりっ子遊び場" class="hero-logo">
-      <p class="hero-catch">期待の、その先をつくる。</p>
+      <p class="hero-catch">期待の、<br class="sp-only">その先をつくる。</p>
       <p class="hero-sub">Hair & Makeup Artist</p>
       <p class="hero-name">RICA NAKANO</p>
     </div>
