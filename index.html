@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rika Nakano | Hair & Makeup Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 400;
+      color: #333;
+      background: #fff;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== Typography ===== */
+    .font-display { font-family: 'Poppins', sans-serif; }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 0.5em;
+      color: #333;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--coral);
+      letter-spacing: 0.15em;
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    /* ===== Colors ===== */
+    :root {
+      --coral: #FF1493;
+      --coral-light: #FF69B4;
+      --mint: #00C853;
+      --mint-light: #32CD32;
+      --yellow: #FFD700;
+      --yellow-light: #FFE44D;
+      --lavender: #8A2BE2;
+      --lavender-light: #9370DB;
+      --pink-bg: #FFE0F0;
+      --mint-bg: #D5FFE8;
+      --yellow-bg: #FFF8CC;
+      --lavender-bg: #EDE0FF;
+      --text-dark: #333;
+      --text-mid: #666;
+      --text-light: #999;
+      --white: #fff;
+    }
+
+    /* ===== Animations ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    }
+    .header.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 4px 20px rgba(0, 200, 83, 0.15);
+      padding: 0.7rem 2rem;
+    }
+    .header-logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+    .header-logo-img {
+      height: 36px;
+      width: auto;
+      filter: brightness(10);
+      transition: filter 0.3s;
+    }
+    .header.scrolled .header-logo-img {
+      filter: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .header.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-links a:hover { color: var(--coral); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .header.scrolled .hamburger span { background: var(--coral); }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -4px); }
+
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(255,20,147,0.95), rgba(30,144,255,0.95));
+      z-index: 999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+    .mobile-nav.active { display: flex; }
+    .mobile-nav a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: transform 0.3s;
+    }
+    .mobile-nav a:hover { transform: scale(1.1); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #FF1493 0%, #FF8C00 20%, #FFD700 40%, #00C853 60%, #1E90FF 80%, #8A2BE2 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.2) 0%, transparent 50%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-logo {
+      max-width: 480px;
+      width: 75vw;
+      margin: 0 auto 1.5rem;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+    .hero-catch {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .hero-sub {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      color: var(--white);
+      letter-spacing: 0.3em;
+      font-weight: 500;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    }
+    .hero-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.2em;
+      margin-top: 2rem;
+      font-weight: 400;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+    }
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+    .scroll-line {
+      width: 2px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+    @keyframes scrollDown {
+      0% { top: -100%; }
+      50% { top: 100%; }
+      100% { top: 100%; }
+    }
+
+    /* ===== Sections ===== */
+    section {
+      padding: 6rem 1.5rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== Profile ===== */
+    .profile { background: var(--pink-bg); }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .profile-photo {
+      background: linear-gradient(135deg, #FFB0D8, #FF85C0);
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      box-shadow: 0 8px 30px rgba(255,20,147,0.2);
+    }
+    .profile-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: var(--text-dark);
+    }
+    .profile-name-en {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      color: var(--coral);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .profile-meta {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .profile-text {
+      font-size: 0.9rem;
+      line-height: 2;
+      margin-bottom: 2rem;
+    }
+    .profile-certs h4 {
+      font-size: 0.8rem;
+      color: var(--coral);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    .profile-certs ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .profile-certs li {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--white);
+      border: 2px solid var(--coral-light);
+      border-radius: 20px;
+      color: var(--coral);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .profile-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .profile-photo { max-width: 280px; margin: 0 auto; }
+    }
+
+    /* ===== Portfolio ===== */
+    .portfolio { background: var(--white); }
+
+    .portfolio-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .portfolio-tab {
+      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--mint);
+      border-radius: 24px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: none;
+      color: var(--mint);
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 500;
+    }
+    .portfolio-tab.active,
+    .portfolio-tab:hover {
+      background: var(--mint);
+      color: var(--white);
+      border-color: var(--mint);
+      transform: scale(1.05);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+    .portfolio-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      overflow: hidden;
+      font-weight: 500;
+    }
+    .portfolio-item:hover {
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+    .portfolio-item:nth-child(6n+1) { background: linear-gradient(135deg, #FF85C0, #FF1493); }
+    .portfolio-item:nth-child(6n+2) { background: linear-gradient(135deg, #66EAAA, #00C853); }
+    .portfolio-item:nth-child(6n+3) { background: linear-gradient(135deg, #FFE44D, #FFD700); }
+    .portfolio-item:nth-child(6n+4) { background: linear-gradient(135deg, #B07AFF, #8A2BE2); }
+    .portfolio-item:nth-child(6n+5) { background: linear-gradient(135deg, #5CB8FF, #1E90FF); }
+    .portfolio-item:nth-child(6n)   { background: linear-gradient(135deg, #FFA040, #FF6347); }
+
+    .btn-more {
+      display: block;
+      margin: 2rem auto 3rem;
+      padding: 0.8rem 3rem;
+      border: 2px solid var(--coral);
+      border-radius: 24px;
+      background: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      color: var(--coral);
+      font-weight: 500;
+    }
+    .btn-more:hover {
+      background: var(--coral);
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .exhibition {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 2px dashed var(--mint-light);
+    }
+    .exhibition h4 {
+      font-size: 0.8rem;
+      color: var(--mint);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .exhibition-list {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .exhibition-list li {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      position: relative;
+      padding-left: 1rem;
+    }
+    .exhibition-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint);
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== Works ===== */
+    .works { background: var(--mint-bg); }
+
+    .works-category {
+      margin-bottom: 3.5rem;
+    }
+    .works-category-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px dashed var(--mint-light);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .works-category-title .cat-label {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      color: var(--white);
+      border-radius: 12px;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    /* Category label colors */
+    .works-category:nth-child(1) .cat-label { background: var(--coral); }
+    .works-category:nth-child(2) .cat-label { background: var(--mint); }
+    .works-category:nth-child(3) .cat-label { background: var(--lavender); }
+    .works-category:nth-child(4) .cat-label { background: #FF8C00; }
+    .works-category:nth-child(5) .cat-label { background: #1E90FF; }
+    .works-category:nth-child(6) .cat-label { background: #FF1493; }
+    .works-category:nth-child(7) .cat-label { background: var(--coral); }
+    .works-category:nth-child(8) .cat-label { background: var(--mint); }
+    .works-category:nth-child(9) .cat-label { background: var(--lavender); }
+
+    .works-featured {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .work-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    }
+    .work-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .work-card-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #FF85C0, #66EAAA);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      position: relative;
+    }
+    .work-card-thumb.video::after {
+      content: '\25B6';
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--coral);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .work-card-body {
+      padding: 1rem;
+    }
+    .work-card-body h5 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .work-card .star-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.2rem 0.6rem;
+      background: linear-gradient(135deg, #FF1493, #FF6347);
+      color: var(--white);
+      border-radius: 12px;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .works-others {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .works-others li {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--white);
+      border-radius: 20px;
+      color: var(--text-mid);
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* Famous people grid */
+    .celeb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+    }
+    .celeb-grid li {
+      font-size: 0.8rem;
+      padding: 0.7rem 1rem;
+      background: var(--white);
+      border-radius: 16px;
+      color: var(--text-mid);
+      border-left: 4px solid #FF69B4;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-weight: 500;
+    }
+
+    /* ===== Price ===== */
+    .price { background: var(--yellow-bg); }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .price-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      border-top: 5px solid var(--mint);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .price-card:nth-child(1) { border-top-color: var(--mint); }
+    .price-card:nth-child(2) { border-top-color: var(--coral); }
+    .price-card:nth-child(3) { border-top-color: var(--lavender); }
+    .price-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+    .price-card.popular {
+      border-top-color: var(--coral);
+      background: linear-gradient(to bottom, #FFD0E8, var(--white));
+    }
+    .price-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #FF1493, #FF6347);
+      color: var(--white);
+      font-size: 0.7rem;
+      padding: 0.35rem 1.3rem;
+      border-radius: 20px;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(255,20,147,0.4);
+    }
+    .price-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .price-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .price-amount {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .price-amount small {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+    .price-from {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+    .price-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+    .btn-contact {
+      display: block;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #FF1493, #FF6347);
+      color: var(--white);
+      border: none;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 600;
+      text-align: center;
+    }
+    .btn-contact:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(255,20,147,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .price-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto 2rem; }
+      .price-card { margin-top: 1rem; }
+    }
+
+    /* ===== Contact ===== */
+    .contact { background: var(--lavender-bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3rem;
+    }
+
+    .contact-line {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .contact-line h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .contact-line p {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: #06c755;
+      color: var(--white);
+      border: none;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(6,199,85,0.3);
+    }
+    .btn-line:hover { transform: translateY(-3px) scale(1.03); }
+    .line-icon {
+      width: 22px;
+      height: 22px;
+      background: var(--white);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #06c755;
+      font-weight: 700;
+    }
+
+    .contact-form {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .contact-form h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text-mid);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e8e8e8;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: #FAFAFA;
+      color: var(--text-dark);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--mint);
+      box-shadow: 0 0 0 3px rgba(0,200,83,0.2);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+      padding-top: 0.3rem;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .radio-group input[type="radio"] {
+      width: auto;
+      accent-color: var(--coral);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #00C853, #009624);
+      color: var(--white);
+      border: none;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,200,83,0.4);
+    }
+
+    .contact-notes {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .contact-notes p {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: linear-gradient(135deg, #B8FFD8, #FFD0E8, #FFE44D, #D0BFFF);
+      color: var(--text-mid);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--coral-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--coral);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      letter-spacing: 0;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+    }
+    .footer-social a:hover {
+      background: var(--coral);
+      color: var(--white);
+      border-color: var(--coral);
+      transform: scale(1.15);
+    }
+    .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <a href="#" class="header-logo"><img src="logo.png" alt="ひとりっ子遊び場" class="header-logo-img"></a>
+    <nav class="nav-links">
+      <a href="#profile">PROFILE</a>
+      <a href="#portfolio">PORTFOLIO</a>
+      <a href="#works">WORKS</a>
+      <a href="#price">PRICE</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#profile">PROFILE</a>
+    <a href="#portfolio">PORTFOLIO</a>
+    <a href="#works">WORKS</a>
+    <a href="#price">PRICE</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <img src="logo.png" alt="ひとりっ子遊び場" class="hero-logo">
+      <p class="hero-catch">期待の、その先をつくる。</p>
+      <p class="hero-sub">Hair & Makeup Artist</p>
+      <p class="hero-name">RIKA NAKANO</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== Profile ===== -->
+  <section class="profile" id="profile">
+    <div class="container">
+      <h2 class="section-title fade-in">Profile</h2>
+      <p class="section-subtitle fade-in">一家に一台、ナカノリカ。</p>
+      <div class="profile-grid">
+        <div class="profile-photo fade-in-left">PHOTO</div>
+        <div class="fade-in-right">
+          <h3 class="profile-name">ナカノ リカ</h3>
+          <p class="profile-name-en">Rika Nakano</p>
+          <p class="profile-meta">大阪府吹田市出身 / 1999.4.20 / おうし座</p>
+          <div class="profile-text">
+            <p>2021年ECCアーティスト美容専門学校ヘアメイク科卒業。卒業後すぐにフリーランスとして活動を開始し、広告・CMや起業家プロフィール写真など幅広い分野で活躍中。</p>
+            <br>
+            <p>最近ではモデル、インフルエンサー、YouTuber、ファッションスタイリスト、司会業にも挑戦中。</p>
+          </div>
+          <div class="profile-certs">
+            <h4>QUALIFICATIONS</h4>
+            <ul>
+              <li>美容師国家資格</li>
+              <li>JMAメイクアップ技能検定1級</li>
+              <li>化粧品検定1級</li>
+              <li>ビジネスマナー検定2級</li>
+              <li>色彩検定2級</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Portfolio ===== -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="section-title fade-in">Portfolio</h2>
+      <p class="section-subtitle fade-in">SELECTED WORKS</p>
+
+      <div class="portfolio-tabs fade-in">
+        <button class="portfolio-tab active" data-filter="all">ALL</button>
+        <button class="portfolio-tab" data-filter="natural">ナチュラル</button>
+        <button class="portfolio-tab" data-filter="art">アート</button>
+        <button class="portfolio-tab" data-filter="cosplay">コスプレ</button>
+      </div>
+
+      <div class="portfolio-grid fade-in">
+        <div class="portfolio-item" data-category="natural">Natural 01</div>
+        <div class="portfolio-item" data-category="art">Art 01</div>
+        <div class="portfolio-item" data-category="natural">Natural 02</div>
+        <div class="portfolio-item" data-category="cosplay">Cosplay 01</div>
+        <div class="portfolio-item" data-category="natural">Natural 03</div>
+        <div class="portfolio-item" data-category="art">Art 02</div>
+        <div class="portfolio-item" data-category="cosplay">Cosplay 02</div>
+        <div class="portfolio-item" data-category="natural">Natural 04</div>
+        <div class="portfolio-item" data-category="art">Art 03</div>
+        <div class="portfolio-item" data-category="natural">Natural 05</div>
+        <div class="portfolio-item" data-category="cosplay">Cosplay 03</div>
+        <div class="portfolio-item" data-category="natural">Natural 06</div>
+        <div class="portfolio-item" data-category="art">Art 04</div>
+        <div class="portfolio-item" data-category="natural">Natural 07</div>
+        <div class="portfolio-item" data-category="cosplay">Cosplay 04</div>
+        <div class="portfolio-item" data-category="art">Art 05</div>
+        <div class="portfolio-item" data-category="natural">Natural 08</div>
+        <div class="portfolio-item" data-category="cosplay">Cosplay 05</div>
+        <div class="portfolio-item" data-category="art">Art 06</div>
+        <div class="portfolio-item" data-category="natural">Natural 09</div>
+      </div>
+
+      <button class="btn-more fade-in">もっと見る</button>
+
+      <div class="exhibition fade-in">
+        <h4>PORTRAIT EXHIBITION</h4>
+        <ul class="exhibition-list">
+          <li>66展</li>
+          <li>闇の王展</li>
+          <li>リアルポートレート2024</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Works ===== -->
+  <section class="works" id="works">
+    <div class="container">
+      <h2 class="section-title fade-in">Works</h2>
+      <p class="section-subtitle fade-in">ACHIEVEMENTS</p>
+
+      <!-- 動画 -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">VIDEO</span> 動画</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb video">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>NTT西日本教育DX広告</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb video">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>あべのハルカス300 ショートドラマ</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb video">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>兵庫県防災ツーリズム</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb video">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>MYLILY ブランドムービー</h5>
+            </div>
+          </div>
+        </div>
+        <ul class="works-others">
+          <li>藍住町PR動画</li>
+          <li>神鋼不動産CM</li>
+          <li>ブックオフCM</li>
+          <li>高須クリニック</li>
+          <li>らくおう説明動画</li>
+          <li>アストラゼネガ社内ムービー</li>
+          <li>エディオン Windows CM</li>
+        </ul>
+      </div>
+
+      <!-- SNS -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>vasary media メイク動画担当</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>未来パレット ヘアメイク小物制作担当</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MV -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">MV</span> MV</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb video">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>巫薙ラビッツ『日輪』</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">TV</span> TV</h3>
+        <ul class="works-others">
+          <li>ケンコバのバコバコナイト 赤ひげBAR</li>
+        </ul>
+      </div>
+
+      <!-- スチール -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>Canvaフリー素材</h5>
+            </div>
+          </div>
+        </div>
+        <ul class="works-others">
+          <li>ASP2024日本大会</li>
+          <li>スリーコインズポップ</li>
+          <li>阪神タイガースポスター</li>
+          <li>LEGOLAND JAPANパンフレット</li>
+          <li>ヒラキキッズページ</li>
+          <li>バイオメディカル専門学校卒業アルバム</li>
+        </ul>
+      </div>
+
+      <!-- アパレル -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">APPAREL</span> アパレル</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>punktum(R)</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>atelier Harry</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>suit stomp</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>raum vintage</h5>
+            </div>
+          </div>
+        </div>
+        <ul class="works-others">
+          <li>juju international</li>
+          <li>EVISU</li>
+        </ul>
+      </div>
+
+      <!-- ブライダル・成人式 -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>サガノカン（卒業前撮り）</h5>
+            </div>
+          </div>
+        </div>
+        <ul class="works-others">
+          <li>京都むらさき</li>
+          <li>キモノハーツ神戸</li>
+          <li>アトリエロゼ</li>
+          <li>エマーサ</li>
+          <li>ブライダル千代田</li>
+          <li>アイドル&</li>
+          <li>ファーストステージ</li>
+        </ul>
+      </div>
+
+      <!-- 有名人 -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
+        <ul class="celeb-grid">
+          <li>よゐこ有野さん</li>
+          <li>misonoさん</li>
+          <li>キテレツ佐々木大光さん</li>
+          <li>YouTuberゑむ氏</li>
+          <li>指揮者佐渡裕</li>
+          <li>大川藍さん</li>
+          <li>クイズノックこうちゃん</li>
+          <li>AZ</li>
+          <li>FIELD OF VIEW浅岡雄也さん</li>
+          <li>声優土岐隼一</li>
+          <li>俳優リッチー・コー</li>
+          <li>ダンサーヒヨリちゃん</li>
+          <li>バーレスク東京かなみん</li>
+          <li>ストリーマーLiagN</li>
+          <li>ストリーマースタンミ</li>
+          <li>フォレスタ（財木麗子・吉田明未・三宅里菜）</li>
+        </ul>
+      </div>
+
+      <!-- メディア出演 -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>マッチングアプリジョイナス ショートドラマ</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>スタジオ心お正月プランSNS宣伝</h5>
+            </div>
+          </div>
+        </div>
+        <ul class="works-others">
+          <li>ほんわかテレビ メイク解説者</li>
+          <li>クレンジングバームDUO PRショート</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Price ===== -->
+  <section class="price" id="price">
+    <div class="container">
+      <h2 class="section-title fade-in">Price</h2>
+      <p class="section-subtitle fade-in">MENU & PRICE</p>
+
+      <div class="price-grid fade-in">
+        <div class="price-card">
+          <h4>気合メイク</h4>
+          <p class="price-amount">¥15,000<small>~</small></p>
+          <p class="price-from">ヘア&フルメイク</p>
+        </div>
+        <div class="price-card popular">
+          <span class="price-badge">一番人気</span>
+          <h4>日常メイク</h4>
+          <p class="price-amount">¥11,000<small>~</small></p>
+          <p class="price-from">ナチュラルメイク</p>
+        </div>
+        <div class="price-card">
+          <h4>ヘアセットのみ</h4>
+          <p class="price-amount">¥3,300<small>~</small></p>
+          <p class="price-from">ヘアアレンジ</p>
+        </div>
+      </div>
+
+      <p class="price-note fade-in">※ 交通費別途 / 詳しくはお問い合わせください</p>
+      <a href="#contact" class="btn-contact fade-in">お問い合わせはこちら</a>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title fade-in">Contact</h2>
+      <p class="section-subtitle fade-in">お問い合わせ</p>
+
+      <div class="contact-grid fade-in">
+        <!-- LINE -->
+        <div class="contact-line">
+          <h4>一般のお客様</h4>
+          <p>LINE@で簡単予約！<br>お気軽にご連絡ください。</p>
+          <button class="btn-line">
+            <span class="line-icon">L</span>
+            LINE で予約する
+          </button>
+        </div>
+
+        <!-- 企業フォーム -->
+        <div class="contact-form">
+          <h4>企業様向けお問い合わせ</h4>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="company">会社名 <span style="color:var(--coral)">*</span></label>
+              <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">日付 <span style="color:var(--coral)">*</span></label>
+                <input type="date" id="date" name="date" required>
+              </div>
+              <div class="form-group">
+                <label for="location">ロケーション</label>
+                <input type="text" id="location" name="location">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="content">内容 <span style="color:var(--coral)">*</span></label>
+              <textarea id="content" name="content" required placeholder="ご依頼内容をご記入ください"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="people">施術人数</label>
+                <input type="number" id="people" name="people" min="1" placeholder="人数">
+              </div>
+              <div class="form-group">
+                <label for="hours">稼働時間目安</label>
+                <input type="text" id="hours" name="hours" placeholder="例: 3時間">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="budget">予算（税込）</label>
+                <input type="text" id="budget" name="budget" placeholder="例: ¥50,000">
+              </div>
+              <div class="form-group">
+                <label>交通費の有無</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="transport" value="有"> 有</label>
+                  <label><input type="radio" name="transport" value="無"> 無</label>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit">送信する</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="contact-notes fade-in">
+        <p>3営業日以内にご連絡いたします。<br>
+        返信可能時間: 12:00~20:00<br>
+        ※上記時間以外にもご連絡差し上げる場合がございます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="X">X</a>
+      <a href="#" aria-label="TikTok">TK</a>
+      <a href="#" aria-label="YouTube">YT</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Rika Nakano &mdash; Hair &amp; Makeup Artist</p>
+  </footer>
+
+  <script>
+    // ===== Header scroll =====
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ===== Hamburger =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ===== Scroll fade-in =====
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ===== Portfolio filter =====
+    const tabs = document.querySelectorAll('.portfolio-tab');
+    const items = document.querySelectorAll('.portfolio-item');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+
+        items.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== Form submit =====
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
+      e.target.reset();
+    });
+  </script>
+
+</body>
+</html>
