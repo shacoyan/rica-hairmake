@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rika Nakano | Hair & Makeup Artist</title>
+  <title>Rica Nakano | Hair & Makeup Artist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -333,14 +333,14 @@
       box-shadow: 0 8px 30px rgba(255,20,147,0.2);
     }
     .profile-name {
-      font-size: 1.4rem;
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
       margin-bottom: 0.3rem;
       color: var(--text-dark);
     }
     .profile-name-en {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.85rem;
+      font-size: 1.2rem;
       color: var(--coral);
       letter-spacing: 0.1em;
       margin-bottom: 1.5rem;
@@ -911,6 +911,72 @@
       font-family: 'Poppins', sans-serif;
       color: var(--text-light);
     }
+
+    /* ===== Lightbox ===== */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: opacity 0.2s, transform 0.2s;
+      opacity: 0.7;
+    }
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+    .lightbox-close {
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      font-weight: 300;
+      line-height: 1;
+      z-index: 2001;
+    }
+    .lightbox-prev,
+    .lightbox-next {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 0.5rem;
+      z-index: 2001;
+    }
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      transform: translateY(-50%) scale(1.15);
+    }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
   </style>
 </head>
 <body>
@@ -945,7 +1011,7 @@
       <img src="logo.png" alt="ひとりっ子遊び場" class="hero-logo">
       <p class="hero-catch">期待の、その先をつくる。</p>
       <p class="hero-sub">Hair & Makeup Artist</p>
-      <p class="hero-name">RIKA NAKANO</p>
+      <p class="hero-name">RICA NAKANO</p>
     </div>
     <div class="scroll-indicator">
       <span>SCROLL</span>
@@ -962,7 +1028,7 @@
         <div class="profile-photo fade-in-left">PHOTO</div>
         <div class="fade-in-right">
           <h3 class="profile-name">ナカノ リカ</h3>
-          <p class="profile-name-en">Rika Nakano</p>
+          <p class="profile-name-en">Rica Nakano</p>
           <p class="profile-meta">大阪府吹田市出身 / 1999.4.20 / おうし座</p>
           <div class="profile-text">
             <p>2021年ECCアーティスト美容専門学校ヘアメイク科卒業。卒業後すぐにフリーランスとして活動を開始し、広告・CMや起業家プロフィール写真など幅広い分野で活躍中。</p>
@@ -1406,6 +1472,14 @@
     </div>
   </section>
 
+  <!-- ===== Lightbox ===== -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" aria-label="閉じる">&times;</button>
+    <button class="lightbox-prev" aria-label="前の画像">&#8249;</button>
+    <button class="lightbox-next" aria-label="次の画像">&#8250;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+
   <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="footer-social">
@@ -1414,7 +1488,7 @@
       <a href="#" aria-label="TikTok">TK</a>
       <a href="#" aria-label="YouTube">YT</a>
     </div>
-    <p class="footer-copy">&copy; 2026 Rika Nakano &mdash; Hair &amp; Makeup Artist</p>
+    <p class="footer-copy">&copy; 2026 Rica Nakano &mdash; Hair &amp; Makeup Artist</p>
   </footer>
 
   <script>
@@ -1464,6 +1538,79 @@
         btnMore.style.display = 'none';
       });
     }
+
+    // ===== Portfolio shuffle =====
+    function shuffleChildren(container) {
+      if (!container) return;
+      const items = Array.from(container.children);
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      items.forEach(item => container.appendChild(item));
+    }
+    document.querySelectorAll('.portfolio-grid').forEach(grid => shuffleChildren(grid));
+
+    // ===== Lightbox =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    let lightboxItems = [];
+    let lightboxIndex = 0;
+
+    function collectLightboxItems() {
+      lightboxItems = Array.from(document.querySelectorAll('.portfolio-item img'));
+    }
+    collectLightboxItems();
+
+    function openLightbox(index) {
+      collectLightboxItems();
+      lightboxIndex = index;
+      lightboxImg.src = lightboxItems[index].src;
+      lightboxImg.alt = lightboxItems[index].alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev() {
+      lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
+      lightboxImg.src = lightboxItems[lightboxIndex].src;
+      lightboxImg.alt = lightboxItems[lightboxIndex].alt;
+    }
+
+    function showNext() {
+      lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
+      lightboxImg.src = lightboxItems[lightboxIndex].src;
+      lightboxImg.alt = lightboxItems[lightboxIndex].alt;
+    }
+
+    document.querySelectorAll('.portfolio-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        collectLightboxItems();
+        const img = item.querySelector('img');
+        const idx = lightboxItems.indexOf(img);
+        if (idx !== -1) openLightbox(idx);
+      });
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
+    lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
 
     // ===== Form submit =====
     document.getElementById('contactForm').addEventListener('submit', (e) => {
