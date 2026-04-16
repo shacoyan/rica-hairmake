@@ -4,13 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rica Nakano | Hair & Makeup Artist</title>
+  <meta name="description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。ご依頼・お見積もりはお気軽にご相談ください。">
+  <meta name="theme-color" content="#FF1493">
+  <link rel="canonical" href="https://rica-nakano.com/">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rica Nakano | Hair & Makeup Artist">
+  <meta property="og:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。">
+  <meta property="og:image" content="images/hero.jpg">
+  <meta property="og:url" content="https://rica-nakano.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rica Nakano | Hair & Makeup Artist">
+  <meta property="og:locale" content="ja_JP">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rica Nakano | Hair & Makeup Artist">
+  <meta name="twitter:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano のポートフォリオサイト。">
+  <meta name="twitter:image" content="images/hero.jpg">
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rica Nakano",
+    "alternateName": "ナカノ リカ",
+    "jobTitle": "Hair & Makeup Artist",
+    "birthPlace": "大阪府吹田市",
+    "url": "https://rica-nakano.com/",
+    "image": "images/profile.jpg",
+    "sameAs": []
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== Utility ===== */
     .sp-only { display: none; }
     @media (max-width: 768px) { .sp-only { display: inline; } }
+    br.sp-only { display: none; }
+    @media (max-width: 768px) { br.sp-only { display: inline; } }
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,6 +61,8 @@
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
+    fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    legend { padding: 0; }
 
     /* ===== Typography ===== */
     .font-display { font-family: 'Poppins', sans-serif; }
@@ -57,6 +94,9 @@
       --yellow-light: #FFE44D;
       --lavender: #8A2BE2;
       --lavender-light: #9370DB;
+      --orange: #FF8C00;
+      --blue: #1E90FF;
+      --pink: #FF1493;
       --pink-bg: #FFE0F0;
       --mint-bg: #D5FFE8;
       --yellow-bg: #FFF8CC;
@@ -146,11 +186,10 @@
     .nav-links a {
       font-family: 'M PLUS Rounded 1c', sans-serif;
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 500;
       letter-spacing: 0.1em;
       color: rgba(255,255,255,0.9);
       transition: color 0.3s;
-      font-weight: 500;
     }
     .header.scrolled .nav-links a { color: var(--text-mid); }
     .nav-links a:hover { color: var(--coral); }
@@ -486,15 +525,15 @@
       font-weight: 600;
     }
     /* Category label colors */
-    .works-category:nth-child(1) .cat-label { background: var(--coral); }
-    .works-category:nth-child(2) .cat-label { background: var(--mint); }
-    .works-category:nth-child(3) .cat-label { background: var(--lavender); }
-    .works-category:nth-child(4) .cat-label { background: #FF8C00; }
-    .works-category:nth-child(5) .cat-label { background: #1E90FF; }
-    .works-category:nth-child(6) .cat-label { background: #FF1493; }
-    .works-category:nth-child(7) .cat-label { background: var(--coral); }
-    .works-category:nth-child(8) .cat-label { background: var(--mint); }
-    .works-category:nth-child(9) .cat-label { background: var(--lavender); }
+    .works-category:nth-of-type(1) .cat-label { background: var(--coral); }
+    .works-category:nth-of-type(2) .cat-label { background: var(--mint); }
+    .works-category:nth-of-type(3) .cat-label { background: var(--lavender); }
+    .works-category:nth-of-type(4) .cat-label { background: var(--orange); }
+    .works-category:nth-of-type(5) .cat-label { background: var(--blue); }
+    .works-category:nth-of-type(6) .cat-label { background: var(--pink); }
+    .works-category:nth-of-type(7) .cat-label { background: var(--coral); }
+    .works-category:nth-of-type(8) .cat-label { background: var(--mint); }
+    .works-category:nth-of-type(9) .cat-label { background: var(--lavender); }
 
     .works-featured {
       display: grid;
@@ -584,7 +623,7 @@
       background: var(--white);
       border-radius: 16px;
       color: var(--text-mid);
-      border-left: 4px solid #FF69B4;
+      border-left: 4px solid var(--coral-light);
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       font-weight: 500;
     }
@@ -767,7 +806,8 @@
     .form-group {
       margin-bottom: 1.2rem;
     }
-    .form-group label {
+    .form-group label,
+    .form-group legend {
       display: block;
       font-size: 0.8rem;
       font-weight: 500;
@@ -967,7 +1007,7 @@
 
   <!-- ===== Header ===== -->
   <header class="header" id="header">
-    <a href="#" class="header-logo"><img src="logo.png" alt="ひとりっ子遊び場" class="header-logo-img"></a>
+    <a href="#" class="header-logo"><img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="header-logo-img" width="976" height="479"></a>
     <nav class="nav-links">
       <a href="#profile">PROFILE</a>
       <a href="#portfolio">PORTFOLIO</a>
@@ -975,13 +1015,13 @@
       <a href="#price">PRICE</a>
       <a href="#contact">CONTACT</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <button class="hamburger" id="hamburger" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </header>
 
   <!-- Mobile Nav -->
-  <nav class="mobile-nav" id="mobileNav">
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
     <a href="#profile">PROFILE</a>
     <a href="#portfolio">PORTFOLIO</a>
     <a href="#works">WORKS</a>
@@ -992,7 +1032,7 @@
   <!-- ===== Hero ===== -->
   <section class="hero" id="hero">
     <div class="hero-content">
-      <img src="logo.png" alt="ひとりっ子遊び場" class="hero-logo">
+      <img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="hero-logo" width="976" height="479" fetchpriority="high">
       <p class="hero-catch">期待の<br class="sp-only">その先をつくる。</p>
       <p class="hero-sub">Hair & Makeup Artist</p>
       <p class="hero-name">RICA NAKANO</p>
@@ -1009,7 +1049,7 @@
       <h2 class="section-title fade-in">Profile</h2>
       <p class="section-subtitle fade-in">一家に一台、ナカノリカ。</p>
       <div class="profile-grid">
-        <div class="profile-photo fade-in-left"><img src="images/profile.jpg" alt="ナカノ リカ"></div>
+        <div class="profile-photo fade-in-left"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="lazy" decoding="async"></div>
         <div class="fade-in-right">
           <h3 class="profile-name">ナカノ リカ</h3>
           <p class="profile-name-en">Rica Nakano</p>
@@ -1103,7 +1143,7 @@
         <div class="portfolio-item"><img src="images/portfolio-58.jpg" alt="Portfolio 58" loading="lazy"></div>
       </div>
 
-      <button class="btn-more fade-in" id="btnMore">もっと見る</button>
+      <button type="button" class="btn-more fade-in" id="btnMore">もっと見る</button>
 
     </div>
   </section>
@@ -1392,7 +1432,7 @@
         <div class="contact-line">
           <h4>一般のお客様</h4>
           <p>LINE@で簡単予約！<br>お気軽にご連絡ください。</p>
-          <button class="btn-line">
+          <button type="button" class="btn-line">
             <span class="line-icon">L</span>
             LINE で予約する
           </button>
@@ -1403,13 +1443,13 @@
           <h4>企業様向けお問い合わせ</h4>
           <form id="contactForm">
             <div class="form-group">
-              <label for="company">会社名 <span style="color:var(--coral)">*</span></label>
-              <input type="text" id="company" name="company" required>
+              <label for="company">会社名 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
+              <input type="text" id="company" name="company" required aria-required="true">
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="date">日付 <span style="color:var(--coral)">*</span></label>
-                <input type="date" id="date" name="date" required>
+                <label for="date">日付 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
+                <input type="date" id="date" name="date" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="location">ロケーション</label>
@@ -1417,8 +1457,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="content">内容 <span style="color:var(--coral)">*</span></label>
-              <textarea id="content" name="content" required placeholder="ご依頼内容をご記入ください"></textarea>
+              <label for="content">内容 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
+              <textarea id="content" name="content" required aria-required="true" placeholder="ご依頼内容をご記入ください"></textarea>
             </div>
             <div class="form-row">
               <div class="form-group">
@@ -1436,11 +1476,13 @@
                 <input type="text" id="budget" name="budget" placeholder="例: ¥50,000">
               </div>
               <div class="form-group">
-                <label>交通費の有無</label>
-                <div class="radio-group">
-                  <label><input type="radio" name="transport" value="有"> 有</label>
-                  <label><input type="radio" name="transport" value="無"> 無</label>
-                </div>
+                <fieldset class="transport-fieldset">
+                  <legend>交通費の有無</legend>
+                  <div class="radio-group">
+                    <label><input type="radio" name="transport" value="有"> 有</label>
+                    <label><input type="radio" name="transport" value="無"> 無</label>
+                  </div>
+                </fieldset>
               </div>
             </div>
             <button type="submit" class="btn-submit">送信する</button>
@@ -1457,20 +1499,21 @@
   </section>
 
   <!-- ===== Lightbox ===== -->
-  <div class="lightbox-overlay" id="lightbox">
-    <button class="lightbox-close" aria-label="閉じる">&times;</button>
-    <button class="lightbox-prev" aria-label="前の画像">&#8249;</button>
-    <button class="lightbox-next" aria-label="次の画像">&#8250;</button>
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="ポートフォリオ画像ビュー">
+    <button type="button" class="lightbox-close" aria-label="閉じる">&times;</button>
+    <button type="button" class="lightbox-prev" aria-label="前の画像">&#8249;</button>
+    <button type="button" class="lightbox-next" aria-label="次の画像">&#8250;</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
   </div>
 
   <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="footer-social">
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="X">X</a>
-      <a href="#" aria-label="TikTok">TK</a>
-      <a href="#" aria-label="YouTube">YT</a>
+      <!-- 実 SNS URL 設定時は href を差し替え、target="_blank" rel="noopener noreferrer" を付与すること -->
+      <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">IG</a>
+      <a href="#" aria-label="X" aria-disabled="true" tabindex="-1">X</a>
+      <a href="#" aria-label="TikTok" aria-disabled="true" tabindex="-1">TK</a>
+      <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">YT</a>
     </div>
     <p class="footer-copy">&copy; 2026 Rica Nakano &mdash; Hair &amp; Makeup Artist</p>
   </footer>
@@ -1488,12 +1531,17 @@
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       mobileNav.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+      const isOpen = mobileNav.classList.contains('active');
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileNav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         mobileNav.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       });
     });
@@ -1540,6 +1588,7 @@
     const lightboxImg = document.getElementById('lightboxImg');
     let lightboxItems = [];
     let lightboxIndex = 0;
+    let lightboxLastFocus = null;
 
     function collectLightboxItems() {
       lightboxItems = Array.from(document.querySelectorAll('.portfolio-item img'));
@@ -1553,11 +1602,17 @@
       lightboxImg.alt = lightboxItems[index].alt;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+      lightboxLastFocus = document.activeElement;
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
+      if (lightboxLastFocus && typeof lightboxLastFocus.focus === 'function') {
+        lightboxLastFocus.focus();
+      }
     }
 
     function showPrev() {
@@ -1594,7 +1649,32 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') showPrev();
       if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'Tab') {
+        // Focus trap: lightbox 内のフォーカス可能要素に閉じ込める
+        const focusable = lightbox.querySelectorAll('button');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
+
+    // ===== Date input: min を当日に設定 =====
+    (function setDateMin() {
+      const dateInput = document.getElementById('date');
+      if (!dateInput) return;
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+    })();
 
     // ===== Form submit =====
     document.getElementById('contactForm').addEventListener('submit', (e) => {
