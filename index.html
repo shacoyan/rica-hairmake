@@ -105,6 +105,14 @@ legend { padding: 0; }
   --orange: #FF8C00;
   --blue: #1E90FF;
   --pink: #FF1493;
+  /* --- Phase 0 追補: 10属性セレクタ用トークン (設計書12-6 / Phase 1 で差替予定) --- */
+  --sky:    #1E90FF; /* tv: 旧 blue 近似 */
+  --peach:  #FF8C00; /* still: 旧 orange 近似 */
+  --sage:   #FF1493; /* apparel: 旧 pink 近似 */
+  --rose:   #FF1493; /* bridal: 旧 coral(7) 近似 */
+  --gold:   #00C853; /* celeb: 旧 mint(8) 近似 */
+  --sand:   #8A2BE2; /* media: 旧 lavender(9) 近似 */
+  --plum:   #8A2BE2; /* model: 新10番 / lavender 近似 */
   --pink-bg: #FFE0F0;
   --mint-bg: #D5FFE8;
   --yellow-bg: #FFF8CC;
@@ -580,16 +588,17 @@ section {
   letter-spacing: 0.05em;
   font-weight: 600;
 }
-/* Category label colors */
-.works-category:nth-of-type(1) .cat-label { background: var(--coral); }
-.works-category:nth-of-type(2) .cat-label { background: var(--mint); }
-.works-category:nth-of-type(3) .cat-label { background: var(--lavender); }
-.works-category:nth-of-type(4) .cat-label { background: var(--orange); }
-.works-category:nth-of-type(5) .cat-label { background: var(--blue); }
-.works-category:nth-of-type(6) .cat-label { background: var(--pink); }
-.works-category:nth-of-type(7) .cat-label { background: var(--coral); }
-.works-category:nth-of-type(8) .cat-label { background: var(--mint); }
-.works-category:nth-of-type(9) .cat-label { background: var(--lavender); }
+/* Category label colors (10属性セレクタ / 設計書12-6 準拠) */
+.works-category[data-category="video"]   .cat-label { background: var(--coral); }
+.works-category[data-category="sns"]     .cat-label { background: var(--mint); }
+.works-category[data-category="mv"]      .cat-label { background: var(--lavender); }
+.works-category[data-category="tv"]      .cat-label { background: var(--sky); }
+.works-category[data-category="still"]   .cat-label { background: var(--peach); }
+.works-category[data-category="apparel"] .cat-label { background: var(--sage); }
+.works-category[data-category="bridal"]  .cat-label { background: var(--rose); }
+.works-category[data-category="celeb"]   .cat-label { background: var(--gold); }
+.works-category[data-category="media"]   .cat-label { background: var(--sand); }
+.works-category[data-category="model"]   .cat-label { background: var(--plum); }
 
 .works-featured {
   display: grid;
