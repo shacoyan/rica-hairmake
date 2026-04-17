@@ -226,6 +226,17 @@ legend { padding: 0; }
 @media (max-width: 768px) { .sp-only { display: inline; } }
 br.sp-only { display: none; }
 @media (max-width: 768px) { br.sp-only { display: inline; } }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ============================================================
    [SPLIT TARGET: layout.css]
@@ -587,9 +598,10 @@ section {
 
 .works-featured {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
+  justify-content: start;
 }
 .work-card {
   background: var(--white);
