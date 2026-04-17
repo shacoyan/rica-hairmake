@@ -1007,7 +1007,7 @@
 
   <!-- ===== Header ===== -->
   <header class="header" id="header">
-    <a href="#" class="header-logo"><img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="header-logo-img" width="976" height="479"></a>
+    <a href="#" class="header-logo"><img src="logo.png" alt="Rica Nakano" class="header-logo-img" width="976" height="479"></a>
     <nav class="nav-links">
       <a href="#profile">PROFILE</a>
       <a href="#portfolio">PORTFOLIO</a>
@@ -1031,8 +1031,9 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="hero">
+    <h1 class="visually-hidden">Rica Nakano - Hair &amp; Makeup Artist</h1>
     <div class="hero-content">
-      <img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="hero-logo" width="976" height="479" fetchpriority="high">
+      <img src="logo.png" alt="Rica Nakano" class="hero-logo" width="976" height="479" fetchpriority="high">
       <p class="hero-catch">期待の<br class="sp-only">その先をつくる。</p>
       <p class="hero-sub">Hair & Makeup Artist</p>
       <p class="hero-name">RICA NAKANO</p>
@@ -1049,7 +1050,7 @@
       <h2 class="section-title fade-in">Profile</h2>
       <p class="section-subtitle fade-in">一家に一台、ナカノリカ。</p>
       <div class="profile-grid">
-        <div class="profile-photo fade-in-left"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="lazy" decoding="async"></div>
+        <div class="profile-photo fade-in-left"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="eager" fetchpriority="high" decoding="async"></div>
         <div class="fade-in-right">
           <h3 class="profile-name">ナカノ リカ</h3>
           <p class="profile-name-en">Rica Nakano</p>
@@ -1155,35 +1156,35 @@
       <p class="section-subtitle fade-in">ACHIEVEMENTS</p>
 
       <!-- 動画 -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="video">
         <h3 class="works-category-title"><span class="cat-label">VIDEO</span> 動画</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>NTT西日本教育DX広告</h5>
+              <h4>NTT西日本教育DX広告</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>あべのハルカス300 ショートドラマ</h5>
+              <h4>あべのハルカス300 ショートドラマ</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>兵庫県防災ツーリズム</h5>
+              <h4>兵庫県防災ツーリズム</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>MYLILY ブランドムービー</h5>
+              <h4>MYLILY ブランドムービー</h4>
             </div>
           </div>
         </div>
@@ -1199,42 +1200,42 @@
       </div>
 
       <!-- SNS -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="sns">
         <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>vasary media メイク動画担当</h5>
+              <h4>vasary media メイク動画担当</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>未来パレット ヘアメイク小物制作担当</h5>
+              <h4>未来パレット ヘアメイク小物制作担当</h4>
             </div>
           </div>
         </div>
       </div>
 
       <!-- MV -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="pv-mv">
         <h3 class="works-category-title"><span class="cat-label">MV</span> MV</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>巫薙ラビッツ『日輪』</h5>
+              <h4>巫薙ラビッツ『日輪』</h4>
             </div>
           </div>
         </div>
       </div>
 
       <!-- TV -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="tv-cm">
         <h3 class="works-category-title"><span class="cat-label">TV</span> TV</h3>
         <ul class="works-others">
           <li>ケンコバのバコバコナイト 赤ひげBAR</li>
@@ -1242,14 +1243,14 @@
       </div>
 
       <!-- スチール -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="other">
         <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>Canvaフリー素材</h5>
+              <h4>Canvaフリー素材</h4>
             </div>
           </div>
         </div>
@@ -1264,35 +1265,35 @@
       </div>
 
       <!-- アパレル -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="artist">
         <h3 class="works-category-title"><span class="cat-label">APPAREL</span> アパレル</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>punktum(R)</h5>
+              <h4>punktum(R)</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>atelier Harry</h5>
+              <h4>atelier Harry</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>suit stomp</h5>
+              <h4>suit stomp</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>raum vintage</h5>
+              <h4>raum vintage</h4>
             </div>
           </div>
         </div>
@@ -1303,14 +1304,14 @@
       </div>
 
       <!-- ブライダル・成人式 -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="wedding">
         <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>サガノカン（卒業前撮り）</h5>
+              <h4>サガノカン（卒業前撮り）</h4>
             </div>
           </div>
         </div>
@@ -1326,7 +1327,7 @@
       </div>
 
       <!-- 有名人 -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="artist">
         <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
         <ul class="celeb-grid">
           <li>よゐこ有野さん</li>
@@ -1349,28 +1350,28 @@
       </div>
 
       <!-- メディア出演 -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="tv-cm">
         <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
         <div class="works-featured">
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>マッチングアプリジョイナス ショートドラマ</h5>
+              <h4>マッチングアプリジョイナス ショートドラマ</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
+              <h4>南海電鉄フリーペーパーnuts 7月号表紙</h4>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>スタジオ心お正月プランSNS宣伝</h5>
+              <h4>スタジオ心お正月プランSNS宣伝</h4>
             </div>
           </div>
         </div>
@@ -1381,7 +1382,7 @@
       </div>
 
       <!-- モデル -->
-      <div class="works-category fade-in">
+      <div class="works-category fade-in" data-category="hairmake">
         <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル</h3>
         <ul class="works-others">
           <li>Coming soon...</li>
@@ -1395,22 +1396,22 @@
   <section class="price" id="price">
     <div class="container">
       <h2 class="section-title fade-in">Price</h2>
-      <p class="section-subtitle fade-in">MENU & PRICE</p>
+      <p class="section-subtitle fade-in">MENU &amp; PRICE</p>
 
       <div class="price-grid fade-in">
         <div class="price-card">
-          <h4>気合メイク</h4>
+          <h3>気合メイク</h3>
           <p class="price-amount">¥15,000<small>~</small></p>
-          <p class="price-from">ヘア&フルメイク</p>
+          <p class="price-from">ヘア&amp;フルメイク</p>
         </div>
         <div class="price-card popular">
           <span class="price-badge">一番人気</span>
-          <h4>日常メイク</h4>
+          <h3>日常メイク</h3>
           <p class="price-amount">¥11,000<small>~</small></p>
           <p class="price-from">ナチュラルメイク</p>
         </div>
         <div class="price-card">
-          <h4>ヘアセットのみ</h4>
+          <h3>ヘアセットのみ</h3>
           <p class="price-amount">¥3,300<small>~</small></p>
           <p class="price-from">ヘアアレンジ</p>
         </div>
@@ -1430,18 +1431,18 @@
       <div class="contact-grid fade-in">
         <!-- LINE -->
         <div class="contact-line">
-          <h4>一般のお客様</h4>
+          <h3>一般のお客様</h3>
           <p>LINE@で簡単予約！<br>お気軽にご連絡ください。</p>
-          <button type="button" class="btn-line">
+          <a href="#" class="btn-line">
             <span class="line-icon">L</span>
             LINE で予約する
-          </button>
+          </a>
         </div>
 
         <!-- 企業フォーム -->
         <div class="contact-form">
-          <h4>企業様向けお問い合わせ</h4>
-          <form id="contactForm">
+          <h3>企業様向けお問い合わせ</h3>
+          <form id="contactForm" method="POST" data-form-endpoint="https://formspree.io/f/placeholder">
             <div class="form-group">
               <label for="company">会社名 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
               <input type="text" id="company" name="company" required aria-required="true">
@@ -1449,7 +1450,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="date">日付 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
-                <input type="date" id="date" name="date" required aria-required="true">
+                <input type="date" id="date" name="date" min="" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="location">ロケーション</label>
