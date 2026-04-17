@@ -41,12 +41,20 @@
   <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+
+    /* ============================================================
+       [SPLIT TARGET: utilities.css]
+       ============================================================ */
     /* ===== Utility ===== */
     .sp-only { display: none; }
     @media (max-width: 768px) { .sp-only { display: inline; } }
     br.sp-only { display: none; }
     @media (max-width: 768px) { br.sp-only { display: inline; } }
 
+
+    /* ============================================================
+       [SPLIT TARGET: base.css]
+       ============================================================ */
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -84,6 +92,10 @@
       font-weight: 500;
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: tokens.css]
+       ============================================================ */
     /* ===== Colors ===== */
     :root {
       --coral: #FF1493;
@@ -142,6 +154,10 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/header.css]
+       ============================================================ */
     /* ===== Header ===== */
     .header {
       position: fixed;
@@ -256,6 +272,10 @@
       .scroll-indicator { bottom: 0.5rem !important; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/hero.css]
+       ============================================================ */
     /* ===== Hero ===== */
     .hero {
       position: relative;
@@ -355,6 +375,10 @@
       100% { top: 100%; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: layout.css]
+       ============================================================ */
     /* ===== Sections ===== */
     section {
       padding: 6rem 1.5rem;
@@ -364,6 +388,10 @@
       margin: 0 auto;
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/about.css]
+       ============================================================ */
     /* ===== Profile ===== */
     .profile { background: var(--pink-bg); }
     .profile-grid {
@@ -442,6 +470,10 @@
       .profile-photo { max-width: 100%; margin: 0 auto; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/portfolio.css]
+       ============================================================ */
     /* ===== Portfolio ===== */
     .portfolio { background: var(--white); }
 
@@ -499,6 +531,10 @@
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/works.css]
+       ============================================================ */
     /* ===== Works ===== */
     .works { background: var(--mint-bg); }
 
@@ -611,6 +647,10 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/celebs.css]
+       ============================================================ */
     /* Famous people grid */
     .celeb-grid {
       display: grid;
@@ -628,6 +668,10 @@
       font-weight: 500;
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/services.css]
+       ============================================================ */
     /* ===== Price ===== */
     .price { background: var(--yellow-bg); }
 
@@ -730,6 +774,10 @@
       .price-card { margin-top: 1rem; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/form.css]
+       ============================================================ */
     /* ===== Contact ===== */
     .contact { background: var(--lavender-bg); }
 
@@ -893,6 +941,10 @@
       .form-row { grid-template-columns: 1fr; }
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/footer.css]
+       ============================================================ */
     /* ===== Footer ===== */
     .footer {
       background: #fff;
@@ -936,6 +988,10 @@
       color: var(--text-light);
     }
 
+
+    /* ============================================================
+       [SPLIT TARGET: components/lightbox.css]
+       ============================================================ */
     /* ===== Lightbox ===== */
     .lightbox-overlay {
       position: fixed;
@@ -1519,13 +1575,25 @@
   </footer>
 
   <script>
+
+    // ============================================================
+    // [SPLIT TARGET: main.js]
+    // ============================================================
     // ===== Header scroll =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/header.js]
+    // ============================================================
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 60);
     });
 
     // ===== Hamburger =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/nav.js]
+    // ============================================================
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
     hamburger.addEventListener('click', () => {
@@ -1547,6 +1615,10 @@
     });
 
     // ===== Scroll fade-in =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/scrollReveal.js]
+    // ============================================================
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1561,6 +1633,10 @@
     });
 
     // ===== Portfolio "もっと見る" =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/portfolio.js]
+    // ============================================================
     const btnMore = document.getElementById('btnMore');
     const extraGrid = document.querySelector('.portfolio-grid-extra');
     if (btnMore && extraGrid) {
@@ -1584,6 +1660,10 @@
     document.querySelectorAll('.portfolio-grid').forEach(grid => shuffleChildren(grid));
 
     // ===== Lightbox =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/lightbox.js]
+    // ============================================================
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     let lightboxItems = [];
@@ -1666,6 +1746,10 @@
     });
 
     // ===== Date input: min を当日に設定 =====
+
+    // ============================================================
+    // [SPLIT TARGET: modules/form.js]
+    // ============================================================
     (function setDateMin() {
       const dateInput = document.getElementById('date');
       if (!dateInput) return;
