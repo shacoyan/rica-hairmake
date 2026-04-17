@@ -1129,20 +1129,66 @@
       width: min(680px, 88vw);
       height: auto;
       transform-origin: 50% 100%;
-      animation: logoBounce 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation: logoBounce 1.7s linear both;
+      will-change: transform;
     }
     @keyframes logoBounce {
-      0%   { transform: translateY(0)      scale(1, 1)       rotate(0deg)  skewX(0deg); }
-      12%  { transform: translateY(0)      scale(1.15, 0.8)  rotate(-2deg) skewX(2deg); }
-      30%  { transform: translateY(-38px)  scale(0.88, 1.18) rotate(-6deg) skewX(-3deg); }
-      45%  { transform: translateY(-6px)   scale(1.1, 0.92)  rotate(3deg)  skewX(2deg); }
-      60%  {
-        transform: translateY(-22px)  scale(0.94, 1.08) rotate(6deg)  skewX(-2deg);
-        animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+      /* Anticipation: 静止 → 沈み込み開始（ゆっくり） */
+      0% {
+        transform: translateY(0) scale(1, 1) rotate(0deg) skewX(0deg);
+        animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);  /* ease-in-quad */
       }
-      78%  { transform: translateY(-4px)   scale(1.03, 0.98) rotate(-1deg) skewX(0deg); }
-      90%  { transform: translateY(-1px)   scale(1.01, 0.99) rotate(0deg)  skewX(0deg); }
-      100% { transform: translateY(0)      scale(1, 1)       rotate(0deg)  skewX(0deg); }
+      10% {
+        transform: translateY(2px) scale(1.04, 0.96) rotate(-0.5deg) skewX(1deg);
+        animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.2); /* さらに深く ease-in */
+      }
+
+      /* Deep Squash: スライム的に深く潰す（長めに時間を使う） */
+      28% {
+        transform: translateY(6px) scale(1.30, 0.65) rotate(-1.5deg) skewX(2deg);
+        animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);    /* 超 ease-in（溜め） */
+      }
+
+      /* Launch: 爆発的リリース（短時間・急加速 → 急減速しない＝発射感） */
+      35% {
+        transform: translateY(-28px) scale(0.72, 1.40) rotate(-4deg) skewX(-2deg);
+        animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); /* 空中へは ease-out 寄り */
+      }
+
+      /* Apex: 最高点で流体感（翻弄） */
+      50% {
+        transform: translateY(-66px) scale(0.88, 1.15) rotate(-6deg) skewX(-3deg);
+        animation-timing-function: cubic-bezier(0.42, 0, 1, 1);       /* ease-in：落下加速 */
+      }
+
+      /* Impact: 叩きつけ（ドンッ！） */
+      60% {
+        transform: translateY(0) scale(1.28, 0.74) rotate(4deg) skewX(3deg);
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);    /* ease-out-quart：素早く跳ね返る */
+      }
+
+      /* Recoil: 二次ジャンプ（小） */
+      72% {
+        transform: translateY(-18px) scale(0.92, 1.10) rotate(-2deg) skewX(-1deg);
+        animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);    /* ease-in-out */
+      }
+
+      /* Settle A: 小さな着地 */
+      82% {
+        transform: translateY(0) scale(1.06, 0.96) rotate(1deg) skewX(0deg);
+        animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);    /* ease-out（非 overshoot！） */
+      }
+
+      /* Settle B: 収束（overshoot しないカーブで静定） */
+      92% {
+        transform: translateY(0) scale(0.99, 1.01) rotate(0deg) skewX(0deg);
+        animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);    /* ease-out 継続 */
+      }
+
+      /* Rest: 完全静止（translateY(0) 固定・めり込みなし） */
+      100% {
+        transform: translateY(0) scale(1, 1) rotate(0deg) skewX(0deg);
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .loading-logo { animation-duration: 0.2s; animation-timing-function: linear; }
@@ -2253,6 +2299,25 @@
       try {
         const lastRect = heroLogo.getBoundingClientRect();
         const firstRect = loadingLogo.getBoundingClientRect();
+
+        const outOfView =
+          lastRect.width === 0 || lastRect.height === 0
+          || lastRect.bottom <= 0
+          || lastRect.top >= window.innerHeight
+          || Math.abs(lastRect.top  - firstRect.top)  > window.innerHeight * 1.5
+          || Math.abs(lastRect.left - firstRect.left) > window.innerWidth  * 1.5;
+
+        if (outOfView) {
+          heroLogo.classList.remove('loading-hidden');
+          overlay.classList.add('fade-out');
+          const onFadeEnd = () => {
+            overlay.removeEventListener('transitionend', onFadeEnd);
+            cleanup();
+          };
+          overlay.addEventListener('transitionend', onFadeEnd);
+          setTimeout(cleanup, 1000);
+          return;
+        }
 
         const dx = lastRect.left - firstRect.left;
         const dy = lastRect.top - firstRect.top;
