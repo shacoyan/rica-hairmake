@@ -471,6 +471,39 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }
 
+    /* ===== Portfolio Flip-in (D) ===== */
+    .portfolio-item {
+      opacity: 0;
+      transform: perspective(800px) rotateY(-90deg);
+      transform-origin: left center;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+      transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.5s ease,
+        box-shadow 0.3s;
+      transition-delay: calc(var(--i, 0) * 60ms);
+    }
+    .portfolio-item.flip-in {
+      opacity: 1;
+      transform: perspective(800px) rotateY(0deg);
+    }
+    .portfolio-item.flip-in:hover {
+      transform: perspective(800px) rotateY(0deg) scale(1.08) translateY(-4px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    }
+    .portfolio-item.will-change-done {
+      will-change: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .portfolio-item {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+      .portfolio-item.flip-in { transform: none; }
+    }
+
     .btn-more {
       display: block;
       margin: 2rem auto 3rem;
@@ -1061,7 +1094,6 @@
     /* ===== Hero/Headerロゴ アスペクト比修正 ===== */
     .hero-logo { height: auto; object-fit: contain; }
     .header-logo-img { object-fit: contain; }
-    .hero-logo.loading-hidden { visibility: hidden; }
 
     /* ===== Lightbox: Instagram 縦長アスペクト ===== */
     .lightbox-overlay.media-instagram .lightbox-video-wrap {
@@ -1108,6 +1140,37 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .card-carousel-slide { transition: none; }
+    }
+
+    /* ===== Profile Stagger ===== */
+    .pp-photo { opacity: 0; transform: scale(0.96); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .pp-photo.in { opacity: 1; transform: scale(1); }
+
+    .pp-info { /* wrapper: 中身の段階演出のために全体は常に表示 */ }
+
+    .pp-roll { visibility: hidden; }           /* 分解前の raw テキストを隠す */
+    .pp-roll.ready { visibility: visible; }    /* JS 分解完了後に表示 OK */
+    .pp-roll .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(40px) rotate(180deg);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i,0) * 80ms);
+    }
+    .pp-roll.in .char {
+      opacity: 1;
+      transform: translateX(0) rotate(0deg);
+    }
+
+    .pp-fade { opacity: 0; transform: translateY(8px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .pp-fade.in { opacity: 1; transform: translateY(0); }
+
+    .pp-rest { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .pp-rest.in { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pp-photo, .pp-fade, .pp-rest, .pp-roll .char { transition: none; opacity: 1; transform: none; }
+      .pp-roll { visibility: visible; }
     }
 
     /* ===== Loading 演出 ===== */
@@ -1195,11 +1258,77 @@
       .loading-overlay { transition: none; }
     }
 
+    /* ===== Hero Typing ===== */
+    .hero-catch .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(6px);
+      animation: heroCharIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: calc(var(--i, 0) * 70ms);
+      animation-play-state: paused;
+    }
+    .hero-catch.typing-start .char {
+      animation-play-state: running;
+    }
+    .hero-catch .char.space { width: 0.25em; }
+    .hero-catch .caret {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: currentColor;
+      margin-left: 2px;
+      vertical-align: -0.12em;
+      opacity: 0;
+      animation: heroCaretBlink 0.9s steps(2) infinite;
+    }
+    .hero-catch.typing-done .caret { opacity: 1; }
+    @keyframes heroCharIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroCaretBlink {
+      50% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-catch .char { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .hero-catch .caret { animation: none; opacity: 0; }
+    }
+
     /* ===== work-card-clickable（画像カード一律クリック対応） ===== */
     .work-card-clickable { cursor: pointer; }
     .work-card-clickable:focus-visible {
       outline: 3px solid var(--coral);
       outline-offset: 2px;
+    }
+
+    /* ===== Works Slide Right ===== */
+    .work-slide-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i,0) * 120ms);
+    }
+    .work-slide-right.slide-in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .work-slide-right { transition: none; opacity: 1; transform: none; }
+    }
+    /* ===== Price Pop ===== */
+    .price-grid .price-card {
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .price-grid.price-pop-run .price-card:nth-child(1) { transition-delay: 0ms; }
+    .price-grid.price-pop-run .price-card:nth-child(2) { transition-delay: 170ms; }
+    .price-grid.price-pop-run .price-card:nth-child(3) { transition-delay: 340ms; }
+    .price-grid.price-pop-run .price-card {
+      opacity: 1;
+      transform: scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .price-grid .price-card { transition: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -1252,17 +1381,17 @@
       <h2 class="section-title fade-in">Profile</h2>
       <p class="section-subtitle fade-in">一家に一台、ナカノリカ。</p>
       <div class="profile-grid">
-        <div class="profile-photo fade-in-left"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="lazy" decoding="async"></div>
-        <div class="fade-in-right">
-          <h3 class="profile-name">ナカノ リカ</h3>
-          <p class="profile-name-en">Rica Nakano</p>
-          <p class="profile-meta">大阪府吹田市出身 / 1999.4.20 / おうし座</p>
-          <div class="profile-text">
+        <div class="profile-photo pp-photo"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="lazy" decoding="async"></div>
+        <div class="pp-info">
+          <h3 class="profile-name pp-roll" aria-label="ナカノ リカ">ナカノ リカ</h3>
+          <p class="profile-name-en pp-fade">Rica Nakano</p>
+          <p class="profile-meta pp-rest">大阪府吹田市出身 / 1999.4.20 / おうし座</p>
+          <div class="profile-text pp-rest">
             <p>2021年ECCアーティスト美容専門学校ヘアメイク科卒業。卒業後すぐにフリーランスとして活動を開始し、広告・CMや起業家プロフィール写真など幅広い分野で活躍中。</p>
             <br>
             <p>最近ではモデル、インフルエンサー、YouTuber、ファッションスタイリスト、司会業にも挑戦中。</p>
           </div>
-          <div class="profile-certs">
+          <div class="profile-certs pp-rest">
             <h4>資格</h4>
             <ul>
               <li>美容師国家資格</li>
@@ -1283,7 +1412,7 @@
       <h2 class="section-title fade-in">Portfolio</h2>
       <p class="section-subtitle fade-in">SELECTED WORKS</p>
 
-      <div class="portfolio-grid fade-in">
+      <div class="portfolio-grid">
         <div class="portfolio-item"><img src="images/portfolio-01.jpg" alt="Portfolio 01" loading="lazy"></div>
         <div class="portfolio-item"><img src="images/portfolio-02.jpg" alt="Portfolio 02" loading="lazy"></div>
         <div class="portfolio-item"><img src="images/portfolio-03.jpg" alt="Portfolio 03" loading="lazy"></div>
@@ -1306,7 +1435,7 @@
         <div class="portfolio-item"><img src="images/portfolio-20.jpg" alt="Portfolio 20" loading="lazy"></div>
       </div>
 
-      <div class="portfolio-grid portfolio-grid-extra fade-in" style="display:none;">
+      <div class="portfolio-grid portfolio-grid-extra" style="display:none;">
         <div class="portfolio-item"><img src="images/portfolio-21.jpg" alt="Portfolio 21" loading="lazy"></div>
         <div class="portfolio-item"><img src="images/portfolio-22.jpg" alt="Portfolio 22" loading="lazy"></div>
         <div class="portfolio-item"><img src="images/portfolio-23.jpg" alt="Portfolio 23" loading="lazy"></div>
@@ -1358,7 +1487,7 @@
       <p class="section-subtitle fade-in">ACHIEVEMENTS</p>
 
       <!-- 動画 -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">VIDEO</span> 動画</h3>
         <div class="works-featured">
           <div class="work-card work-card-media"
@@ -1424,7 +1553,7 @@
         </ul>
       </div>
       <!-- SNS -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
         <div class="works-featured">
           <!-- TODO: Instagram reel サムネ素材待ち -->
@@ -1455,7 +1584,7 @@
       </div>
 
       <!-- MV -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MV</span> MV</h3>
         <div class="works-featured">
           <div class="work-card work-card-media"
@@ -1475,7 +1604,7 @@
       </div>
 
       <!-- TV -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">TV</span> TV</h3>
         <ul class="works-others">
           <li>ケンコバのバコバコナイト 赤ひげBAR</li>
@@ -1483,7 +1612,7 @@
       </div>
 
       <!-- スチール -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
         <div class="works-featured">
           <div class="work-card has-card-carousel">
@@ -1551,7 +1680,7 @@
       </div>
 
       <!-- アパレル -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">APPAREL</span> アパレル</h3>
         <div class="works-featured">
           <div class="work-card work-card-media"
@@ -1640,7 +1769,7 @@
       </div>
 
       <!-- ブライダル・成人式 -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
         <div class="works-featured">
           <div class="work-card">
@@ -1663,7 +1792,7 @@
       </div>
 
       <!-- 有名人 -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
         <ul class="celeb-grid">
           <li>よゐこ有野さん</li>
@@ -1686,7 +1815,7 @@
       </div>
 
       <!-- メディア出演 -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
         <div class="works-featured">
           <div class="work-card">
@@ -1718,7 +1847,7 @@
       </div>
 
       <!-- ポートレート -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">PORTRAIT</span> ポートレート</h3>
         <div class="works-featured">
           <div class="work-card">
@@ -1770,7 +1899,7 @@
       </div>
 
       <!-- 展示 -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">EXHIBITION</span> 展示</h3>
         <div class="works-featured">
           <div class="work-card">
@@ -1795,7 +1924,7 @@
       </div>
 
       <!-- モデル -->
-      <div class="works-category fade-in">
+      <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル</h3>
         <ul class="works-others">
           <li>Coming soon...</li>
@@ -2262,12 +2391,11 @@
       });
     });
 
-// ===== Loading 演出: バウンス → FLIP → フェードアウト =====
+// ===== Loading 演出: バウンス → フェードアウト =====
 (function () {
   const overlay = document.getElementById('loadingOverlay');
   const loadingLogo = document.getElementById('loadingLogo');
-  const heroLogo = document.querySelector('.hero-logo');
-  if (!overlay || !loadingLogo || !heroLogo) return;
+  if (!overlay || !loadingLogo) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -2276,119 +2404,289 @@
     if (isFinished) return;
     isFinished = true;
     if (overlay && overlay.isConnected) overlay.remove();
-    heroLogo.classList.remove('loading-hidden');
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
+    window.dispatchEvent(new CustomEvent('loading:done'));
   }
 
-  // 問題4: 最終セーフティネット（window load 後 5 秒で強制解除）
+  // 最終セーフティネット（window load 後 5 秒で強制解除）
   window.addEventListener('load', () => {
     setTimeout(cleanup, 5000);
   });
 
   try {
-    heroLogo.classList.add('loading-hidden');
     document.body.style.overflow = 'hidden';
 
-    function finish() {
-      // reduced-motion/エラー時は即 cleanup
-      cleanup();
-    }
-
-    function runFLIP() {
-      try {
-        const lastRect = heroLogo.getBoundingClientRect();
-        const firstRect = loadingLogo.getBoundingClientRect();
-
-        const outOfView =
-          lastRect.width === 0 || lastRect.height === 0
-          || lastRect.bottom <= 0
-          || lastRect.top >= window.innerHeight
-          || Math.abs(lastRect.top  - firstRect.top)  > window.innerHeight * 1.5
-          || Math.abs(lastRect.left - firstRect.left) > window.innerWidth  * 1.5;
-
-        if (outOfView) {
-          heroLogo.classList.remove('loading-hidden');
-          overlay.classList.add('fade-out');
-          const onFadeEnd = () => {
-            overlay.removeEventListener('transitionend', onFadeEnd);
-            cleanup();
-          };
-          overlay.addEventListener('transitionend', onFadeEnd);
-          setTimeout(cleanup, 1000);
-          return;
-        }
-
-        const dx = lastRect.left - firstRect.left;
-        const dy = lastRect.top - firstRect.top;
-        const sx = lastRect.width / firstRect.width;
-
-        loadingLogo.style.transformOrigin = 'top left';
-        loadingLogo.style.transition = 'transform 0.8s cubic-bezier(0.22, 1.4, 0.36, 1)';
-
-        // 問題3: transition と transform を別フレーム扱いにするため強制リフロー
-        void loadingLogo.offsetWidth;
-
-        loadingLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${sx})`;
-
-        // 問題2: fade-out は FLIP transitionend 後に付与（移動中に消えないように）
-        let flipDone = false;
-        const onFlipEnd = (e) => {
-          if (e && e.propertyName && e.propertyName !== 'transform') return;
-          if (flipDone) return;
-          flipDone = true;
-          loadingLogo.removeEventListener('transitionend', onFlipEnd);
-
-          overlay.classList.add('fade-out');
-          heroLogo.classList.remove('loading-hidden');
-
-          // opacity transition 完了で cleanup
-          const onFadeEnd = () => {
-            overlay.removeEventListener('transitionend', onFadeEnd);
-            cleanup();
-          };
-          overlay.addEventListener('transitionend', onFadeEnd);
-
-          // 問題1: transitionend 未発火対策フォールバック
-          setTimeout(cleanup, 1000);
-        };
-        loadingLogo.addEventListener('transitionend', onFlipEnd);
-
-        // 問題1: FLIP 側の transitionend 未発火対策フォールバック
-        setTimeout(() => {
-          if (!flipDone) onFlipEnd(null);
-        }, 1000);
-      } catch (err) {
-        cleanup();
-      }
+    function fadeOut() {
+      overlay.classList.add('fade-out');
+      overlay.addEventListener('transitionend', cleanup, { once: true });
+      setTimeout(cleanup, 1000);
     }
 
     function start() {
       if (reduceMotion) {
-        // 問題5: reduced-motion は bounce/FLIP スキップして即 cleanup
         cleanup();
         return;
       }
-      loadingLogo.addEventListener('animationend', runFLIP, { once: true });
-      setTimeout(() => {
-        if (overlay.isConnected && !isFinished) {
-          loadingLogo.style.animation = 'none';
-          runFLIP();
-        }
-      }, 2000);
+      loadingLogo.addEventListener('animationend', fadeOut, { once: true });
+      setTimeout(fadeOut, 2000);
     }
 
     if (loadingLogo.complete && loadingLogo.naturalWidth > 0) {
       start();
     } else {
       loadingLogo.addEventListener('load', start, { once: true });
-      loadingLogo.addEventListener('error', finish, { once: true });
+      loadingLogo.addEventListener('error', cleanup, { once: true });
     }
   } catch (err) {
-    // 問題4: 例外時も必ず cleanup
     cleanup();
   }
 })();
+
+/* ===== Hero Typing (B) ===== */
+(function() {
+  const catchEl = document.querySelector('.hero-catch');
+  if (!catchEl) return;
+
+  function splitChars() {
+    const childNodes = Array.from(catchEl.childNodes);
+    const fragment = document.createDocumentFragment();
+    let index = 0;
+    let hasReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    childNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'BR') {
+        fragment.appendChild(node);
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          if (ch === '\n' || ch === '\r') continue;
+          const span = document.createElement('span');
+          if (ch === ' ' || ch === '　') {
+            span.className = 'char space';
+          } else {
+            span.className = 'char';
+          }
+          if (!hasReducedMotion) {
+            span.style.setProperty('--i', index++);
+          } else {
+            span.style.setProperty('--i', '0');
+          }
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = ch;
+          fragment.appendChild(span);
+        }
+      }
+    });
+
+    const caret = document.createElement('span');
+    caret.className = 'caret';
+    caret.setAttribute('aria-hidden', 'true');
+    fragment.appendChild(caret);
+
+    catchEl.innerHTML = '';
+    catchEl.setAttribute('aria-label', '期待のその先をつくる。');
+    catchEl.appendChild(fragment);
+  }
+
+  function startTyping() {
+    if (catchEl.classList.contains('typing-start')) return;
+    catchEl.classList.add('typing-start');
+    const chars = catchEl.querySelectorAll('.char');
+    if (chars.length > 0) {
+      const lastChar = chars[chars.length - 1];
+      lastChar.addEventListener('animationend', () => {
+        catchEl.classList.add('typing-done');
+      }, { once: true });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', splitChars);
+
+  window.addEventListener('loading:done', startTyping);
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (!catchEl.classList.contains('typing-start')) {
+        startTyping();
+      }
+    }, 100);
+  });
+})();
+
+  // ===== C: Profile Stagger =====
+  (function() {
+    'use strict';
+
+    const ppSection = document.querySelector('.profile#profile');
+    const ppRoll = document.querySelector('.pp-roll');
+    const ppPhoto = document.querySelector('.pp-photo');
+    const ppFade = document.querySelector('.pp-fade');
+    const ppRests = document.querySelectorAll('.pp-rest');
+
+    if (ppSection && ppRoll) {
+      // 1. .pp-roll の文字分解
+      const rawText = ppRoll.textContent;
+      ppRoll.innerHTML = '';
+      let charIndex = 0;
+
+      Array.from(rawText).forEach(function(ch) {
+        const span = document.createElement('span');
+        span.setAttribute('aria-hidden', 'true');
+
+        if (ch === ' ' || ch === '\u3000') {
+          // 半角スペース or 全角スペース
+          span.className = 'char space';
+          span.innerHTML = '&nbsp;';
+        } else {
+          span.className = 'char';
+          span.style.setProperty('--i', charIndex);
+          span.textContent = ch;
+          charIndex++;
+        }
+
+        ppRoll.appendChild(span);
+      });
+
+      const totalChars = charIndex;
+      ppRoll.classList.add('ready');
+
+      // 2. reduce-motion 検出
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 3. IntersectionObserver (threshold: 0.2, once)
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            observer.unobserve(ppSection);
+
+            if (prefersReducedMotion) {
+              // 4. reduce-motion 時: 全クラス同時付与で瞬時表示
+              ppPhoto.classList.add('in');
+              ppRoll.classList.add('in');
+              if (ppFade) ppFade.classList.add('in');
+              ppRests.forEach(function(el) { el.classList.add('in'); });
+              return;
+            }
+
+            // 段階演出: setTimeout ベース
+            // Phase 1: 画像フェードイン (delay 0ms)
+            ppPhoto.classList.add('in');
+
+            // Phase 2: pp-roll に in 付与 (画像アニメ完了待ち ~700ms)
+            setTimeout(function() {
+              ppRoll.classList.add('in');
+            }, 700);
+
+            // Phase 3: pp-fade に in 付与 (~700ms + charCount*80ms + 500ms)
+            var rollDelay = 700 + totalChars * 80 + 500;
+            setTimeout(function() {
+              if (ppFade) ppFade.classList.add('in');
+            }, rollDelay);
+
+            // Phase 4: pp-rest 全要素に in 付与 (stagger不要、同時発火)
+            var restDelay = rollDelay + 600 + 100; // pp-fade duration + buffer
+            setTimeout(function() {
+              ppRests.forEach(function(el) { el.classList.add('in'); });
+            }, restDelay);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(ppSection);
+    }
+  })();
+
+  // ===== D: Portfolio Flip-in =====
+  (function() {
+    var applyIndex = function(grid) {
+      Array.prototype.forEach.call(grid.children, function(item, index) {
+        item.style.setProperty('--i', index);
+      });
+    };
+
+    var applyFlipIn = function(grid) {
+      var items = grid.querySelectorAll('.portfolio-item');
+      Array.prototype.forEach.call(items, function(item) {
+        item.classList.add('flip-in');
+        var onEnd = function() {
+          item.classList.add('will-change-done');
+          item.removeEventListener('transitionend', onEnd);
+        };
+        item.addEventListener('transitionend', onEnd);
+      });
+    };
+
+    // 初期採番（shuffle 結果順）
+    document.querySelectorAll('.portfolio-grid').forEach(function(grid) {
+      applyIndex(grid);
+    });
+
+    // IntersectionObserver（extra 以外を監視）
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          applyFlipIn(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.portfolio-grid:not(.portfolio-grid-extra)').forEach(function(grid) {
+      observer.observe(grid);
+    });
+
+    // 「もっと見る」ボタン追加購読（既存ハンドラは置換せず併存）
+    var btnMore = document.getElementById('btnMore');
+    var extraGrid = document.querySelector('.portfolio-grid-extra');
+    if (btnMore && extraGrid) {
+      btnMore.addEventListener('click', function() {
+        // 既存ハンドラが display を解除した後に走らせる
+        requestAnimationFrame(function() {
+          applyIndex(extraGrid);
+          var rect = extraGrid.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            applyFlipIn(extraGrid);
+          } else {
+            observer.observe(extraGrid);
+          }
+        });
+      });
+    }
+  })();
+
+  // ===== Works Slide Right =====
+  (() => {
+    const cats = document.querySelectorAll('.works-category.work-slide-right');
+    if (!cats.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('slide-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    cats.forEach(cat => observer.observe(cat));
+  })();
+
+  // ===== Price Pop (Team F) =====
+  ;(function() {
+    const priceGrid = document.querySelector('.price-grid');
+    if (!priceGrid) return;
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          priceGrid.classList.add('price-pop-run');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(priceGrid);
+  })();
   </script>
 
 </body>
