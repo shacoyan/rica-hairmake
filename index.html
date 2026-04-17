@@ -1072,80 +1072,42 @@
       max-height: 85vh;
     }
 
-    /* ===== Works: Canva カルーセル ===== */
-    .works-carousel {
-      position: relative;
-      margin: 1rem auto 0;
-      max-width: 720px;
-    }
-    .works-carousel:focus-visible {
+    /* ===== Works: カード内カルーセル ===== */
+    .work-card.has-card-carousel { cursor: pointer; }
+    .work-card.has-card-carousel:focus-visible {
       outline: 3px solid var(--coral);
-      outline-offset: 4px;
-      border-radius: 12px;
+      outline-offset: 2px;
     }
-    .carousel-track {
+    .card-carousel {
       position: relative;
-      aspect-ratio: 1 / 1;
-      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      width: 100%;
       overflow: hidden;
-      background: #f8f4ea;
+      background: linear-gradient(135deg, #FF85C0, #66EAAA);
     }
-    .carousel-slide {
+    .card-carousel-track {
+      position: absolute;
+      inset: 0;
+    }
+    .card-carousel-slide {
       position: absolute;
       inset: 0;
       opacity: 0;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.7s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .carousel-slide.active { opacity: 1; }
-    .carousel-slide img {
+    .card-carousel-slide.is-active { opacity: 1; }
+    .card-carousel-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      cursor: pointer;
-    }
-    .carousel-prev, .carousel-next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background 0.2s;
-      z-index: 2;
-    }
-    .carousel-prev:hover, .carousel-next:hover { background: rgba(0, 0, 0, 0.6); }
-    .carousel-prev { left: 0.5rem; }
-    .carousel-next { right: 0.5rem; }
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.4rem;
-      margin-top: 0.8rem;
-    }
-    .carousel-dots .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.2);
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      padding: 0;
-    }
-    .carousel-dots .dot[aria-current="true"] {
-      background: var(--coral);
-      transform: scale(1.3);
+      display: block;
+      pointer-events: none;
     }
     @media (prefers-reduced-motion: reduce) {
-      .carousel-slide { transition: none; }
+      .card-carousel-slide { transition: none; }
     }
 
     /* ===== Loading 演出 ===== */
@@ -1166,18 +1128,21 @@
     .loading-logo {
       width: min(680px, 88vw);
       height: auto;
-      animation: logoBounce 1.5s ease-in-out;
+      transform-origin: 50% 100%;
+      animation: logoBounce 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
     @keyframes logoBounce {
-      0%   { transform: translateY(0) rotate(0deg); }
-      20%  { transform: translateY(-30px) rotate(-3deg); }
-      40%  { transform: translateY(0) rotate(0deg); }
-      60%  { transform: translateY(-20px) rotate(3deg); }
-      80%  { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+      0%   { transform: translateY(0)      scale(1, 1)       rotate(0deg)  skewX(0deg); }
+      12%  { transform: translateY(0)      scale(1.15, 0.8)  rotate(-2deg) skewX(2deg); }
+      30%  { transform: translateY(-38px)  scale(0.88, 1.18) rotate(-6deg) skewX(-3deg); }
+      45%  { transform: translateY(-6px)   scale(1.1, 0.92)  rotate(3deg)  skewX(2deg); }
+      60%  { transform: translateY(-22px)  scale(0.94, 1.08) rotate(6deg)  skewX(-2deg); }
+      75%  { transform: translateY(0)      scale(1.06, 0.96) rotate(-2deg) skewX(1deg); }
+      90%  { transform: translateY(-6px)   scale(0.98, 1.02) rotate(1deg)  skewX(0deg); }
+      100% { transform: translateY(0)      scale(1, 1)       rotate(0deg)  skewX(0deg); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .loading-logo { animation-duration: 0.2s; }
+      .loading-logo { animation-duration: 0.2s; animation-timing-function: linear; }
       .loading-overlay { transition: none; }
     }
 
@@ -1472,10 +1437,54 @@
       <div class="works-category fade-in">
         <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/still-canva-01.jpg');"
-                 aria-hidden="true"></div>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="0"
+                 aria-roledescription="carousel" aria-label="Canvaフリー素材スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 14">
+                  <img src="images/works/still-canva-01.jpg" alt="Canva フリー素材 01" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 14">
+                  <img src="images/works/still-canva-02.jpg" alt="Canva フリー素材 02" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 14">
+                  <img src="images/works/still-canva-03.jpg" alt="Canva フリー素材 03" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 14">
+                  <img src="images/works/still-canva-04.jpg" alt="Canva フリー素材 04" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 14">
+                  <img src="images/works/still-canva-05.jpg" alt="Canva フリー素材 05" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 14">
+                  <img src="images/works/still-canva-06.jpg" alt="Canva フリー素材 06" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="7 / 14">
+                  <img src="images/works/still-canva-07.jpg" alt="Canva フリー素材 07" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="8 / 14">
+                  <img src="images/works/still-canva-08.jpg" alt="Canva フリー素材 08" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="9 / 14">
+                  <img src="images/works/still-canva-09.jpg" alt="Canva フリー素材 09" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="10 / 14">
+                  <img src="images/works/still-canva-10.jpg" alt="Canva フリー素材 10" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="11 / 14">
+                  <img src="images/works/still-canva-11.jpg" alt="Canva フリー素材 11" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="12 / 14">
+                  <img src="images/works/still-canva-12.jpg" alt="Canva フリー素材 12" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="13 / 14">
+                  <img src="images/works/still-canva-13.jpg" alt="Canva フリー素材 13" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="14 / 14">
+                  <img src="images/works/still-canva-14.jpg" alt="Canva フリー素材 14" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>Canvaフリー素材</h5>
@@ -1490,67 +1499,6 @@
           <li>ヒラキキッズページ</li>
           <li>バイオメディカル専門学校卒業アルバム</li>
         </ul>
-        <!-- Canva カルーセル（代表カードに入りきらなかった 13 枚） -->
-        <div class="works-carousel" data-interval="4000" aria-roledescription="carousel" aria-label="Canvaフリー素材スチール">
-          <div class="carousel-track">
-            <div class="carousel-slide active" role="group" aria-roledescription="slide" aria-label="1 / 13">
-              <img src="images/works/still-canva-02.jpg" alt="Canva still 02" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 13">
-              <img src="images/works/still-canva-03.jpg" alt="Canva still 03" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 13">
-              <img src="images/works/still-canva-04.jpg" alt="Canva still 04" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 13">
-              <img src="images/works/still-canva-05.jpg" alt="Canva still 05" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 13">
-              <img src="images/works/still-canva-06.jpg" alt="Canva still 06" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 13">
-              <img src="images/works/still-canva-07.jpg" alt="Canva still 07" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="7 / 13">
-              <img src="images/works/still-canva-08.jpg" alt="Canva still 08" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="8 / 13">
-              <img src="images/works/still-canva-09.jpg" alt="Canva still 09" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="9 / 13">
-              <img src="images/works/still-canva-10.jpg" alt="Canva still 10" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="10 / 13">
-              <img src="images/works/still-canva-11.jpg" alt="Canva still 11" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="11 / 13">
-              <img src="images/works/still-canva-12.jpg" alt="Canva still 12" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="12 / 13">
-              <img src="images/works/still-canva-13.jpg" alt="Canva still 13" loading="lazy">
-            </div>
-            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="13 / 13">
-              <img src="images/works/still-canva-14.jpg" alt="Canva still 14" loading="lazy">
-            </div>
-          </div>
-          <button type="button" class="carousel-prev" aria-label="前の画像">&lt;</button>
-          <button type="button" class="carousel-next" aria-label="次の画像">&gt;</button>
-          <div class="carousel-dots" role="tablist">
-            <button type="button" class="dot" aria-current="true" aria-label="1枚目を表示"></button>
-            <button type="button" class="dot" aria-label="2枚目を表示"></button>
-            <button type="button" class="dot" aria-label="3枚目を表示"></button>
-            <button type="button" class="dot" aria-label="4枚目を表示"></button>
-            <button type="button" class="dot" aria-label="5枚目を表示"></button>
-            <button type="button" class="dot" aria-label="6枚目を表示"></button>
-            <button type="button" class="dot" aria-label="7枚目を表示"></button>
-            <button type="button" class="dot" aria-label="8枚目を表示"></button>
-            <button type="button" class="dot" aria-label="9枚目を表示"></button>
-            <button type="button" class="dot" aria-label="10枚目を表示"></button>
-            <button type="button" class="dot" aria-label="11枚目を表示"></button>
-            <button type="button" class="dot" aria-label="12枚目を表示"></button>
-            <button type="button" class="dot" aria-label="13枚目を表示"></button>
-          </div>
-        </div>
       </div>
 
       <!-- アパレル -->
@@ -1570,17 +1518,65 @@
               <h5>punktum(R) <small>| ヘアメイク担当</small></h5>
             </div>
           </div>
-          <!-- TODO: Drive フォルダサムネ素材待ち -->
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="1"
+                 aria-roledescription="carousel" aria-label="atelier Harry スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 10">
+                  <img src="images/works/atelier-01.jpg" alt="atelier Harry 01" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 10">
+                  <img src="images/works/atelier-02.jpg" alt="atelier Harry 02" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 10">
+                  <img src="images/works/atelier-03.jpg" alt="atelier Harry 03" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 10">
+                  <img src="images/works/atelier-04.jpg" alt="atelier Harry 04" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 10">
+                  <img src="images/works/atelier-05.jpg" alt="atelier Harry 05" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 10">
+                  <img src="images/works/atelier-06.jpg" alt="atelier Harry 06" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="7 / 10">
+                  <img src="images/works/atelier-07.jpg" alt="atelier Harry 07" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="8 / 10">
+                  <img src="images/works/atelier-08.jpg" alt="atelier Harry 08" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="9 / 10">
+                  <img src="images/works/atelier-09.jpg" alt="atelier Harry 09" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="10 / 10">
+                  <img src="images/works/atelier-10.jpg" alt="atelier Harry 10" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>atelier Harry | ヘアメイク担当</h5>
             </div>
           </div>
-          <!-- TODO: Drive フォルダサムネ素材待ち -->
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="2"
+                 aria-roledescription="carousel" aria-label="suit stomp スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 4">
+                  <img src="images/works/suitstomp-01.png" alt="suit stomp 01" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 4">
+                  <img src="images/works/suitstomp-02.png" alt="suit stomp 02" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 4">
+                  <img src="images/works/suitstomp-03.png" alt="suit stomp 03" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 4">
+                  <img src="images/works/suitstomp-04.png" alt="suit stomp 04" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>suit stomp | ヘアメイク担当</h5>
@@ -2105,29 +2101,23 @@
       });
     });
 
-    // ===== Canva カルーセル =====
-    document.querySelectorAll('.works-carousel').forEach((root) => {
-      const slides = Array.from(root.querySelectorAll('.carousel-slide'));
-      const dots = Array.from(root.querySelectorAll('.carousel-dots .dot'));
-      const prevBtn = root.querySelector('.carousel-prev');
-      const nextBtn = root.querySelector('.carousel-next');
-      const interval = parseInt(root.dataset.interval || '4000', 10);
+    // ===== カード内カルーセル =====
+    document.querySelectorAll('.card-carousel').forEach((root) => {
+      const slides = Array.from(root.querySelectorAll('.card-carousel-slide'));
+      if (slides.length <= 1) return;
+      const interval = parseInt(root.dataset.interval || '3500', 10);
+      const phase = parseInt(root.dataset.phase || '0', 10);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       let currentIndex = 0;
       let timerId = null;
 
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
       function go(index) {
-        slides[currentIndex]?.classList.remove('active');
-        dots[currentIndex]?.setAttribute('aria-current', 'false');
+        slides[currentIndex]?.classList.remove('is-active');
         currentIndex = (index + slides.length) % slides.length;
-        slides[currentIndex]?.classList.add('active');
-        dots[currentIndex]?.setAttribute('aria-current', 'true');
+        slides[currentIndex]?.classList.add('is-active');
       }
-
       function next() { go(currentIndex + 1); }
-      function prev() { go(currentIndex - 1); }
-
       function start() {
         if (reduceMotion) return;
         stop();
@@ -2137,39 +2127,30 @@
         if (timerId) { clearInterval(timerId); timerId = null; }
       }
 
-      prevBtn?.addEventListener('click', () => { prev(); start(); });
-      nextBtn?.addEventListener('click', () => { next(); start(); });
-      dots.forEach((dot, i) => dot.addEventListener('click', () => { go(i); start(); }));
+      const card = root.closest('.work-card');
+      (card || root).addEventListener('mouseenter', stop);
+      (card || root).addEventListener('mouseleave', start);
 
-      root.addEventListener('mouseenter', stop);
-      root.addEventListener('mouseleave', start);
+      const offset = reduceMotion ? 0 : Math.floor((interval / 3) * (phase % 3));
+      setTimeout(start, offset);
+    });
 
-      // スワイプ
-      let touchStartX = 0;
-      root.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; stop(); }, { passive: true });
-      root.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 50) { dx > 0 ? prev() : next(); }
-        start();
+    // ===== カード内カルーセル → Lightbox =====
+    document.querySelectorAll('.work-card.has-card-carousel').forEach((card) => {
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      const title = card.querySelector('h5')?.textContent?.trim() || '';
+      card.setAttribute('aria-label', `${title} を拡大`);
+
+      const fire = () => {
+        const activeImg = card.querySelector('.card-carousel-slide.is-active img');
+        if (!activeImg) return;
+        openLightboxMedia('image', activeImg.src, activeImg.alt || title);
+      };
+      card.addEventListener('click', fire);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
       });
-
-      // 画像クリックで Lightbox 拡大
-      slides.forEach((slide) => {
-        const img = slide.querySelector('img');
-        if (!img) return;
-        img.addEventListener('click', () => {
-          openLightboxMedia('image', img.src, img.alt || '');
-        });
-      });
-
-      // キーボード
-      root.setAttribute('tabindex', '0');
-      root.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { prev(); start(); }
-        else if (e.key === 'ArrowRight') { next(); start(); }
-      });
-
-      start();
     });
 
     // ===== Date input: min を当日に設定 =====
@@ -2191,7 +2172,7 @@
     });
 
     // ===== 全 .has-image 画像カードを画像Lightbox対応 =====
-    document.querySelectorAll('.work-card:not(.work-card-media)').forEach((card) => {
+    document.querySelectorAll('.work-card:not(.work-card-media):not(.has-card-carousel)').forEach((card) => {
       const thumb = card.querySelector('.work-card-thumb.has-image');
       if (!thumb) return;
       const styleAttr = thumb.getAttribute('style') || '';
@@ -2253,7 +2234,7 @@
         const sx = lastRect.width / firstRect.width;
 
         loadingLogo.style.transformOrigin = 'top left';
-        loadingLogo.style.transition = 'transform 0.6s ease-out';
+        loadingLogo.style.transition = 'transform 0.8s cubic-bezier(0.22, 1.4, 0.36, 1)';
 
         // 問題3: transition と transform を別フレーム扱いにするため強制リフロー
         void loadingLogo.offsetWidth;
@@ -2279,14 +2260,14 @@
           overlay.addEventListener('transitionend', onFadeEnd);
 
           // 問題1: transitionend 未発火対策フォールバック
-          setTimeout(cleanup, 800);
+          setTimeout(cleanup, 1000);
         };
         loadingLogo.addEventListener('transitionend', onFlipEnd);
 
         // 問題1: FLIP 側の transitionend 未発火対策フォールバック
         setTimeout(() => {
           if (!flipDone) onFlipEnd(null);
-        }, 900);
+        }, 1000);
       } catch (err) {
         cleanup();
       }
