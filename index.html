@@ -1955,17 +1955,18 @@
     // ===== Lightbox =====
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
-    let lightboxItems = [];
+    let lightboxItems = [];           // Array<{src: string, alt: string}>
     let lightboxIndex = 0;
     let lightboxLastFocus = null;
 
-    function collectLightboxItems() {
-      lightboxItems = Array.from(document.querySelectorAll('.portfolio-item img'));
+    function collectGalleryLightboxItems() {
+      lightboxItems = Array.from(document.querySelectorAll('.portfolio-item img'))
+        .map(img => ({ src: img.src, alt: img.alt || '' }));
     }
-    collectLightboxItems();
+    collectGalleryLightboxItems();
 
     function openLightbox(index) {
-      collectLightboxItems();
+      collectGalleryLightboxItems();
       lightboxIndex = index;
       lightboxImg.src = lightboxItems[index].src;
       lightboxImg.alt = lightboxItems[index].alt;
@@ -1990,6 +1991,7 @@
 
     function showPrev() {
       if (lightbox.classList.contains('media-video')) return;
+      if (!lightboxItems.length) return;
       lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
       lightboxImg.src = lightboxItems[lightboxIndex].src;
       lightboxImg.alt = lightboxItems[lightboxIndex].alt;
@@ -1997,17 +1999,17 @@
 
     function showNext() {
       if (lightbox.classList.contains('media-video')) return;
+      if (!lightboxItems.length) return;
       lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
       lightboxImg.src = lightboxItems[lightboxIndex].src;
       lightboxImg.alt = lightboxItems[lightboxIndex].alt;
     }
 
-    document.querySelectorAll('.portfolio-item').forEach((item) => {
+    const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+    portfolioItems.forEach((item, idx) => {
       item.addEventListener('click', () => {
-        collectLightboxItems();
-        const img = item.querySelector('img');
-        const idx = lightboxItems.indexOf(img);
-        if (idx !== -1) openLightbox(idx);
+        collectGalleryLightboxItems();
+        openLightbox(idx);
       });
     });
 
@@ -2050,8 +2052,10 @@
      *   - 'instagram' : Instagram Reel iframe 埋め込み（縦長レイアウト）
      * @param {string} url - メディアURL
      * @param {string} [alt] - 画像の alt テキスト（image モード時）
+     * @param {Array<{src,alt}>} [imageSet]   - image モード時に巡回させる独立セット。省略時はギャラリー
+     * @param {number}           [startIndex] - imageSet 内の開始 index
      */
-    function openLightboxMedia(type, url, alt) {
+    function openLightboxMedia(type, url, alt, imageSet, startIndex) {
       if (type === 'image' && !url) return;
       lightboxLastFocus = document.activeElement;
       const videoWrap = document.getElementById('lightboxVideoWrap');
@@ -2079,6 +2083,17 @@
         videoWrap.innerHTML = '';
         lightboxImg.src = url;
         lightboxImg.alt = alt || '';
+
+        if (Array.isArray(imageSet) && imageSet.length > 0) {
+          // カルーセル経由: 独立セットで上書き
+          lightboxItems = imageSet.slice();
+          lightboxIndex = Math.max(0, Math.min(startIndex || 0, imageSet.length - 1));
+        } else {
+          // フォールバック: ギャラリーに戻す（従来挙動）
+          collectGalleryLightboxItems();
+          const i = lightboxItems.findIndex(it => it.src === url);
+          lightboxIndex = i >= 0 ? i : 0;
+        }
       } else {
         return;
       }
@@ -2146,9 +2161,16 @@
       card.setAttribute('aria-label', `${title} を拡大`);
 
       const fire = () => {
-        const activeImg = card.querySelector('.card-carousel-slide.is-active img');
-        if (!activeImg) return;
-        openLightboxMedia('image', activeImg.src, activeImg.alt || title);
+        const slideImgs = Array.from(card.querySelectorAll('.card-carousel-slide img'));
+        if (slideImgs.length === 0) return;
+
+        const activeSlide = card.querySelector('.card-carousel-slide.is-active');
+        const activeImg = activeSlide?.querySelector('img') || slideImgs[0];
+
+        const items = slideImgs.map(img => ({ src: img.src, alt: img.alt || title }));
+        const startIndex = Math.max(0, slideImgs.indexOf(activeImg));
+
+        openLightboxMedia('image', activeImg.src, activeImg.alt || title, items, startIndex);
       };
       card.addEventListener('click', fire);
       card.addEventListener('keydown', (e) => {
