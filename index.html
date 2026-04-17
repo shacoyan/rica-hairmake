@@ -39,6 +39,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="logo.png" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== Utility ===== */
@@ -1024,23 +1025,6 @@
     .works-category:nth-of-type(11) .cat-label { background: var(--blue); }
     .works-category:nth-of-type(12) .cat-label { background: var(--pink); }
 
-    /* ===== Works: STILL Canva サブグリッド ===== */
-    .works-subgrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .works-subgrid img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .works-subgrid img:hover { transform: scale(1.04); }
-
     /* ===== Lightbox: 動画コンテナ ===== */
     .lightbox-video-wrap {
       position: relative;
@@ -1073,9 +1057,142 @@
       color: var(--text-light);
       margin-left: 0.2em;
     }
+
+    /* ===== Hero/Headerロゴ アスペクト比修正 ===== */
+    .hero-logo { height: auto; object-fit: contain; }
+    .header-logo-img { object-fit: contain; }
+    .hero-logo.loading-hidden { visibility: hidden; }
+
+    /* ===== Lightbox: Instagram 縦長アスペクト ===== */
+    .lightbox-overlay.media-instagram .lightbox-video-wrap {
+      width: min(90vw, 420px, calc(85vh * 9 / 16));
+      height: auto;
+      aspect-ratio: 9 / 16;
+      max-width: 90vw;
+      max-height: 85vh;
+    }
+
+    /* ===== Works: Canva カルーセル ===== */
+    .works-carousel {
+      position: relative;
+      margin: 1rem auto 0;
+      max-width: 720px;
+    }
+    .works-carousel:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+    .carousel-track {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8f4ea;
+    }
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .carousel-prev, .carousel-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .carousel-prev:hover, .carousel-next:hover { background: rgba(0, 0, 0, 0.6); }
+    .carousel-prev { left: 0.5rem; }
+    .carousel-next { right: 0.5rem; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+    }
+    .carousel-dots .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      padding: 0;
+    }
+    .carousel-dots .dot[aria-current="true"] {
+      background: var(--coral);
+      transform: scale(1.3);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-slide { transition: none; }
+    }
+
+    /* ===== Loading 演出 ===== */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #fefaee;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loading-logo {
+      width: min(680px, 88vw);
+      height: auto;
+      animation: logoBounce 1.5s ease-in-out;
+    }
+    @keyframes logoBounce {
+      0%   { transform: translateY(0) rotate(0deg); }
+      20%  { transform: translateY(-30px) rotate(-3deg); }
+      40%  { transform: translateY(0) rotate(0deg); }
+      60%  { transform: translateY(-20px) rotate(3deg); }
+      80%  { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .loading-logo { animation-duration: 0.2s; }
+      .loading-overlay { transition: none; }
+    }
+
+    /* ===== work-card-clickable（画像カード一律クリック対応） ===== */
+    .work-card-clickable { cursor: pointer; }
+    .work-card-clickable:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
+<div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+  <img src="logo.png" alt="" class="loading-logo" id="loadingLogo" width="976" height="479">
+</div>
 
   <!-- ===== Header ===== -->
   <header class="header" id="header">
@@ -1230,29 +1347,52 @@
       <div class="works-category fade-in">
         <h3 class="works-category-title"><span class="cat-label">VIDEO</span> 動画</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb video">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="youtube"
+               data-media-url="https://www.youtube.com/embed/AQqhtlrHnqI"
+               role="button" tabindex="0"
+               aria-label="NTT西日本教育DX広告 を再生">
+            <div class="work-card-thumb has-image video"
+                 style="background-image: url('images/works/video-ntt.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>NTT西日本教育DX広告</h5>
             </div>
           </div>
-          <div class="work-card">
+          <!-- TODO: あべのハルカス サムネ素材待ち -->
+          <div class="work-card work-card-media"
+               data-media-type="instagram"
+               data-media-url="https://www.instagram.com/reel/DK1OSQxzaii/embed"
+               role="button" tabindex="0"
+               aria-label="あべのハルカス300 ショートドラマ を再生">
             <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>あべのハルカス300 ショートドラマ</h5>
             </div>
           </div>
-          <div class="work-card">
-            <div class="work-card-thumb video">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="youtube"
+               data-media-url="https://www.youtube.com/embed/HYPQNmK68WM"
+               role="button" tabindex="0"
+               aria-label="兵庫県防災ツーリズム を再生">
+            <div class="work-card-thumb has-image video"
+                 style="background-image: url('images/works/video-hyogo.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>兵庫県防災ツーリズム</h5>
             </div>
           </div>
-          <div class="work-card">
-            <div class="work-card-thumb video">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="youtube"
+               data-media-url="https://www.youtube.com/embed/4GQtuQc5Y38"
+               role="button" tabindex="0"
+               aria-label="MYLILY ブランドムービー を再生">
+            <div class="work-card-thumb has-image video"
+                 style="background-image: url('images/works/video-mylily.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>MYLILY ブランドムービー</h5>
@@ -1274,16 +1414,24 @@
         <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
         <div class="works-featured">
           <!-- TODO: Instagram reel サムネ素材待ち -->
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="instagram"
+               data-media-url="https://www.instagram.com/reel/C0T6vXerVG9/embed"
+               role="button" tabindex="0"
+               aria-label="vasary media メイク企画・運営担当 を再生">
+            <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>vasary media | メイク企画・運営担当</h5>
             </div>
           </div>
           <!-- TODO: Instagram reel サムネ素材待ち -->
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="instagram"
+               data-media-url="https://www.instagram.com/reel/DW_SnFOp4qD/embed"
+               role="button" tabindex="0"
+               aria-label="未来パレット ヘアメイク・ネイル制作担当 を再生">
+            <div class="work-card-thumb video">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>未来パレット | ヘアメイク・ネイル制作担当</h5>
@@ -1342,21 +1490,66 @@
           <li>ヒラキキッズページ</li>
           <li>バイオメディカル専門学校卒業アルバム</li>
         </ul>
-        <!-- Canva サブグリッド（代表カードに入りきらなかった 13 枚） -->
-        <div class="works-subgrid">
-          <img src="images/works/still-canva-02.jpg" alt="Canva still 02" loading="lazy">
-          <img src="images/works/still-canva-03.jpg" alt="Canva still 03" loading="lazy">
-          <img src="images/works/still-canva-04.jpg" alt="Canva still 04" loading="lazy">
-          <img src="images/works/still-canva-05.jpg" alt="Canva still 05" loading="lazy">
-          <img src="images/works/still-canva-06.jpg" alt="Canva still 06" loading="lazy">
-          <img src="images/works/still-canva-07.jpg" alt="Canva still 07" loading="lazy">
-          <img src="images/works/still-canva-08.jpg" alt="Canva still 08" loading="lazy">
-          <img src="images/works/still-canva-09.jpg" alt="Canva still 09" loading="lazy">
-          <img src="images/works/still-canva-10.jpg" alt="Canva still 10" loading="lazy">
-          <img src="images/works/still-canva-11.jpg" alt="Canva still 11" loading="lazy">
-          <img src="images/works/still-canva-12.jpg" alt="Canva still 12" loading="lazy">
-          <img src="images/works/still-canva-13.jpg" alt="Canva still 13" loading="lazy">
-          <img src="images/works/still-canva-14.jpg" alt="Canva still 14" loading="lazy">
+        <!-- Canva カルーセル（代表カードに入りきらなかった 13 枚） -->
+        <div class="works-carousel" data-interval="4000" aria-roledescription="carousel" aria-label="Canvaフリー素材スチール">
+          <div class="carousel-track">
+            <div class="carousel-slide active" role="group" aria-roledescription="slide" aria-label="1 / 13">
+              <img src="images/works/still-canva-02.jpg" alt="Canva still 02" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 13">
+              <img src="images/works/still-canva-03.jpg" alt="Canva still 03" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 13">
+              <img src="images/works/still-canva-04.jpg" alt="Canva still 04" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 13">
+              <img src="images/works/still-canva-05.jpg" alt="Canva still 05" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 13">
+              <img src="images/works/still-canva-06.jpg" alt="Canva still 06" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 13">
+              <img src="images/works/still-canva-07.jpg" alt="Canva still 07" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="7 / 13">
+              <img src="images/works/still-canva-08.jpg" alt="Canva still 08" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="8 / 13">
+              <img src="images/works/still-canva-09.jpg" alt="Canva still 09" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="9 / 13">
+              <img src="images/works/still-canva-10.jpg" alt="Canva still 10" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="10 / 13">
+              <img src="images/works/still-canva-11.jpg" alt="Canva still 11" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="11 / 13">
+              <img src="images/works/still-canva-12.jpg" alt="Canva still 12" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="12 / 13">
+              <img src="images/works/still-canva-13.jpg" alt="Canva still 13" loading="lazy">
+            </div>
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="13 / 13">
+              <img src="images/works/still-canva-14.jpg" alt="Canva still 14" loading="lazy">
+            </div>
+          </div>
+          <button type="button" class="carousel-prev" aria-label="前の画像">&lt;</button>
+          <button type="button" class="carousel-next" aria-label="次の画像">&gt;</button>
+          <div class="carousel-dots" role="tablist">
+            <button type="button" class="dot" aria-current="true" aria-label="1枚目を表示"></button>
+            <button type="button" class="dot" aria-label="2枚目を表示"></button>
+            <button type="button" class="dot" aria-label="3枚目を表示"></button>
+            <button type="button" class="dot" aria-label="4枚目を表示"></button>
+            <button type="button" class="dot" aria-label="5枚目を表示"></button>
+            <button type="button" class="dot" aria-label="6枚目を表示"></button>
+            <button type="button" class="dot" aria-label="7枚目を表示"></button>
+            <button type="button" class="dot" aria-label="8枚目を表示"></button>
+            <button type="button" class="dot" aria-label="9枚目を表示"></button>
+            <button type="button" class="dot" aria-label="10枚目を表示"></button>
+            <button type="button" class="dot" aria-label="11枚目を表示"></button>
+            <button type="button" class="dot" aria-label="12枚目を表示"></button>
+            <button type="button" class="dot" aria-label="13枚目を表示"></button>
+          </div>
         </div>
       </div>
 
@@ -1393,15 +1586,9 @@
               <h5>suit stomp | ヘアメイク担当</h5>
             </div>
           </div>
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>raum vintage</h5>
-            </div>
-          </div>
         </div>
         <ul class="works-others">
+          <li>raum vintage</li>
           <li>juju international</li>
           <li>EVISU</li>
         </ul>
@@ -1795,7 +1982,7 @@
       lightbox.classList.remove('active');
       const videoWrap = document.getElementById('lightboxVideoWrap');
       if (videoWrap) videoWrap.innerHTML = '';
-      lightbox.classList.remove('media-video', 'media-image');
+      lightbox.classList.remove('media-video', 'media-image', 'media-instagram');
       document.body.style.overflow = '';
       if (lightboxLastFocus && typeof lightboxLastFocus.focus === 'function') {
         lightboxLastFocus.focus();
@@ -1854,8 +2041,19 @@
       }
     });
 
-    // ===== Lightbox Media Extensions (Video / YouTube / Subgrid) =====
+    // ===== Lightbox Media Extensions (Video / YouTube / Image / Instagram) =====
+    /**
+     * Lightbox メディアを指定モードで開く
+     * @param {'video'|'youtube'|'image'|'instagram'} type - メディア種別
+     *   - 'video'     : HTML5 <video> 再生
+     *   - 'youtube'   : YouTube iframe 埋め込み
+     *   - 'image'     : 画像表示（url 未指定時は何もしない）
+     *   - 'instagram' : Instagram Reel iframe 埋め込み（縦長レイアウト）
+     * @param {string} url - メディアURL
+     * @param {string} [alt] - 画像の alt テキスト（image モード時）
+     */
     function openLightboxMedia(type, url, alt) {
+      if (type === 'image' && !url) return;
       lightboxLastFocus = document.activeElement;
       const videoWrap = document.getElementById('lightboxVideoWrap');
       if (!videoWrap) return;
@@ -1872,6 +2070,10 @@
         lightbox.classList.add('media-video');
         lightbox.classList.remove('media-image');
         videoWrap.innerHTML = `<iframe src="${url}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      } else if (type === 'instagram') {
+        lightbox.classList.add('media-video', 'media-instagram');
+        lightbox.classList.remove('media-image');
+        videoWrap.innerHTML = `<iframe src="${url}" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen></iframe>`;
       } else if (type === 'image') {
         lightbox.classList.add('media-image');
         lightbox.classList.remove('media-video');
@@ -1903,10 +2105,71 @@
       });
     });
 
-    document.querySelectorAll('.works-subgrid img').forEach((img) => {
-      img.addEventListener('click', () => {
-        openLightboxMedia('image', img.src, img.alt || '');
+    // ===== Canva カルーセル =====
+    document.querySelectorAll('.works-carousel').forEach((root) => {
+      const slides = Array.from(root.querySelectorAll('.carousel-slide'));
+      const dots = Array.from(root.querySelectorAll('.carousel-dots .dot'));
+      const prevBtn = root.querySelector('.carousel-prev');
+      const nextBtn = root.querySelector('.carousel-next');
+      const interval = parseInt(root.dataset.interval || '4000', 10);
+      let currentIndex = 0;
+      let timerId = null;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function go(index) {
+        slides[currentIndex]?.classList.remove('active');
+        dots[currentIndex]?.setAttribute('aria-current', 'false');
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex]?.classList.add('active');
+        dots[currentIndex]?.setAttribute('aria-current', 'true');
+      }
+
+      function next() { go(currentIndex + 1); }
+      function prev() { go(currentIndex - 1); }
+
+      function start() {
+        if (reduceMotion) return;
+        stop();
+        timerId = setInterval(next, interval);
+      }
+      function stop() {
+        if (timerId) { clearInterval(timerId); timerId = null; }
+      }
+
+      prevBtn?.addEventListener('click', () => { prev(); start(); });
+      nextBtn?.addEventListener('click', () => { next(); start(); });
+      dots.forEach((dot, i) => dot.addEventListener('click', () => { go(i); start(); }));
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+
+      // スワイプ
+      let touchStartX = 0;
+      root.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; stop(); }, { passive: true });
+      root.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) { dx > 0 ? prev() : next(); }
+        start();
       });
+
+      // 画像クリックで Lightbox 拡大
+      slides.forEach((slide) => {
+        const img = slide.querySelector('img');
+        if (!img) return;
+        img.addEventListener('click', () => {
+          openLightboxMedia('image', img.src, img.alt || '');
+        });
+      });
+
+      // キーボード
+      root.setAttribute('tabindex', '0');
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { prev(); start(); }
+        else if (e.key === 'ArrowRight') { next(); start(); }
+      });
+
+      start();
     });
 
     // ===== Date input: min を当日に設定 =====
@@ -1926,6 +2189,135 @@
       alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
       e.target.reset();
     });
+
+    // ===== 全 .has-image 画像カードを画像Lightbox対応 =====
+    document.querySelectorAll('.work-card:not(.work-card-media)').forEach((card) => {
+      const thumb = card.querySelector('.work-card-thumb.has-image');
+      if (!thumb) return;
+      const styleAttr = thumb.getAttribute('style') || '';
+      const bgMatch = styleAttr.match(/url\(['"]?([^'")]+)['"]?\)/);
+      const url = bgMatch ? bgMatch[1] : null;
+      if (!url) return;
+      card.classList.add('work-card-clickable');
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      const title = card.querySelector('h5')?.textContent?.trim() || '';
+      card.setAttribute('aria-label', `${title} を拡大`);
+      const fire = () => openLightboxMedia('image', url, title);
+      card.addEventListener('click', fire);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
+      });
+    });
+
+// ===== Loading 演出: バウンス → FLIP → フェードアウト =====
+(function () {
+  const overlay = document.getElementById('loadingOverlay');
+  const loadingLogo = document.getElementById('loadingLogo');
+  const heroLogo = document.querySelector('.hero-logo');
+  if (!overlay || !loadingLogo || !heroLogo) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let isFinished = false;
+  function cleanup() {
+    if (isFinished) return;
+    isFinished = true;
+    if (overlay && overlay.isConnected) overlay.remove();
+    heroLogo.classList.remove('loading-hidden');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+  // 問題4: 最終セーフティネット（window load 後 5 秒で強制解除）
+  window.addEventListener('load', () => {
+    setTimeout(cleanup, 5000);
+  });
+
+  try {
+    heroLogo.classList.add('loading-hidden');
+    document.body.style.overflow = 'hidden';
+
+    function finish() {
+      // reduced-motion/エラー時は即 cleanup
+      cleanup();
+    }
+
+    function runFLIP() {
+      try {
+        const lastRect = heroLogo.getBoundingClientRect();
+        const firstRect = loadingLogo.getBoundingClientRect();
+
+        const dx = lastRect.left - firstRect.left;
+        const dy = lastRect.top - firstRect.top;
+        const sx = lastRect.width / firstRect.width;
+
+        loadingLogo.style.transformOrigin = 'top left';
+        loadingLogo.style.transition = 'transform 0.6s ease-out';
+
+        // 問題3: transition と transform を別フレーム扱いにするため強制リフロー
+        void loadingLogo.offsetWidth;
+
+        loadingLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${sx})`;
+
+        // 問題2: fade-out は FLIP transitionend 後に付与（移動中に消えないように）
+        let flipDone = false;
+        const onFlipEnd = (e) => {
+          if (e && e.propertyName && e.propertyName !== 'transform') return;
+          if (flipDone) return;
+          flipDone = true;
+          loadingLogo.removeEventListener('transitionend', onFlipEnd);
+
+          overlay.classList.add('fade-out');
+          heroLogo.classList.remove('loading-hidden');
+
+          // opacity transition 完了で cleanup
+          const onFadeEnd = () => {
+            overlay.removeEventListener('transitionend', onFadeEnd);
+            cleanup();
+          };
+          overlay.addEventListener('transitionend', onFadeEnd);
+
+          // 問題1: transitionend 未発火対策フォールバック
+          setTimeout(cleanup, 800);
+        };
+        loadingLogo.addEventListener('transitionend', onFlipEnd);
+
+        // 問題1: FLIP 側の transitionend 未発火対策フォールバック
+        setTimeout(() => {
+          if (!flipDone) onFlipEnd(null);
+        }, 900);
+      } catch (err) {
+        cleanup();
+      }
+    }
+
+    function start() {
+      if (reduceMotion) {
+        // 問題5: reduced-motion は bounce/FLIP スキップして即 cleanup
+        cleanup();
+        return;
+      }
+      loadingLogo.addEventListener('animationend', runFLIP, { once: true });
+      setTimeout(() => {
+        if (overlay.isConnected && !isFinished) {
+          loadingLogo.style.animation = 'none';
+          runFLIP();
+        }
+      }, 2000);
+    }
+
+    if (loadingLogo.complete && loadingLogo.naturalWidth > 0) {
+      start();
+    } else {
+      loadingLogo.addEventListener('load', start, { once: true });
+      loadingLogo.addEventListener('error', finish, { once: true });
+    }
+  } catch (err) {
+    // 問題4: 例外時も必ず cleanup
+    cleanup();
+  }
+})();
   </script>
 
 </body>
