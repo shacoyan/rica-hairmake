@@ -1001,6 +1001,78 @@
     }
     .lightbox-prev { left: 1.5rem; }
     .lightbox-next { right: 1.5rem; }
+
+    /* ===== Works: 実画像サムネ対応 ===== */
+    .work-card-thumb.has-image {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .work-card-thumb.has-image::before {
+      content: "";
+      display: none;
+    }
+    /* クリッカブル work-card */
+    .work-card.work-card-media { cursor: pointer; }
+    .work-card.work-card-media:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 2px;
+    }
+
+    /* ===== Works: 新規カテゴリのラベル色（10, 11, 12 番目） ===== */
+    .works-category:nth-of-type(10) .cat-label { background: var(--orange); }
+    .works-category:nth-of-type(11) .cat-label { background: var(--blue); }
+    .works-category:nth-of-type(12) .cat-label { background: var(--pink); }
+
+    /* ===== Works: STILL Canva サブグリッド ===== */
+    .works-subgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .works-subgrid img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .works-subgrid img:hover { transform: scale(1.04); }
+
+    /* ===== Lightbox: 動画コンテナ ===== */
+    .lightbox-video-wrap {
+      position: relative;
+      width: min(90vw, 1280px);
+      aspect-ratio: 16/9;
+      max-height: 85vh;
+      display: none;
+    }
+    .lightbox-overlay.media-video .lightbox-img { display: none; }
+    .lightbox-overlay.media-video .lightbox-video-wrap { display: block; }
+    .lightbox-overlay.media-image .lightbox-video-wrap { display: none; }
+
+    .lightbox-video-wrap video,
+    .lightbox-video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    /* 動画表示中は prev/next を非表示 */
+    .lightbox-overlay.media-video .lightbox-prev,
+    .lightbox-overlay.media-video .lightbox-next { display: none; }
+
+    /* h5 内の small（役割の補足） */
+    .work-card-body h5 small {
+      font-size: 0.75em;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-left: 0.2em;
+    }
   </style>
 </head>
 <body>
@@ -1197,23 +1269,24 @@
           <li>エディオン Windows CM</li>
         </ul>
       </div>
-
       <!-- SNS -->
       <div class="works-category fade-in">
         <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
         <div class="works-featured">
+          <!-- TODO: Instagram reel サムネ素材待ち -->
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>vasary media メイク動画担当</h5>
+              <h5>vasary media | メイク企画・運営担当</h5>
             </div>
           </div>
+          <!-- TODO: Instagram reel サムネ素材待ち -->
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>未来パレット ヘアメイク小物制作担当</h5>
+              <h5>未来パレット | ヘアメイク・ネイル制作担当</h5>
             </div>
           </div>
         </div>
@@ -1223,11 +1296,17 @@
       <div class="works-category fade-in">
         <h3 class="works-category-title"><span class="cat-label">MV</span> MV</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb video">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="youtube"
+               data-media-url="https://www.youtube.com/embed/b_Xjh_OdW34"
+               role="button" tabindex="0"
+               aria-label="巫薙ラビッツ『日輪』 MV を再生">
+            <div class="work-card-thumb has-image video"
+                 style="background-image: url('images/works/mv-kaminagi-rabbits.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>巫薙ラビッツ『日輪』</h5>
+              <h5>巫薙ラビッツ『日輪』 <small>(Lioさん担当)</small></h5>
             </div>
           </div>
         </div>
@@ -1246,7 +1325,9 @@
         <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
         <div class="works-featured">
           <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/still-canva-01.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
               <h5>Canvaフリー素材</h5>
@@ -1261,31 +1342,55 @@
           <li>ヒラキキッズページ</li>
           <li>バイオメディカル専門学校卒業アルバム</li>
         </ul>
+        <!-- Canva サブグリッド（代表カードに入りきらなかった 13 枚） -->
+        <div class="works-subgrid">
+          <img src="images/works/still-canva-02.jpg" alt="Canva still 02" loading="lazy">
+          <img src="images/works/still-canva-03.jpg" alt="Canva still 03" loading="lazy">
+          <img src="images/works/still-canva-04.jpg" alt="Canva still 04" loading="lazy">
+          <img src="images/works/still-canva-05.jpg" alt="Canva still 05" loading="lazy">
+          <img src="images/works/still-canva-06.jpg" alt="Canva still 06" loading="lazy">
+          <img src="images/works/still-canva-07.jpg" alt="Canva still 07" loading="lazy">
+          <img src="images/works/still-canva-08.jpg" alt="Canva still 08" loading="lazy">
+          <img src="images/works/still-canva-09.jpg" alt="Canva still 09" loading="lazy">
+          <img src="images/works/still-canva-10.jpg" alt="Canva still 10" loading="lazy">
+          <img src="images/works/still-canva-11.jpg" alt="Canva still 11" loading="lazy">
+          <img src="images/works/still-canva-12.jpg" alt="Canva still 12" loading="lazy">
+          <img src="images/works/still-canva-13.jpg" alt="Canva still 13" loading="lazy">
+          <img src="images/works/still-canva-14.jpg" alt="Canva still 14" loading="lazy">
+        </div>
       </div>
 
       <!-- アパレル -->
       <div class="works-category fade-in">
         <h3 class="works-category-title"><span class="cat-label">APPAREL</span> アパレル</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
+          <div class="work-card work-card-media"
+               data-media-type="video"
+               data-media-url="videos/apparel-punktum.mp4"
+               role="button" tabindex="0"
+               aria-label="punktum(R) PV を再生">
+            <div class="work-card-thumb has-image video"
+                 style="background-image: url('images/works/apparel-punktum.jpg');"
+                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>punktum(R)</h5>
+              <h5>punktum(R) <small>| ヘアメイク担当</small></h5>
             </div>
           </div>
+          <!-- TODO: Drive フォルダサムネ素材待ち -->
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>atelier Harry</h5>
+              <h5>atelier Harry | ヘアメイク担当</h5>
             </div>
           </div>
+          <!-- TODO: Drive フォルダサムネ素材待ち -->
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>suit stomp</h5>
+              <h5>suit stomp | ヘアメイク担当</h5>
             </div>
           </div>
           <div class="work-card">
@@ -1378,6 +1483,83 @@
           <li>ほんわかテレビ メイク解説者</li>
           <li>クレンジングバームDUO PRショート</li>
         </ul>
+      </div>
+
+      <!-- ポートレート -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">PORTRAIT</span> ポートレート</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-01.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 01</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-02.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 02</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-03.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 03</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-04.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 04</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-05.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 05</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 展示 -->
+      <div class="works-category fade-in">
+        <h3 class="works-category-title"><span class="cat-label">EXHIBITION</span> 展示</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/exhibition-yami-no-ou.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>闇の王展</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/exhibition-ny-junkfood.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>NY個展『junk food』</h5>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- モデル -->
@@ -1504,6 +1686,7 @@
     <button type="button" class="lightbox-prev" aria-label="前の画像">&#8249;</button>
     <button type="button" class="lightbox-next" aria-label="次の画像">&#8250;</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-video-wrap" id="lightboxVideoWrap" aria-hidden="true"></div>
   </div>
 
   <!-- ===== Footer ===== -->
@@ -1600,7 +1783,8 @@
       lightboxIndex = index;
       lightboxImg.src = lightboxItems[index].src;
       lightboxImg.alt = lightboxItems[index].alt;
-      lightbox.classList.add('active');
+      lightbox.classList.add('active', 'media-image');
+      lightbox.classList.remove('media-video');
       document.body.style.overflow = 'hidden';
       lightboxLastFocus = document.activeElement;
       const closeBtn = lightbox.querySelector('.lightbox-close');
@@ -1609,6 +1793,9 @@
 
     function closeLightbox() {
       lightbox.classList.remove('active');
+      const videoWrap = document.getElementById('lightboxVideoWrap');
+      if (videoWrap) videoWrap.innerHTML = '';
+      lightbox.classList.remove('media-video', 'media-image');
       document.body.style.overflow = '';
       if (lightboxLastFocus && typeof lightboxLastFocus.focus === 'function') {
         lightboxLastFocus.focus();
@@ -1616,12 +1803,14 @@
     }
 
     function showPrev() {
+      if (lightbox.classList.contains('media-video')) return;
       lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
       lightboxImg.src = lightboxItems[lightboxIndex].src;
       lightboxImg.alt = lightboxItems[lightboxIndex].alt;
     }
 
     function showNext() {
+      if (lightbox.classList.contains('media-video')) return;
       lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
       lightboxImg.src = lightboxItems[lightboxIndex].src;
       lightboxImg.alt = lightboxItems[lightboxIndex].alt;
@@ -1663,6 +1852,61 @@
           first.focus();
         }
       }
+    });
+
+    // ===== Lightbox Media Extensions (Video / YouTube / Subgrid) =====
+    function openLightboxMedia(type, url, alt) {
+      lightboxLastFocus = document.activeElement;
+      const videoWrap = document.getElementById('lightboxVideoWrap');
+      if (!videoWrap) return;
+
+      // 既存のimgをリセットし、モード切り替え
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+
+      if (type === 'video') {
+        lightbox.classList.add('media-video');
+        lightbox.classList.remove('media-image');
+        videoWrap.innerHTML = `<video controls autoplay playsinline><source src="${url}" type="video/mp4"></video>`;
+      } else if (type === 'youtube') {
+        lightbox.classList.add('media-video');
+        lightbox.classList.remove('media-image');
+        videoWrap.innerHTML = `<iframe src="${url}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      } else if (type === 'image') {
+        lightbox.classList.add('media-image');
+        lightbox.classList.remove('media-video');
+        videoWrap.innerHTML = '';
+        lightboxImg.src = url;
+        lightboxImg.alt = alt || '';
+      } else {
+        return;
+      }
+
+      document.body.style.overflow = 'hidden';
+      lightbox.classList.add('active');
+
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    document.querySelectorAll('.work-card-media').forEach((card) => {
+      const fire = () => {
+        const type = card.dataset.mediaType;
+        const url = card.dataset.mediaUrl;
+        const title = card.querySelector('h5')?.textContent?.trim() || '';
+        if (!url || !type) return;
+        openLightboxMedia(type, url, title);
+      };
+      card.addEventListener('click', fire);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
+      });
+    });
+
+    document.querySelectorAll('.works-subgrid img').forEach((img) => {
+      img.addEventListener('click', () => {
+        openLightboxMedia('image', img.src, img.alt || '');
+      });
     });
 
     // ===== Date input: min を当日に設定 =====
