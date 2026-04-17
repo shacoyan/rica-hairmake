@@ -2612,12 +2612,18 @@
 
   document.addEventListener('DOMContentLoaded', splitChars);
 
-  // bounce アニメ完了直後にタイピング開始（fade-out と並行）
-  const loadingLogoEl = document.getElementById('loadingLogo');
-  if (loadingLogoEl) {
-    loadingLogoEl.addEventListener('animationend', startTyping, { once: true });
+  // overlay の opacity fade-out 完了時（= クリーム色が完全に消えた瞬間）にタイピング開始
+  const overlayEl = document.getElementById('loadingOverlay');
+  if (overlayEl) {
+    overlayEl.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'opacity') return;
+      startTyping();
+    });
+  } else {
+    // overlay が既に存在しない（キャッシュ復元・SPA 的再訪など）: 即発火
+    startTyping();
   }
-  // フォールバック: loading:done（bounce不発・Safari等）
+  // フォールバック: overlay が DOM から除去されたタイミング（cleanup 完了）
   window.addEventListener('loading:done', startTyping);
 
   window.addEventListener('load', () => {
