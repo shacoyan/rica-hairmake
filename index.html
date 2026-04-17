@@ -2626,11 +2626,13 @@
   // フォールバック: overlay が DOM から除去されたタイミング（cleanup 完了）
   window.addEventListener('loading:done', startTyping);
 
+  // フォールバック: load 完了後も typing が開始されていない、かつ overlay が既に DOM から消えている場合のみ発火
+  // （overlay がまだ存在する間は transitionend / loading:done に任せる。クリーム色で覆っている間の発火を防止）
   window.addEventListener('load', () => {
     setTimeout(() => {
-      if (!catchEl.classList.contains('typing-start')) {
-        startTyping();
-      }
+      if (document.getElementById('loadingOverlay')) return; // overlay がまだ健在 → 正規ルートに委譲
+      if (catchEl.classList.contains('typing-start')) return;
+      startTyping();
     }, 100);
   });
 })();
