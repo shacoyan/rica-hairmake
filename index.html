@@ -191,9 +191,30 @@
       letter-spacing: 0.1em;
       color: rgba(255,255,255,0.9);
       transition: color 0.3s;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      width: 100%;
     }
     .header.scrolled .nav-links a { color: var(--text-mid); }
-    .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--coral); }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links a::after { transition: none; }
+    }
 
     /* Hamburger */
     .hamburger {
@@ -479,10 +500,10 @@
       backface-visibility: hidden;
       will-change: transform, opacity;
       transition:
-        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.5s ease,
+        transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.7s ease,
         box-shadow 0.3s;
-      transition-delay: calc(var(--i, 0) * 60ms);
+      transition-delay: calc(var(--i, 0) * 80ms);
     }
     .portfolio-item.flip-in {
       opacity: 1;
@@ -1143,7 +1164,7 @@
     }
 
     /* ===== Profile Stagger ===== */
-    .pp-photo { opacity: 0; transform: scale(0.96); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .pp-photo { opacity: 0; transform: scale(0.96); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1); }
     .pp-photo.in { opacity: 1; transform: scale(1); }
 
     .pp-info { /* wrapper: 中身の段階演出のために全体は常に表示 */ }
@@ -1154,23 +1175,63 @@
       display: inline-block;
       opacity: 0;
       transform: translateX(40px) rotate(180deg);
-      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: calc(var(--i,0) * 80ms);
+      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i,0) * 50ms);
     }
     .pp-roll.in .char {
       opacity: 1;
       transform: translateX(0) rotate(0deg);
     }
 
-    .pp-fade { opacity: 0; transform: translateY(8px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .pp-fade { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .pp-fade.in { opacity: 1; transform: translateY(0); }
 
-    .pp-rest { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .pp-rest { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .pp-rest.in { opacity: 1; transform: translateY(0); }
 
     @media (prefers-reduced-motion: reduce) {
       .pp-photo, .pp-fade, .pp-rest, .pp-roll .char { transition: none; opacity: 1; transform: none; }
       .pp-roll { visibility: visible; }
+    }
+
+    /* ===== Profile SNS ===== */
+    .profile-sns {
+      margin-top: 1.5rem;
+    }
+    .profile-sns h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .profile-sns-list {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .profile-sns-list a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--lavender);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .profile-sns-list a:hover {
+      background: var(--coral);
+      color: var(--white);
+      transform: scale(1.15);
     }
 
     /* ===== Loading 演出 ===== */
@@ -1281,7 +1342,14 @@
       opacity: 0;
       animation: heroCaretBlink 0.9s steps(2) infinite;
     }
-    .hero-catch.typing-done .caret { opacity: 1; }
+    .hero-catch.typing-start .caret {
+      opacity: 1;
+    }
+    .hero-catch.typing-done .caret {
+      animation: none;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.2s;
+    }
     @keyframes heroCharIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -1329,6 +1397,26 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .price-grid .price-card { transition: none; opacity: 1; transform: none; }
+    }
+    /* ===== Contact Pop ===== */
+    .contact-pop > .contact-line,
+    .contact-pop > .contact-form {
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .contact-pop.contact-pop-run > .contact-line { transition-delay: 0ms; }
+    .contact-pop.contact-pop-run > .contact-form { transition-delay: 170ms; }
+    .contact-pop.contact-pop-run > .contact-line,
+    .contact-pop.contact-pop-run > .contact-form {
+      opacity: 1;
+      transform: scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .contact-pop > .contact-line,
+      .contact-pop > .contact-form {
+        transition: none; opacity: 1; transform: none;
+      }
     }
   </style>
 </head>
@@ -1400,6 +1488,16 @@
               <li>ビジネスマナー検定2級</li>
               <li>色彩検定2級</li>
             </ul>
+          </div>
+          <div class="profile-sns pp-rest">
+            <!-- 実 SNS URL 設定時は href を差し替え、target="_blank" rel="noopener noreferrer" を付与すること -->
+            <h4>SNS</h4>
+            <div class="profile-sns-list">
+              <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">IG</a>
+              <a href="#" aria-label="X" aria-disabled="true" tabindex="-1">X</a>
+              <a href="#" aria-label="TikTok" aria-disabled="true" tabindex="-1">TK</a>
+              <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">YT</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1970,7 +2068,7 @@
       <h2 class="section-title fade-in">Contact</h2>
       <p class="section-subtitle fade-in">お問い合わせ</p>
 
-      <div class="contact-grid fade-in">
+      <div class="contact-grid contact-pop">
         <!-- LINE -->
         <div class="contact-line">
           <h4>一般のお客様</h4>
@@ -2493,17 +2591,33 @@
   function startTyping() {
     if (catchEl.classList.contains('typing-start')) return;
     catchEl.classList.add('typing-start');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      catchEl.classList.add('typing-done');
+      const caret = catchEl.querySelector('.caret');
+      if (caret) caret.remove();
+      return;
+    }
+
     const chars = catchEl.querySelectorAll('.char');
     if (chars.length > 0) {
       const lastChar = chars[chars.length - 1];
       lastChar.addEventListener('animationend', () => {
         catchEl.classList.add('typing-done');
+        const caret = catchEl.querySelector('.caret');
+        if (caret) setTimeout(() => caret.remove(), 1000);
       }, { once: true });
     }
   }
 
   document.addEventListener('DOMContentLoaded', splitChars);
 
+  // bounce アニメ完了直後にタイピング開始（fade-out と並行）
+  const loadingLogoEl = document.getElementById('loadingLogo');
+  if (loadingLogoEl) {
+    loadingLogoEl.addEventListener('animationend', startTyping, { once: true });
+  }
+  // フォールバック: loading:done（bounce不発・Safari等）
   window.addEventListener('loading:done', startTyping);
 
   window.addEventListener('load', () => {
@@ -2574,19 +2688,19 @@
             // Phase 1: 画像フェードイン (delay 0ms)
             ppPhoto.classList.add('in');
 
-            // Phase 2: pp-roll に in 付与 (画像アニメ完了待ち ~700ms)
+            // Phase 2: pp-roll に in 付与 (画像アニメ完了待ち ~400ms)
             setTimeout(function() {
               ppRoll.classList.add('in');
-            }, 700);
+            }, 400);
 
-            // Phase 3: pp-fade に in 付与 (~700ms + charCount*80ms + 500ms)
-            var rollDelay = 700 + totalChars * 80 + 500;
+            // Phase 3: pp-fade に in 付与 (~400ms + charCount*50ms + 500ms)
+            var rollDelay = 400 + totalChars * 50 + 500;
             setTimeout(function() {
               if (ppFade) ppFade.classList.add('in');
             }, rollDelay);
 
             // Phase 4: pp-rest 全要素に in 付与 (stagger不要、同時発火)
-            var restDelay = rollDelay + 600 + 100; // pp-fade duration + buffer
+            var restDelay = rollDelay + 500 + 100; // pp-fade duration (0.5s) + buffer
             setTimeout(function() {
               ppRests.forEach(function(el) { el.classList.add('in'); });
             }, restDelay);
@@ -2686,6 +2800,21 @@
     }, { threshold: 0.25 });
 
     observer.observe(priceGrid);
+  })();
+
+  // ===== Contact Pop (Team B) =====
+  ;(function() {
+    const contactPop = document.querySelector('.contact-pop');
+    if (!contactPop) return;
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          contactPop.classList.add('contact-pop-run');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    observer.observe(contactPop);
   })();
   </script>
 
