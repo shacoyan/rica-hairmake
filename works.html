@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rica Nakano | Hair & Makeup Artist</title>
-  <meta name="description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。ご依頼・お見積もりはお気軽にご相談ください。">
+  <title>Works | ナカノ リカ</title>
+  <meta name="description" content="ナカノ リカの全実績一覧（動画・SNS・MV・TV・スチール・アパレル ほか 12 カテゴリ）">
   <meta name="theme-color" content="#FF1493">
-  <link rel="canonical" href="https://rica-nakano.com/">
+  <link rel="canonical" href="https://rica-nakano.com/works.html">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="apple-touch-icon" href="logo.png">
   <!-- Open Graph -->
-  <meta property="og:title" content="Rica Nakano | Hair & Makeup Artist">
-  <meta property="og:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。">
+  <meta property="og:title" content="Works | ナカノ リカ">
+  <meta property="og:description" content="ナカノ リカの全実績一覧（動画・SNS・MV・TV・スチール・アパレル ほか 12 カテゴリ）">
   <meta property="og:image" content="images/hero.jpg">
-  <meta property="og:url" content="https://rica-nakano.com/">
+  <meta property="og:url" content="https://rica-nakano.com/works.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rica Nakano | Hair & Makeup Artist">
   <meta property="og:locale" content="ja_JP">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Rica Nakano | Hair & Makeup Artist">
-  <meta name="twitter:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano のポートフォリオサイト。">
+  <meta name="twitter:title" content="Works | ナカノ リカ">
+  <meta name="twitter:description" content="ナカノ リカの全実績一覧（12 カテゴリ）">
   <meta name="twitter:image" content="images/hero.jpg">
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -547,7 +547,6 @@
       font-family: 'M PLUS Rounded 1c', sans-serif;
       color: var(--coral);
       font-weight: 500;
-      text-decoration: none;
     }
     .btn-more:hover {
       background: var(--coral);
@@ -604,27 +603,6 @@
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1rem;
       margin-bottom: 1.5rem;
-    }
-    .works-featured-hero {
-      margin-bottom: 1.5rem;
-    }
-    .work-card.work-card-hero {
-      display: block;
-    }
-    .work-card.work-card-hero .work-card-thumb {
-      aspect-ratio: 16 / 9;
-      min-height: 360px;
-    }
-    .work-card.work-card-hero .work-card-body {
-      padding: 1.4rem 1.6rem;
-    }
-    .work-card.work-card-hero .work-card-body h5 {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    @media (max-width: 768px) {
-      .work-card.work-card-hero .work-card-thumb { min-height: 220px; }
-      .work-card.work-card-hero .work-card-body h5 { font-size: 1rem; }
     }
     .work-card {
       background: var(--white);
@@ -1355,7 +1333,7 @@
       opacity: 0;
       transform: translateY(6px);
       animation: heroCharIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: calc(var(--i, 0) * 110ms + var(--pause, 0ms));
+      animation-delay: calc(var(--i, 0) * 70ms + var(--pause, 0ms));
       animation-play-state: paused;
     }
     .hero-catch.typing-start .char {
@@ -1376,7 +1354,6 @@
       opacity: 1;
     }
     .hero-catch.typing-done .caret {
-      pointer-events: none;
       animation: none;
       opacity: 0;
       transition: opacity 0.4s ease 0.2s;
@@ -1457,51 +1434,23 @@
     margin: 1.5rem 0 0.5rem;
   }
   .breadcrumb a { color: var(--text-mid); text-decoration: underline; }
-
-  /* ===== Price Details (下層ページ用) ===== */
-  .price-details {
-    max-width: 780px;
-    margin: 2.5rem auto 1.5rem;
-    padding: 1.5rem;
-    background: var(--white);
-    border-radius: 20px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  }
-  .price-details h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 1.2rem 0 0.6rem;
-    color: var(--text-dark);
-  }
-  .price-details h3:first-child { margin-top: 0; }
-  .price-details-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem;
-  }
-  .price-details-list li {
-    font-size: 0.85rem;
-    color: var(--text-mid);
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed var(--mint-light);
-  }
-  .price-details-list li:last-child { border-bottom: none; }
   </style>
 </head>
 <body>
+
 <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
   <img src="logo.png" alt="" class="loading-logo" id="loadingLogo" width="976" height="479">
 </div>
 
   <!-- ===== Header ===== -->
   <header class="header" id="header">
-    <a href="#" class="header-logo"><img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="header-logo-img" width="976" height="479"></a>
+    <a href="index.html" class="header-logo"><img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="header-logo-img" width="976" height="479"></a>
     <nav class="nav-links">
-      <a href="#profile">PROFILE</a>
-      <a href="#portfolio">PORTFOLIO</a>
-      <a href="#works">WORKS</a>
-      <a href="#price">PRICE</a>
-      <a href="#contact">CONTACT</a>
+      <a href="index.html#profile">PROFILE</a>
+      <a href="index.html#portfolio">PORTFOLIO</a>
+      <a href="index.html#works">WORKS</a>
+      <a href="index.html#price">PRICE</a>
+      <a href="index.html#contact">CONTACT</a>
     </nav>
     <button class="hamburger" id="hamburger" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
@@ -1510,113 +1459,23 @@
 
   <!-- Mobile Nav -->
   <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <a href="#profile">PROFILE</a>
-    <a href="#portfolio">PORTFOLIO</a>
-    <a href="#works">WORKS</a>
-    <a href="#price">PRICE</a>
-    <a href="#contact">CONTACT</a>
+    <a href="index.html#profile">PROFILE</a>
+    <a href="index.html#portfolio">PORTFOLIO</a>
+    <a href="index.html#works">WORKS</a>
+    <a href="index.html#price">PRICE</a>
+    <a href="index.html#contact">CONTACT</a>
   </nav>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="hero-logo" width="976" height="479" fetchpriority="high">
-      <p class="hero-catch">期待の<br class="sp-only">その先をつくる。</p>
-      <p class="hero-sub">Hair & Makeup Artist</p>
-      <p class="hero-name">RICA NAKANO</p>
-    </div>
-    <div class="scroll-indicator">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ===== Profile ===== -->
-  <section class="profile" id="profile">
-    <div class="container">
-      <h2 class="section-title fade-in">Profile</h2>
-      <p class="section-subtitle fade-in">一家に一台、ナカノリカ。</p>
-      <div class="profile-grid">
-        <div class="profile-photo pp-photo"><img src="images/profile.jpg" alt="ナカノ リカ（ヘアメイクアーティスト）のプロフィール写真" loading="lazy" decoding="async"></div>
-        <div class="pp-info">
-          <h3 class="profile-name pp-roll" aria-label="ナカノ リカ">ナカノ リカ</h3>
-          <p class="profile-name-en pp-fade">Rica Nakano</p>
-          <p class="profile-meta pp-rest">大阪府吹田市出身 / 1999.4.20 / おうし座</p>
-          <div class="profile-text pp-rest">
-            <p>2021年ECCアーティスト美容専門学校ヘアメイク科卒業。卒業後すぐにフリーランスとして活動を開始し、広告・CMや起業家プロフィール写真など幅広い分野で活躍中。</p>
-            <br>
-            <p>最近ではモデル、インフルエンサー、YouTuber、ファッションスタイリスト、司会業にも挑戦中。</p>
-          </div>
-          <div class="profile-certs pp-rest">
-            <h4>資格</h4>
-            <ul>
-              <li>美容師国家資格</li>
-              <li>JMAメイクアップ技能検定1級</li>
-              <li>化粧品検定1級</li>
-              <li>ビジネスマナー検定2級</li>
-              <li>色彩検定2級</li>
-            </ul>
-          </div>
-          <div class="profile-sns pp-rest">
-            <!-- 実 SNS URL 設定時は href を差し替え、target="_blank" rel="noopener noreferrer" を付与すること -->
-            <h4>SNS</h4>
-            <div class="profile-sns-list">
-              <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">IG</a>
-              <a href="#" aria-label="X" aria-disabled="true" tabindex="-1">X</a>
-              <a href="#" aria-label="TikTok" aria-disabled="true" tabindex="-1">TK</a>
-              <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">YT</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Portfolio ===== -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <h2 class="section-title fade-in">Portfolio</h2>
-      <p class="section-subtitle fade-in">SELECTED WORKS</p>
-
-      <div class="portfolio-grid">
-        <div class="portfolio-item"><img src="images/portfolio-01.jpg" alt="Portfolio 01" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-02.jpg" alt="Portfolio 02" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-03.jpg" alt="Portfolio 03" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-04.jpg" alt="Portfolio 04" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-05.jpg" alt="Portfolio 05" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-06.jpg" alt="Portfolio 06" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-07.jpg" alt="Portfolio 07" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-08.jpg" alt="Portfolio 08" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-09.jpg" alt="Portfolio 09" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-10.jpg" alt="Portfolio 10" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-11.jpg" alt="Portfolio 11" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-12.jpg" alt="Portfolio 12" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-13.jpg" alt="Portfolio 13" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-14.jpg" alt="Portfolio 14" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-15.jpg" alt="Portfolio 15" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-16.jpg" alt="Portfolio 16" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-17.jpg" alt="Portfolio 17" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-18.jpg" alt="Portfolio 18" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-19.jpg" alt="Portfolio 19" loading="lazy"></div>
-        <div class="portfolio-item"><img src="images/portfolio-20.jpg" alt="Portfolio 20" loading="lazy"></div>
-      </div>
-
-      <a href="gallery.html" class="btn-more fade-in" id="btnMore">もっと見る</a>
-
-    </div>
-  </section>
-
-  <!-- ===== Works ===== -->
+  <main>
   <section class="works" id="works">
     <div class="container">
+      <p class="breadcrumb"><a href="index.html">TOP</a> / Works</p>
       <h2 class="section-title fade-in">Works</h2>
-      <p class="section-subtitle fade-in">ACHIEVEMENTS</p>
-
+      <p class="section-subtitle fade-in">ALL ACHIEVEMENTS</p>
+  
       <!-- 動画 -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">VIDEO</span> 動画</h3>
-
-        <!-- NTT メインビジュアル（大表示） -->
         <div class="works-featured-hero">
           <div class="work-card work-card-hero work-card-media"
                data-media-type="youtube"
@@ -1632,7 +1491,6 @@
             </div>
           </div>
         </div>
-
         <div class="works-featured">
           <!-- TODO: あべのハルカス サムネ素材待ち -->
           <div class="work-card work-card-media"
@@ -1683,6 +1541,7 @@
           <li>エディオン Windows CM</li>
         </ul>
       </div>
+  
       <!-- SNS -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">SNS</span> SNS</h3>
@@ -1713,7 +1572,7 @@
           </div>
         </div>
       </div>
-
+  
       <!-- MV -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MV</span> MV</h3>
@@ -1733,7 +1592,15 @@
           </div>
         </div>
       </div>
-
+  
+      <!-- TV -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">TV</span> TV</h3>
+        <ul class="works-others">
+          <li>ケンコバのバコバコナイト 赤ひげBAR</li>
+        </ul>
+      </div>
+  
       <!-- スチール -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">STILL</span> スチール</h3>
@@ -1801,7 +1668,7 @@
           <li>バイオメディカル専門学校卒業アルバム</li>
         </ul>
       </div>
-
+  
       <!-- アパレル -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">APPAREL</span> アパレル</h3>
@@ -1890,118 +1757,174 @@
           <li>EVISU</li>
         </ul>
       </div>
-
-      <a href="works.html" class="btn-more fade-in">他の実績をもっと見る</a>
-
-    </div>
-  </section>
-
-  <!-- ===== Price ===== -->
-  <section class="price" id="price">
-    <div class="container">
-      <h2 class="section-title fade-in">Price</h2>
-      <p class="section-subtitle fade-in">MENU & PRICE</p>
-
-      <div class="price-grid fade-in">
-        <div class="price-card">
-          <h4>気合メイク</h4>
-          <p class="price-amount">¥15,000<small>~</small></p>
-          <p class="price-from">ヘア&フルメイク</p>
+  
+      <!-- ブライダル・成人式 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>サガノカン（卒業前撮り）</h5>
+            </div>
+          </div>
         </div>
-        <div class="price-card popular">
-          <span class="price-badge">一番人気</span>
-          <h4>日常メイク</h4>
-          <p class="price-amount">¥11,000<small>~</small></p>
-          <p class="price-from">ナチュラルメイク</p>
+        <ul class="works-others">
+          <li>京都むらさき</li>
+          <li>キモノハーツ神戸</li>
+          <li>アトリエロゼ</li>
+          <li>エマーサ</li>
+          <li>ブライダル千代田</li>
+          <li>アイドル&</li>
+          <li>ファーストステージ</li>
+        </ul>
+      </div>
+  
+      <!-- 有名人 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
+        <ul class="celeb-grid">
+          <li>よゐこ有野さん</li>
+          <li>misonoさん</li>
+          <li>キテレツ佐々木大光さん</li>
+          <li>YouTuberゑむ氏</li>
+          <li>指揮者佐渡裕</li>
+          <li>大川藍さん</li>
+          <li>クイズノックこうちゃん</li>
+          <li>AZ</li>
+          <li>FIELD OF VIEW浅岡雄也さん</li>
+          <li>声優土岐隼一</li>
+          <li>俳優リッチー・コー</li>
+          <li>ダンサーヒヨリちゃん</li>
+          <li>バーレスク東京かなみん</li>
+          <li>ストリーマーLiagN</li>
+          <li>ストリーマースタンミ</li>
+          <li>フォレスタ（財木麗子・吉田明未・三宅里菜）</li>
+        </ul>
+      </div>
+  
+      <!-- メディア出演 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>マッチングアプリジョイナス ショートドラマ</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>スタジオ心お正月プランSNS宣伝</h5>
+            </div>
+          </div>
         </div>
-        <div class="price-card">
-          <h4>ヘアセットのみ</h4>
-          <p class="price-amount">¥3,300<small>~</small></p>
-          <p class="price-from">ヘアアレンジ</p>
+        <ul class="works-others">
+          <li>ほんわかテレビ メイク解説者</li>
+          <li>クレンジングバームDUO PRショート</li>
+        </ul>
+      </div>
+  
+      <!-- ポートレート -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">PORTRAIT</span> ポートレート</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-01.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 01</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-02.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 02</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-03.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 03</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-04.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 04</h5>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/portrait-05.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>ポートレートヘアメイク 05</h5>
+            </div>
+          </div>
         </div>
       </div>
-
-      <p class="price-note fade-in">※ 交通費別途 / 詳しくはお問い合わせください</p>
-      <a href="price.html" class="btn-contact fade-in">詳しくはこちら</a>
-    </div>
-  </section>
-
-  <!-- ===== Contact ===== -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2 class="section-title fade-in">Contact</h2>
-      <p class="section-subtitle fade-in">お問い合わせ</p>
-
-      <div class="contact-grid contact-pop">
-        <!-- LINE -->
-        <div class="contact-line">
-          <h4>一般のお客様</h4>
-          <p>LINE@で簡単予約！<br>お気軽にご連絡ください。</p>
-          <button type="button" class="btn-line">
-            <span class="line-icon">L</span>
-            LINE で予約する
-          </button>
-        </div>
-
-        <!-- 企業フォーム -->
-        <div class="contact-form">
-          <h4>企業様向けお問い合わせ</h4>
-          <form id="contactForm">
-            <div class="form-group">
-              <label for="company">会社名 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
-              <input type="text" id="company" name="company" required aria-required="true">
+  
+      <!-- 展示 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">EXHIBITION</span> 展示</h3>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/exhibition-yami-no-ou.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>闇の王展</h5>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="date">日付 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
-                <input type="date" id="date" name="date" required aria-required="true">
-              </div>
-              <div class="form-group">
-                <label for="location">ロケーション</label>
-                <input type="text" id="location" name="location">
-              </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card-thumb has-image"
+                 style="background-image: url('images/works/exhibition-ny-junkfood.jpg');"
+                 aria-hidden="true"></div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>NY個展『junk food』</h5>
             </div>
-            <div class="form-group">
-              <label for="content">内容 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
-              <textarea id="content" name="content" required aria-required="true" placeholder="ご依頼内容をご記入ください"></textarea>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="people">施術人数</label>
-                <input type="number" id="people" name="people" min="1" placeholder="人数">
-              </div>
-              <div class="form-group">
-                <label for="hours">稼働時間目安</label>
-                <input type="text" id="hours" name="hours" placeholder="例: 3時間">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="budget">予算（税込）</label>
-                <input type="text" id="budget" name="budget" placeholder="例: ¥50,000">
-              </div>
-              <div class="form-group">
-                <fieldset class="transport-fieldset">
-                  <legend>交通費の有無</legend>
-                  <div class="radio-group">
-                    <label><input type="radio" name="transport" value="有"> 有</label>
-                    <label><input type="radio" name="transport" value="無"> 無</label>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-            <button type="submit" class="btn-submit">送信する</button>
-          </form>
+          </div>
         </div>
       </div>
-
-      <div class="contact-notes fade-in">
-        <p>3営業日以内にご連絡いたします。<br>
-        返信可能時間: 12:00~20:00<br>
-        ※上記時間以外にもご連絡差し上げる場合がございます。</p>
+  
+      <!-- モデル -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル</h3>
+        <ul class="works-others">
+          <li>Coming soon...</li>
+        </ul>
       </div>
+  
+      <a href="index.html" class="btn-more fade-in">TOP に戻る</a>
     </div>
   </section>
+  </main>
 
   <!-- ===== Lightbox ===== -->
   <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="ポートフォリオ画像ビュー">
@@ -2012,7 +1935,6 @@
     <div class="lightbox-video-wrap" id="lightboxVideoWrap" aria-hidden="true"></div>
   </div>
 
-  <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="footer-social">
       <!-- 実 SNS URL 設定時は href を差し替え、target="_blank" rel="noopener noreferrer" を付与すること -->
@@ -2065,6 +1987,17 @@
     document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
       observer.observe(el);
     });
+
+    // ===== Portfolio "もっと見る" =====
+    const btnMore = document.getElementById('btnMore');
+    const extraGrid = document.querySelector('.portfolio-grid-extra');
+    if (btnMore && extraGrid) {
+      btnMore.addEventListener('click', () => {
+        extraGrid.style.display = '';
+        extraGrid.classList.add('visible');
+        btnMore.style.display = 'none';
+      });
+    }
 
     // ===== Portfolio shuffle =====
     function shuffleChildren(container) {
@@ -2437,7 +2370,7 @@
     const caret = document.createElement('span');
     caret.className = 'caret';
     caret.setAttribute('aria-hidden', 'true');
-    fragment.insertBefore(caret, fragment.firstChild);
+    fragment.appendChild(caret);
 
     catchEl.innerHTML = '';
     catchEl.setAttribute('aria-label', '期待のその先をつくる。');
@@ -2450,20 +2383,20 @@
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       catchEl.classList.add('typing-done');
+      const caret = catchEl.querySelector('.caret');
+      if (caret) caret.remove();
       return;
     }
 
     const chars = catchEl.querySelectorAll('.char');
-    const caret = catchEl.querySelector('.caret');
-
-    chars.forEach((char, index) => {
-      char.addEventListener('animationend', () => {
-        if (caret) char.insertAdjacentElement('afterend', caret);
-        if (index === chars.length - 1) {
-          catchEl.classList.add('typing-done');
-        }
+    if (chars.length > 0) {
+      const lastChar = chars[chars.length - 1];
+      lastChar.addEventListener('animationend', () => {
+        catchEl.classList.add('typing-done');
+        const caret = catchEl.querySelector('.caret');
+        if (caret) setTimeout(() => caret.remove(), 1000);
       }, { once: true });
-    });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', splitChars);
@@ -2615,6 +2548,23 @@
       observer.observe(grid);
     });
 
+    // 「もっと見る」ボタン追加購読（既存ハンドラは置換せず併存）
+    var btnMore = document.getElementById('btnMore');
+    var extraGrid = document.querySelector('.portfolio-grid-extra');
+    if (btnMore && extraGrid) {
+      btnMore.addEventListener('click', function() {
+        // 既存ハンドラが display を解除した後に走らせる
+        requestAnimationFrame(function() {
+          applyIndex(extraGrid);
+          var rect = extraGrid.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            applyFlipIn(extraGrid);
+          } else {
+            observer.observe(extraGrid);
+          }
+        });
+      });
+    }
   })();
 
   // ===== Works Slide Right =====
