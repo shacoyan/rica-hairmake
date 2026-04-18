@@ -487,8 +487,12 @@
       cursor: pointer;
       position: relative;
       transform-origin: center center;
-      transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+      opacity: 0;
+      transform: perspective(800px) rotateY(-90deg);
+      backface-visibility: hidden;
+      will-change: transform;
       background: #f0f0f0;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .portfolio-item img {
       width: 100%;
@@ -496,36 +500,19 @@
       object-fit: cover;
       display: block;
     }
-    .portfolio-item:hover {
-      transform: scale(1.06);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-      z-index: 2;
-      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
-      transform-origin: center center;
-    }
-
-    /* ===== Portfolio Flip-in (D) ===== */
-    .portfolio-item {
-      opacity: 0;
-      transform: perspective(800px) rotateY(-90deg);
+    .portfolio-item:not(.flip-in) {
       transform-origin: left center;
-      backface-visibility: hidden;
-      will-change: transform, opacity;
-      transition:
-        transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.7s ease,
-        box-shadow 0.3s;
-      transition-delay: calc(var(--i, 0) * 80ms);
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 80ms), opacity 0.7s ease calc(var(--i, 0) * 80ms);
     }
     .portfolio-item.flip-in {
       opacity: 1;
       transform: perspective(800px) rotateY(0deg);
+      transform-origin: center center;
     }
     .portfolio-item.flip-in:hover {
-      transform: perspective(800px) rotateY(0deg) scale(1.06);
-      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+      transform: perspective(800px) rotateY(0deg) translateY(-4px) scale(1.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
       z-index: 2;
-      transform-origin: center center;
     }
     .portfolio-item.will-change-done {
       will-change: auto;
@@ -648,7 +635,13 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      transition-property: transform, box-shadow;
+      transition-duration: 0.3s, 0.3s;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1), ease-out;
+      will-change: transform;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      transform-origin: center center;
     }
     .work-card:hover {
       transform: translateY(-8px) scale(1.02);
@@ -1367,6 +1360,9 @@
     }
 
     /* ===== Hero Typing ===== */
+    .hero-catch {
+      position: relative;
+    }
     .hero-catch .char {
       display: inline-block;
       opacity: 0;
@@ -1380,13 +1376,17 @@
     }
     .hero-catch .char.space { width: 0.25em; }
     .hero-catch .caret {
-      display: inline-block;
-      width: 1px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
       height: 1em;
       background: currentColor;
-      margin-left: 0.05em;
-      vertical-align: -0.12em;
       opacity: 0;
+      transform: translate(0, 0);
+      transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      will-change: transform, opacity;
       animation: heroCaretBlink 1.1s ease-in-out infinite;
     }
     .hero-catch.typing-start .caret {
@@ -1400,7 +1400,7 @@
       pointer-events: none;
       animation: none;
       opacity: 0;
-      transition: opacity 0.4s ease 0.2s;
+      transition: opacity 0.4s ease 0.2s, transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     @keyframes heroCharIn {
       to { opacity: 1; transform: translateY(0); }
@@ -1410,7 +1410,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-catch .char { animation: none !important; opacity: 1 !important; transform: none !important; }
-      .hero-catch .caret { animation: none; opacity: 0; }
+      .hero-catch .caret { animation: none; opacity: 0; transition: none; }
     }
 
     /* ===== work-card-clickable（画像カード一律クリック対応） ===== */
@@ -2474,16 +2474,37 @@
       return;
     }
 
-    const chars = catchEl.querySelectorAll('.char');
+    const chars = Array.from(catchEl.querySelectorAll('.char'));
     const caret = catchEl.querySelector('.caret');
+    if (!caret || chars.length === 0) return;
+
+    const moveCaretTo = (el, atEnd = false) => {
+      const parentRect = catchEl.getBoundingClientRect();
+      const rect = el.getBoundingClientRect();
+      const x = rect.left - parentRect.left + (atEnd ? rect.width : 0);
+      const y = rect.top - parentRect.top;
+      caret.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+    };
+
+    requestAnimationFrame(() => {
+      moveCaretTo(chars[0], false);
+    });
 
     chars.forEach((char, index) => {
-      char.addEventListener('animationend', () => {
-        if (caret) char.insertAdjacentElement('afterend', caret);
-        if (index === chars.length - 1) {
-          catchEl.classList.add('typing-done');
+      char.addEventListener('animationstart', () => {
+        const next = chars[index + 1];
+        if (next) {
+          moveCaretTo(next, false);
+        } else {
+          moveCaretTo(char, true);
         }
       }, { once: true });
+
+      if (index === chars.length - 1) {
+        char.addEventListener('animationend', () => {
+          catchEl.classList.add('typing-done');
+        }, { once: true });
+      }
     });
   }
 
