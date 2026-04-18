@@ -2482,7 +2482,8 @@
       const parentRect = catchEl.getBoundingClientRect();
       const rect = el.getBoundingClientRect();
       const x = rect.left - parentRect.left + (atEnd ? rect.width : 0);
-      const y = rect.top - parentRect.top;
+      const caretH = caret.offsetHeight;
+      const y = rect.top - parentRect.top + (rect.height - caretH) / 2;
       caret.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     };
 
