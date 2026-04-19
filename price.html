@@ -1608,34 +1608,36 @@
       });
     });
 
-    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
-    lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
+    if (lightbox) {
+      lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
+      lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
 
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
 
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
-      if (e.key === 'Tab') {
-        // Focus trap: lightbox 内のフォーカス可能要素に閉じ込める
-        const focusable = lightbox.querySelectorAll('button');
-        if (focusable.length === 0) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Tab') {
+          // Focus trap: lightbox 内のフォーカス可能要素に閉じ込める
+          const focusable = lightbox.querySelectorAll('button');
+          if (focusable.length === 0) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
         }
-      }
-    });
+      });
+    }
 
     // ===== Lightbox Media Extensions (Video / YouTube / Image / Instagram) =====
     /**
@@ -1785,11 +1787,14 @@
     })();
 
     // ===== Form submit =====
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
-      e.target.reset();
-    });
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
+        e.target.reset();
+      });
+    }
 
     // ===== 全 .has-image 画像カードを画像Lightbox対応 =====
     document.querySelectorAll('.work-card:not(.work-card-media):not(.has-card-carousel)').forEach((card) => {

@@ -1811,11 +1811,14 @@
     })();
 
     // ===== Form submit =====
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
-      e.target.reset();
-    });
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
+        e.target.reset();
+      });
+    }
 
     // ===== 全 .has-image 画像カードを画像Lightbox対応 =====
     document.querySelectorAll('.work-card:not(.work-card-media):not(.has-card-carousel)').forEach((card) => {
