@@ -570,6 +570,12 @@
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* Portfolio 表示枚数制限: PC/タブレット 12枚 / SP 8枚 */
+    .portfolio-item:nth-child(n+13) { display: none; }
+    @media (max-width: 480px) {
+      .portfolio-item:nth-child(n+9) { display: none; }
+    }
+
     /* ===== Works ===== */
     .works {
       background: var(--mint-bg);
@@ -1719,8 +1725,6 @@
           </div>
         </div>
         <ul class="works-others">
-          <li>藍住町PR動画</li>
-          <li>神鋼不動産CM</li>
           <li>ブックオフCM</li>
           <li>高須クリニック</li>
           <li>らくおう説明動画</li>
@@ -2139,6 +2143,7 @@
 
     function collectGalleryLightboxItems() {
       lightboxItems = Array.from(document.querySelectorAll('.portfolio-item img'))
+        .filter(img => img.closest('.portfolio-item').offsetParent !== null)
         .map(img => ({ src: img.src, alt: img.alt || '' }));
     }
     collectGalleryLightboxItems();
@@ -2183,7 +2188,7 @@
       lightboxImg.alt = lightboxItems[lightboxIndex].alt;
     }
 
-    const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+    const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item')).filter(item => item.offsetParent !== null);
     portfolioItems.forEach((item, idx) => {
       item.addEventListener('click', () => {
         collectGalleryLightboxItems();
