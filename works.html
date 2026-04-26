@@ -535,23 +535,35 @@
 
     .btn-more {
       display: block;
-      margin: 2rem auto 3rem;
+      width: max-content;
+      margin: 2.5rem auto 3rem;
       padding: 0.8rem 3rem;
+      min-height: 44px;
       border: 2px solid var(--coral);
       border-radius: 24px;
       background: none;
       font-size: 0.8rem;
+      line-height: 1;
+      white-space: nowrap;
       letter-spacing: 0.1em;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       font-family: 'M PLUS Rounded 1c', sans-serif;
       color: var(--coral);
       font-weight: 500;
+      text-decoration: none;
+      will-change: opacity, transform;
+      transform-origin: center;
     }
     .btn-more:hover {
       background: var(--coral);
       color: var(--white);
       transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .btn-more {
+        padding: 0.9rem 2.4rem;
+      }
     }
 
 
@@ -1163,7 +1175,8 @@
       justify-content: center;
     }
     .card-carousel-slide.is-active { opacity: 1; }
-    .card-carousel-slide img {
+    .card-carousel-slide img,
+    .card-carousel-slide video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1805,13 +1818,7 @@
               <h5>マッチングアプリジョイナス ショートドラマ</h5>
             </div>
           </div>
-          <div class="work-card">
-            <div class="work-card-thumb">Thumbnail</div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
-            </div>
-          </div>
+
           <div class="work-card">
             <div class="work-card-thumb">Thumbnail</div>
             <div class="work-card-body">
@@ -1829,121 +1836,65 @@
       <!-- モデル -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル</h3>
-        <ul class="works-others">
-          <li>Coming soon...</li>
-        </ul>
+        <div class="works-featured">
+          <div class="work-card">
+            <div class="work-card-thumb">Thumbnail</div>
+            <div class="work-card-body">
+              <span class="star-badge">PICKUP</span>
+              <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 13: PORTRAIT ポートレートモデル（portrait-new-01 〜 portrait-new-12） -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">PORTRAIT</span> ポートレートモデル</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-01.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 01</h5>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="0" aria-roledescription="carousel" aria-label="ポートレートモデル スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 12">
+                  <img src="images/works/portrait-new-01.jpg" alt="ポートレートモデル 01" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 12">
+                  <img src="images/works/portrait-new-02.jpg" alt="ポートレートモデル 02" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 12">
+                  <img src="images/works/portrait-new-03.jpg" alt="ポートレートモデル 03" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 12">
+                  <img src="images/works/portrait-new-04.jpg" alt="ポートレートモデル 04" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 12">
+                  <img src="images/works/portrait-new-05.jpg" alt="ポートレートモデル 05" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 12">
+                  <img src="images/works/portrait-new-06.jpg" alt="ポートレートモデル 06" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="7 / 12">
+                  <img src="images/works/portrait-new-07.jpg" alt="ポートレートモデル 07" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="8 / 12">
+                  <img src="images/works/portrait-new-08.jpg" alt="ポートレートモデル 08" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="9 / 12">
+                  <img src="images/works/portrait-new-09.jpg" alt="ポートレートモデル 09" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="10 / 12">
+                  <img src="images/works/portrait-new-10.jpg" alt="ポートレートモデル 10" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="11 / 12">
+                  <img src="images/works/portrait-new-11.jpg" alt="ポートレートモデル 11" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="12 / 12">
+                  <img src="images/works/portrait-new-12.jpg" alt="ポートレートモデル 12" loading="lazy" decoding="async">
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-02.jpg');"
-                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 02</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-03.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 03</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-04.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 04</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-05.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 05</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-06.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 06</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-07.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 07</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-08.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 08</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-09.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 09</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-10.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 10</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-11.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 11</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-12.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 12</h5>
+              <h5>ポートレートモデル</h5>
             </div>
           </div>
         </div>
@@ -1953,40 +1904,26 @@
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル仕事 / 音遊</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/oto-asobi-01.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>音遊 01</h5>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="1" aria-roledescription="carousel" aria-label="モデル仕事 / 音遊 スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 4">
+                  <img src="images/works/oto-asobi-01.jpg" alt="モデル仕事 / 音遊 01" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 4">
+                  <img src="images/works/oto-asobi-02.jpg" alt="モデル仕事 / 音遊 02" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 4">
+                  <img src="images/works/oto-asobi-03.jpg" alt="モデル仕事 / 音遊 03" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 4">
+                  <img src="images/works/oto-asobi-04.jpg" alt="モデル仕事 / 音遊 04" loading="lazy" decoding="async">
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/oto-asobi-02.jpg');"
-                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>音遊 02</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/oto-asobi-03.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>音遊 03</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/oto-asobi-04.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>音遊 04</h5>
+              <h5>モデル仕事 / 音遊</h5>
             </div>
           </div>
         </div>
@@ -1996,62 +1933,36 @@
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">PORTRAIT</span> ポートレートモデル</h3>
         <div class="works-featured">
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-13.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 13</h5>
+          <div class="work-card has-card-carousel">
+            <div class="card-carousel" data-interval="3500" data-phase="2"
+                 aria-roledescription="carousel" aria-label="ポートレートモデル 第2弾 スライドショー">
+              <div class="card-carousel-track">
+                <div class="card-carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 6">
+                  <img src="images/works/portrait-new-13.jpg" alt="ポートレートモデル 13" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 / 6">
+                  <img src="images/works/portrait-new-14.jpg" alt="ポートレートモデル 14" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 / 6">
+                  <video src="images/works/portrait-new-15.mp4"
+                         poster="images/works/portrait-new-15-poster.jpg"
+                         autoplay muted loop playsinline preload="metadata"
+                         aria-label="ポートレートモデル 15"></video>
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 / 6">
+                  <img src="images/works/portrait-new-16.jpg" alt="ポートレートモデル 16" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="5 / 6">
+                  <img src="images/works/portrait-new-17.jpg" alt="ポートレートモデル 17" loading="lazy" decoding="async">
+                </div>
+                <div class="card-carousel-slide" role="group" aria-roledescription="slide" aria-label="6 / 6">
+                  <img src="images/works/portrait-new-18.jpg" alt="ポートレートモデル 18" loading="lazy" decoding="async">
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-14.jpg');"
-                 aria-hidden="true"></div>
             <div class="work-card-body">
               <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 14</h5>
-            </div>
-          </div>
-          <div class="work-card work-card-media"
-               data-media-type="video"
-               data-media-url="images/works/portrait-new-15.mp4"
-               role="button" tabindex="0"
-               aria-label="ポートレートモデル 15 を再生">
-            <div class="work-card-thumb has-image video"
-                 style="background-image: url('images/works/portrait-new-15-poster.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 15</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-16.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 16</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-17.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 17</h5>
-            </div>
-          </div>
-          <div class="work-card">
-            <div class="work-card-thumb has-image"
-                 style="background-image: url('images/works/portrait-new-18.jpg');"
-                 aria-hidden="true"></div>
-            <div class="work-card-body">
-              <span class="star-badge">PICKUP</span>
-              <h5>ポートレートモデル 18</h5>
+              <h5>ポートレートモデル</h5>
             </div>
           </div>
         </div>
