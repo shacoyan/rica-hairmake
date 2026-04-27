@@ -1412,6 +1412,56 @@
     border-bottom: 1px dashed var(--mint-light);
   }
   .price-details-list li:last-child { border-bottom: none; }
+
+  /* ===== Price Details 拡張（料金詳細用） ===== */
+  .price-details-list li.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .price-details-list li.price-row .menu-name {
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+  .price-details-list li.price-row .menu-price {
+    font-family: 'Poppins', sans-serif;
+    color: var(--coral);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .price-details-list li.price-row .menu-note {
+    display: block;
+    width: 100%;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 0.2rem;
+  }
+  /* カテゴリ見出しの左ボーダーアクセント（既存 .price-details h3 を上書きしない範囲で） */
+  .price-details h3.price-cat {
+    padding-left: 0.7rem;
+    border-left: 4px solid var(--coral-light);
+  }
+  .price-details h3.price-cat:nth-of-type(2n) { border-left-color: var(--mint-light); }
+  .price-details h3.price-cat:nth-of-type(3n) { border-left-color: var(--lavender-light); }
+
+  /* 注意事項セクション（同じ .price-details の中で軽くトーンを変える） */
+  .price-notes h3.price-cat { border-left-color: var(--lavender-light); }
+  .price-notes .price-details-list li {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  .price-notes .price-details-list li strong {
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .price-details { padding: 1.2rem; }
+    .price-details-list li.price-row .menu-price { font-size: 0.9rem; }
+  }
   </style>
 </head>
 <body>
@@ -1450,9 +1500,9 @@
         <!-- TOP と同じ 3 枚の料金カード -->
         <div class="price-grid fade-in">
           <div class="price-card">
-            <h4>フルメイク</h4>
+            <h4>クリエイティブメイク</h4>
             <p class="price-amount">¥15,000<small>~</small></p>
-            <p class="price-from">ヘア&フルメイク</p>
+            <p class="price-from">ヘア&クリエイティブメイク</p>
           </div>
           <div class="price-card popular">
             <span class="price-badge">一番人気</span>
@@ -1469,21 +1519,110 @@
 
         <p class="price-note fade-in">※ 交通費別途 / 詳細は下記プランをご覧ください</p>
 
-        <!-- 詳細プレースホルダー -->
         <section class="price-details fade-in">
-          <h3>オプション・追加料金</h3>
+          <h3 class="price-cat">キッズヘアメイク</h3>
           <ul class="price-details-list">
-            <li>※ 詳細は現在準備中です。公開までお待ちください。</li>
+            <li class="price-row"><span class="menu-name">キッズヘアメイク（12歳まで）</span><span class="menu-price">¥8,800</span></li>
           </ul>
 
-          <h3>出張料金・交通費</h3>
+          <h3 class="price-cat">メンズメイク</h3>
           <ul class="price-details-list">
-            <li>※ 詳細は現在準備中です。</li>
+            <li class="price-row"><span class="menu-name">メンズメイク</span><span class="menu-price">¥8,800</span></li>
           </ul>
 
-          <h3>団体・企業様向けプラン</h3>
+          <h3 class="price-cat">成人式</h3>
           <ul class="price-details-list">
-            <li>※ 詳細は現在準備中です。</li>
+            <li class="price-row"><span class="menu-name">写真 付き添いなし</span><span class="menu-price">¥15,000</span></li>
+            <li class="price-row"><span class="menu-name">付き添いあり</span><span class="menu-price">¥25,000</span></li>
+            <li class="price-row"><span class="menu-name">成人式ヘアセットのみ</span><span class="menu-price">¥5,500</span></li>
+          </ul>
+
+          <h3 class="price-cat">ブライダル</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">ブライダルフォト ヘアメイク</span><span class="menu-price">¥25,000</span></li>
+            <li class="price-row"><span class="menu-name">ブライダル式当日 ヘアメイク</span><span class="menu-price">¥55,000</span></li>
+            <li class="price-row"><span class="menu-name">オプション：リハーサルメイク</span><span class="menu-price">+¥5,500</span></li>
+          </ul>
+
+          <h3 class="price-cat">七五三</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">七五三ヘアメイク</span><span class="menu-price">¥6,600</span></li>
+          </ul>
+
+          <h3 class="price-cat">ポートレート</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">1パターン</span><span class="menu-price">¥15,000</span></li>
+            <li class="price-row"><span class="menu-name">2パターン</span><span class="menu-price">¥18,000</span></li>
+            <li class="price-row"><span class="menu-name">展示に出す場合</span><span class="menu-price">+¥3,000</span></li>
+          </ul>
+
+          <h3 class="price-cat">プロフィール写真</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">付き添いなし</span><span class="menu-price">¥15,000</span></li>
+            <li class="price-row">
+              <span class="menu-name">付き添いあり</span><span class="menu-price">¥18,000</span>
+              <span class="menu-note">※ 付き添いありのみ1回チェンジあり</span>
+            </li>
+          </ul>
+
+          <h3 class="price-cat">変身ヘアメイク</h3>
+          <ul class="price-details-list">
+            <li class="price-row">
+              <span class="menu-name">コスプレ・黒ギャル・V系・女装 など</span><span class="menu-price">¥18,000</span>
+            </li>
+          </ul>
+
+          <h3 class="price-cat">ペイント&amp;傷メイク</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">ペイント&amp;傷メイク</span><span class="menu-price">¥4,500</span></li>
+          </ul>
+
+          <h3 class="price-cat">ヘアセット</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">基本ヘアセット</span><span class="menu-price">¥3,300</span></li>
+            <li class="price-row"><span class="menu-name">和装ヘアセット</span><span class="menu-price">¥4,500</span></li>
+            <li class="price-row"><span class="menu-name">推し活ヘアセット</span><span class="menu-price">¥4,500</span></li>
+          </ul>
+
+          <h3 class="price-cat">メイクメニュー</h3>
+          <ul class="price-details-list">
+            <li class="price-row"><span class="menu-name">ナチュラルメイク</span><span class="menu-price">¥8,800</span></li>
+            <li class="price-row"><span class="menu-name">クリエイティブメイク</span><span class="menu-price">¥12,000</span></li>
+            <li class="price-row"><span class="menu-name">ポイントメイク</span><span class="menu-price">¥3,300</span></li>
+          </ul>
+        </section>
+
+        <section class="price-details price-notes fade-in">
+          <h3 class="price-cat">キャンセルについて</h3>
+          <ul class="price-details-list">
+            <li><strong>3日前まで</strong>：変更・キャンセル無料</li>
+            <li><strong>前日まで</strong>：50% 頂戴します（交通費はかかりません）</li>
+            <li><strong>当日</strong>：100% 頂戴します（サービス料 + 交通費・早朝深夜料金も含む）</li>
+          </ul>
+
+          <h3 class="price-cat">早朝料金</h3>
+          <ul class="price-details-list">
+            <li>6:00〜8:00台のご依頼は早朝料金として <strong>+¥2,000</strong></li>
+          </ul>
+
+          <h3 class="price-cat">深夜料金</h3>
+          <ul class="price-details-list">
+            <li>23:00〜5:00台のご依頼は深夜料金として <strong>+¥2,500</strong></li>
+          </ul>
+
+          <h3 class="price-cat">交通費・宿泊費</h3>
+          <ul class="price-details-list">
+            <li>全額頂戴します</li>
+          </ul>
+
+          <h3 class="price-cat">ヘアメイクの場所</h3>
+          <ul class="price-details-list">
+            <li>基本的にはご自宅やレンタルスペースの手配など、お客様のほうでお願いいたします</li>
+          </ul>
+
+          <h3 class="price-cat">撮影や着物などについて</h3>
+          <ul class="price-details-list">
+            <li>カメラマンや着付士など幅広く手配しております。別途料金が発生しますが、お気軽にお問い合わせください</li>
           </ul>
         </section>
 
