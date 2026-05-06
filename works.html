@@ -616,6 +616,27 @@
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
+    .works-featured-hero {
+      margin-bottom: 1.5rem;
+    }
+    .work-card.work-card-hero {
+      display: block;
+    }
+    .work-card.work-card-hero .work-card-thumb {
+      aspect-ratio: 16 / 9;
+      min-height: 360px;
+    }
+    .work-card.work-card-hero .work-card-body {
+      padding: 1.4rem 1.6rem;
+    }
+    .work-card.work-card-hero .work-card-body h5 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .work-card.work-card-hero .work-card-thumb { min-height: 220px; }
+      .work-card.work-card-hero .work-card-body h5 { font-size: 1rem; }
+    }
     .work-card {
       background: var(--white);
       border-radius: 20px;
@@ -1783,59 +1804,13 @@
         </div>
       </div>
 
-      <!-- ブライダル・成人式 -->
-      <div class="works-category work-slide-right">
-        <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
-        <ul class="works-others">
-          <li>サガノカン（卒業前撮り）</li>
-          <li>京都むらさき</li>
-          <li>キモノハーツ神戸</li>
-          <li>アトリエロゼ</li>
-          <li>エマーサ</li>
-          <li>ブライダル千代田</li>
-          <li>ファーストステージ</li>
-        </ul>
-      </div>
-  
-      <!-- 有名人 -->
-      <div class="works-category work-slide-right">
-        <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
-        <ul class="celeb-grid">
-          <li>よゐこ有野さん</li>
-          <li>misonoさん</li>
-          <li>キテレツ佐々木大光さん</li>
-          <li>YouTuber ゑむ氏</li>
-          <li>指揮者 佐渡裕さん</li>
-          <li>大川藍さん</li>
-          <li>クイズノック こうちゃんさん</li>
-          <li>ギターリスト AZさん</li>
-          <li>FIELD OF VIEW 浅岡雄也さん</li>
-          <li>声優 土岐隼一さん</li>
-          <li>俳優 リッチー・コーさん</li>
-          <li>ダンサー ヒヨリさん</li>
-          <li>ストリーマー　LiagNさん</li>
-          <li>ストリーマー　スタンミさん</li>
-          <li>フォレスタ（財木麗子・吉田明未・三宅里菜）</li>
-        </ul>
-      </div>
-  
-      <!-- メディア出演 -->
-      <div class="works-category work-slide-right">
-        <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
-        <ul class="works-others">
-          <li>ほんわかテレビ メイク解説者</li>
-          <li>クレンジングバームDUO PRショート</li>
-          <li>マッチングアプリジョイナス ショートドラマ</li>
-        </ul>
-      </div>
-  
       <!-- モデル -->
       <div class="works-category work-slide-right">
         <h3 class="works-category-title"><span class="cat-label">MODEL</span> モデル</h3>
-        <div class="works-featured">
 
-          <!-- (1) 南海電鉄フリーペーパーnuts 7月号表紙 (既存) -->
-          <div class="work-card">
+        <!-- (1) 南海電鉄フリーペーパーnuts 7月号表紙 (Hero) -->
+        <div class="works-featured-hero">
+          <div class="work-card work-card-hero">
             <div class="work-card-thumb has-image"
                  style="background-image: url('images/works/nankai-natts-cover.jpg');"
                  aria-hidden="true"></div>
@@ -1844,6 +1819,9 @@
               <h5>南海電鉄フリーペーパーnuts 7月号表紙</h5>
             </div>
           </div>
+        </div>
+
+        <div class="works-featured">
 
           <!-- (2) スタジオ心お正月プランSNS宣伝 (旧 MEDIA から移動: shogatsu-01〜05) -->
           <div class="work-card has-card-carousel">
@@ -1966,6 +1944,52 @@
           </div>
 
         </div>
+      </div>
+
+      <!-- ブライダル・成人式 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">BRIDAL</span> ブライダル・成人式</h3>
+        <ul class="works-others">
+          <li>サガノカン（卒業前撮り）</li>
+          <li>京都むらさき</li>
+          <li>キモノハーツ神戸</li>
+          <li>アトリエロゼ</li>
+          <li>エマーサ</li>
+          <li>ブライダル千代田</li>
+          <li>ファーストステージ</li>
+        </ul>
+      </div>
+  
+      <!-- 有名人 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">CELEB</span> 有名人</h3>
+        <ul class="celeb-grid">
+          <li>よゐこ有野さん</li>
+          <li>misonoさん</li>
+          <li>キテレツ佐々木大光さん</li>
+          <li>YouTuber ゑむ氏</li>
+          <li>指揮者 佐渡裕さん</li>
+          <li>大川藍さん</li>
+          <li>クイズノック こうちゃんさん</li>
+          <li>ギターリスト AZさん</li>
+          <li>FIELD OF VIEW 浅岡雄也さん</li>
+          <li>声優 土岐隼一さん</li>
+          <li>俳優 リッチー・コーさん</li>
+          <li>ダンサー ヒヨリさん</li>
+          <li>ストリーマー　LiagNさん</li>
+          <li>ストリーマー　スタンミさん</li>
+          <li>フォレスタ（財木麗子・吉田明未・三宅里菜）</li>
+        </ul>
+      </div>
+  
+      <!-- メディア出演 -->
+      <div class="works-category work-slide-right">
+        <h3 class="works-category-title"><span class="cat-label">MEDIA</span> メディア出演</h3>
+        <ul class="works-others">
+          <li>ほんわかテレビ メイク解説者</li>
+          <li>クレンジングバームDUO PRショート</li>
+          <li>マッチングアプリジョイナス ショートドラマ</li>
+        </ul>
       </div>
 
       <a href="index.html" class="btn-more fade-in">TOP に戻る</a>
