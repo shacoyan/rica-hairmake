@@ -276,13 +276,13 @@
       .hero-sub, .hero-name { font-size: 0.7rem; }
       .hero-name { margin-top: 0.1rem !important; }
       .scroll-indicator {
-        top: 70% !important;
-        bottom: auto !important;
+        top: auto !important;
+        bottom: 1.2rem !important;
         left: auto !important;
         right: 0.6rem !important;
         flex-direction: column !important;
         gap: 0.4rem !important;
-        transform: translateY(-50%) !important;
+        transform: none !important;
       }
       .scroll-indicator span {
         writing-mode: vertical-rl !important;
@@ -1993,7 +1993,7 @@
         <!-- 企業フォーム -->
         <div class="contact-form">
           <h4>企業様向けお問い合わせ</h4>
-          <form id="contactForm">
+          <form id="contactForm" action="https://formspree.io/f/xkoybdnv" method="POST">
             <div class="form-group">
               <label for="company">会社名 <span style="color:var(--coral)" aria-hidden="true">*</span></label>
               <input type="text" id="company" name="company" required aria-required="true">
@@ -2371,10 +2371,39 @@
     })();
 
     // ===== Form submit =====
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
-      e.target.reset();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中...';
+      }
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          alert('お問い合わせありがとうございます。3営業日以内にご連絡いたします。');
+          form.reset();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          const msg = (data && Array.isArray(data.errors) && data.errors.length)
+            ? data.errors.map(x => x.message).join('\n')
+            : '送信に失敗しました。時間をおいて再度お試しください。';
+          alert(msg);
+        }
+      } catch (err) {
+        alert('ネットワークエラーが発生しました。通信環境をご確認のうえ再度お試しください。');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        }
+      }
     });
 
     // ===== 全 .has-image 画像カードを画像Lightbox対応 =====
