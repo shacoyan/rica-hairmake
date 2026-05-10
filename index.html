@@ -12,7 +12,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Rica Nakano | Hair & Makeup Artist">
   <meta property="og:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。">
-  <meta property="og:image" content="images/hero.jpg">
+  <meta property="og:image" content="https://rica-nakano.com/images/hero.jpg">
   <meta property="og:url" content="https://rica-nakano.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rica Nakano | Hair & Makeup Artist">
@@ -21,18 +21,45 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rica Nakano | Hair & Makeup Artist">
   <meta name="twitter:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano のポートフォリオサイト。">
-  <meta name="twitter:image" content="images/hero.jpg">
+  <meta name="twitter:image" content="https://rica-nakano.com/images/hero.jpg">
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rica Nakano",
+    "@type": "ProfessionalService",
+    "name": "Rica Nakano Hair & Makeup",
     "alternateName": "ナカノ リカ",
-    "jobTitle": "Hair & Makeup Artist",
-    "birthPlace": "大阪府吹田市",
     "url": "https://rica-nakano.com/",
-    "image": "images/profile.jpg",
+    "image": "https://rica-nakano.com/images/profile.jpg",
+    "logo": "https://rica-nakano.com/logo.png",
+    "description": "大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "大阪府"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "大阪府" },
+      { "@type": "AdministrativeArea", "name": "京都府" },
+      { "@type": "AdministrativeArea", "name": "兵庫県" },
+      { "@type": "AdministrativeArea", "name": "東京都" }
+    ],
+    "knowsAbout": [
+      "ヘアメイク",
+      "ブライダルヘアメイク",
+      "広告ヘアメイク",
+      "CM ヘアメイク",
+      "ミュージックビデオ ヘアメイク",
+      "スチール撮影 ヘアメイク",
+      "クリエイティブメイク"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Rica Nakano",
+      "alternateName": "ナカノ リカ",
+      "jobTitle": "Hair & Makeup Artist",
+      "birthPlace": "大阪府吹田市"
+    },
     "sameAs": []
   }
   </script>
@@ -47,6 +74,19 @@
     @media (max-width: 768px) { .sp-only { display: inline; } }
     br.sp-only { display: none; }
     @media (max-width: 768px) { br.sp-only { display: inline; } }
+
+    /* ===== A11y / SEO ===== */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1547,7 +1587,7 @@
 </head>
 <body>
 <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
-  <img src="logo.png" alt="" class="loading-logo" id="loadingLogo" width="976" height="479">
+  <img src="logo.png" alt="" role="presentation" class="loading-logo" id="loadingLogo" width="976" height="479">
 </div>
 
   <!-- ===== Header ===== -->
@@ -1576,6 +1616,7 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="hero">
+    <h1 class="visually-hidden">ナカノ リカ｜大阪拠点のヘアメイクアーティスト Rica Nakano 公式サイト</h1>
     <div class="hero-content">
       <img src="logo.png" alt="RICA NAKANO Hair & Makeup Artist ロゴ" class="hero-logo" width="976" height="479" fetchpriority="high">
       <p class="hero-catch">期待の<br class="sp-only">その先をつくる。</p>
@@ -2059,7 +2100,7 @@
     <button type="button" class="lightbox-close" aria-label="閉じる">&times;</button>
     <button type="button" class="lightbox-prev" aria-label="前の画像">&#8249;</button>
     <button type="button" class="lightbox-next" aria-label="次の画像">&#8250;</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" role="presentation">
     <div class="lightbox-video-wrap" id="lightboxVideoWrap" aria-hidden="true"></div>
   </div>
 

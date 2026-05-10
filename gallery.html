@@ -4,36 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | Rica Nakano</title>
-  <meta name="description" content="ナカノ リカのヘアメイク作品ギャラリー 全57点。">
+  <meta name="description" content="大阪拠点のヘアメイクアーティスト ナカノ リカ（Rica Nakano）の作品ギャラリー。ポートレート・ブライダル・広告・MV・スチールなど全 57 点のヘアメイク実績写真を一覧で公開しています。">
   <meta name="theme-color" content="#FF1493">
-  <link rel="canonical" href="https://rica-nakano.com/">
+  <link rel="canonical" href="https://rica-nakano.com/gallery.html">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="apple-touch-icon" href="logo.png">
   <!-- Open Graph -->
-  <meta property="og:title" content="Rica Nakano | Hair & Makeup Artist">
-  <meta property="og:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。">
-  <meta property="og:image" content="images/hero.jpg">
-  <meta property="og:url" content="https://rica-nakano.com/">
+  <meta property="og:title" content="Gallery | Rica Nakano - ヘアメイク作品ギャラリー">
+  <meta property="og:description" content="大阪拠点のヘアメイクアーティスト ナカノ リカ（Rica Nakano）の作品ギャラリー。ポートレート・ブライダル・広告・MV・スチールなど全 57 点のヘアメイク実績写真を一覧で公開しています。">
+  <meta property="og:image" content="https://rica-nakano.com/images/hero.jpg">
+  <meta property="og:url" content="https://rica-nakano.com/gallery.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rica Nakano | Hair & Makeup Artist">
   <meta property="og:locale" content="ja_JP">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Rica Nakano | Hair & Makeup Artist">
-  <meta name="twitter:description" content="大阪拠点のヘアメイクアーティスト Rica Nakano のポートフォリオサイト。">
-  <meta name="twitter:image" content="images/hero.jpg">
+  <meta name="twitter:title" content="Gallery | Rica Nakano - ヘアメイク作品ギャラリー">
+  <meta name="twitter:description" content="大阪拠点のヘアメイクアーティスト ナカノ リカ（Rica Nakano）の作品ギャラリー。ポートレート・ブライダル・広告・MV・スチールなど全 57 点のヘアメイク実績写真を一覧で公開しています。">
+  <meta name="twitter:image" content="https://rica-nakano.com/images/hero.jpg">
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rica Nakano",
+    "@type": "ProfessionalService",
+    "name": "Rica Nakano Hair & Makeup",
     "alternateName": "ナカノ リカ",
-    "jobTitle": "Hair & Makeup Artist",
-    "birthPlace": "大阪府吹田市",
     "url": "https://rica-nakano.com/",
-    "image": "images/profile.jpg",
+    "image": "https://rica-nakano.com/images/profile.jpg",
+    "logo": "https://rica-nakano.com/logo.png",
+    "description": "大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "大阪府"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "大阪府" },
+      { "@type": "AdministrativeArea", "name": "京都府" },
+      { "@type": "AdministrativeArea", "name": "兵庫県" },
+      { "@type": "AdministrativeArea", "name": "東京都" }
+    ],
+    "knowsAbout": [
+      "ヘアメイク",
+      "ブライダルヘアメイク",
+      "広告ヘアメイク",
+      "CM ヘアメイク",
+      "ミュージックビデオ ヘアメイク",
+      "スチール撮影 ヘアメイク",
+      "クリエイティブメイク"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Rica Nakano",
+      "alternateName": "ナカノ リカ",
+      "jobTitle": "Hair & Makeup Artist",
+      "birthPlace": "大阪府吹田市"
+    },
     "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "TOP",
+        "item": "https://rica-nakano.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gallery",
+        "item": "https://rica-nakano.com/gallery.html"
+      }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +94,19 @@
     @media (max-width: 768px) { .sp-only { display: inline; } }
     br.sp-only { display: none; }
     @media (max-width: 768px) { br.sp-only { display: inline; } }
+
+    /* ===== A11y / SEO ===== */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1442,6 +1502,7 @@
   <section class="portfolio" id="portfolio">
     <div class="container">
       <p class="breadcrumb"><a href="index.html">TOP</a> / Gallery</p>
+      <h1 class="visually-hidden">ナカノ リカ ヘアメイク作品ギャラリー | 全57点</h1>
       <h2 class="section-title fade-in">Gallery</h2>
       <p class="section-subtitle fade-in">ALL WORKS</p>
       <div class="portfolio-grid">
@@ -1510,7 +1571,7 @@
     <button type="button" class="lightbox-close" aria-label="閉じる">&times;</button>
     <button type="button" class="lightbox-prev" aria-label="前の画像">&#8249;</button>
     <button type="button" class="lightbox-next" aria-label="次の画像">&#8250;</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" role="presentation">
     <div class="lightbox-video-wrap" id="lightboxVideoWrap" aria-hidden="true"></div>
   </div>
 

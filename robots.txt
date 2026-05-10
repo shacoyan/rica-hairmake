@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rica-nakano.com/sitemap.xml
