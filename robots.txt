@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rica-nakano.com/sitemap.xml
+Sitemap: https://rica-hairmake.com/sitemap.xml
