@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>Rica Nakano | Hair & Makeup Artist</title>
   <meta name="description" content="大阪拠点のヘアメイクアーティスト Rica Nakano（ナカノリカ）のポートフォリオサイト。広告・CM・MV・スチール・ブライダル・有名人まで幅広く対応。ご依頼・お見積もりはお気軽にご相談ください。">
   <meta name="theme-color" content="#FF1493">
@@ -65,6 +66,12 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 外部埋込メディア用 preconnect -->
+  <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+  <link rel="preconnect" href="https://www.instagram.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+  <link rel="dns-prefetch" href="https://player.vimeo.com">
   <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="logo.png" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -2179,6 +2186,41 @@
 
     // ===== Lightbox =====
     const lightbox = document.getElementById('lightbox');
+    /**
+     * lightbox 画像の alt テキスト解決
+     * @param {{src:string, alt?:string, caption?:string}|undefined} item
+     * @returns {string}
+     */
+    function resolveLightboxAlt(item) {
+      if (!item) return '作品画像';
+      if (item.alt && typeof item.alt === 'string' && item.alt.trim()) return item.alt.trim();
+      if (item.caption && typeof item.caption === 'string' && item.caption.trim()) return item.caption.trim();
+      return '作品画像';
+    }
+
+    /**
+     * iframe 埋込 URL の許可ドメイン検査
+     * @param {string} url
+     * @returns {string|null}
+     */
+    function sanitizeEmbedUrl(url) {
+      if (!url || typeof url !== 'string') return null;
+      if (/^\.?\/?videos\//i.test(url)) return url;
+      let parsed;
+      try { parsed = new URL(url, window.location.href); }
+      catch (e) { console.warn('[sanitizeEmbedUrl] invalid URL:', url); return null; }
+      if (parsed.origin === window.location.origin) return url;
+      const allowedHosts = [
+        'www.youtube.com', 'youtube.com', 'www.youtube-nocookie.com', 'youtube-nocookie.com', 'youtu.be',
+        'www.instagram.com', 'instagram.com',
+        'player.vimeo.com', 'vimeo.com',
+        'www.tiktok.com', 'tiktok.com',
+      ];
+      if (allowedHosts.includes(parsed.hostname.toLowerCase())) return url;
+      console.warn('[sanitizeEmbedUrl] blocked non-whitelisted host:', parsed.hostname);
+      return null;
+    }
+
     const lightboxImg = document.getElementById('lightboxImg');
     let lightboxItems = [];           // Array<{src: string, alt: string}>
     let lightboxIndex = 0;
@@ -2195,7 +2237,8 @@
       collectGalleryLightboxItems();
       lightboxIndex = index;
       lightboxImg.src = lightboxItems[index].src;
-      lightboxImg.alt = lightboxItems[index].alt;
+      lightboxImg.removeAttribute('role');
+      lightboxImg.alt = resolveLightboxAlt(lightboxItems[index]);
       lightbox.classList.add('active', 'media-image');
       lightbox.classList.remove('media-video');
       document.body.style.overflow = 'hidden';
@@ -2206,6 +2249,8 @@
 
     function closeLightbox() {
       lightbox.classList.remove('active');
+      lightboxImg.setAttribute('role', 'presentation');
+      lightboxImg.alt = '';
       const videoWrap = document.getElementById('lightboxVideoWrap');
       if (videoWrap) videoWrap.innerHTML = '';
       lightbox.classList.remove('media-video', 'media-image', 'media-instagram');
@@ -2219,16 +2264,18 @@
       if (lightbox.classList.contains('media-video')) return;
       if (!lightboxItems.length) return;
       lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
+      lightboxImg.removeAttribute('role');
       lightboxImg.src = lightboxItems[lightboxIndex].src;
-      lightboxImg.alt = lightboxItems[lightboxIndex].alt;
+      lightboxImg.alt = resolveLightboxAlt(lightboxItems[lightboxIndex]);
     }
 
     function showNext() {
       if (lightbox.classList.contains('media-video')) return;
       if (!lightboxItems.length) return;
       lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
+      lightboxImg.removeAttribute('role');
       lightboxImg.src = lightboxItems[lightboxIndex].src;
-      lightboxImg.alt = lightboxItems[lightboxIndex].alt;
+      lightboxImg.alt = resolveLightboxAlt(lightboxItems[lightboxIndex]);
     }
 
     const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item')).filter(item => item.offsetParent !== null);
@@ -2290,25 +2337,39 @@
       // 既存のimgをリセットし、モード切り替え
       lightboxImg.src = '';
       lightboxImg.alt = '';
+      lightboxImg.setAttribute('role', 'presentation');
 
       if (type === 'video') {
         lightbox.classList.add('media-video');
         lightbox.classList.remove('media-image');
-        videoWrap.innerHTML = `<video controls autoplay playsinline><source src="${url}" type="video/mp4"></video>`;
+        {
+          const safeUrl = sanitizeEmbedUrl(url);
+          if (!safeUrl) { videoWrap.innerHTML = ''; return; }
+          videoWrap.innerHTML = `<video controls autoplay playsinline><source src="${safeUrl}" type="video/mp4"></video>`;
+        }
       } else if (type === 'youtube') {
         lightbox.classList.add('media-video');
         lightbox.classList.remove('media-image');
-        videoWrap.innerHTML = `<iframe src="${url}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        {
+          const safeUrl = sanitizeEmbedUrl(url);
+          if (!safeUrl) { videoWrap.innerHTML = ''; return; }
+          videoWrap.innerHTML = `<iframe src="${safeUrl}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        }
       } else if (type === 'instagram') {
         lightbox.classList.add('media-video', 'media-instagram');
         lightbox.classList.remove('media-image');
-        videoWrap.innerHTML = `<iframe src="${url}" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen></iframe>`;
+        {
+          const safeUrl = sanitizeEmbedUrl(url);
+          if (!safeUrl) { videoWrap.innerHTML = ''; return; }
+          videoWrap.innerHTML = `<iframe src="${safeUrl}" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen></iframe>`;
+        }
       } else if (type === 'image') {
         lightbox.classList.add('media-image');
         lightbox.classList.remove('media-video');
         videoWrap.innerHTML = '';
         lightboxImg.src = url;
-        lightboxImg.alt = alt || '';
+        lightboxImg.removeAttribute('role');
+        lightboxImg.alt = alt || resolveLightboxAlt({ alt });
 
         if (Array.isArray(imageSet) && imageSet.length > 0) {
           // カルーセル経由: 独立セットで上書き

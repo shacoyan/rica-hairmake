@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>Price | ナカノ リカ</title>
   <meta name="description" content="大阪拠点のヘアメイクアーティスト ナカノ リカ（Rica Nakano）の料金一覧。クリエイティブメイク ¥15,000〜・日常メイク ¥11,000〜・ヘアセット ¥3,300〜・ブライダル等の各メニュー料金を掲載しています。">
   <meta name="theme-color" content="#FF1493">
@@ -101,41 +102,38 @@
         {
           "@type": "Offer",
           "itemOffered": { "@type": "Service", "name": "クリエイティブメイク（ヘア＆クリエイティブメイク）" },
-          "price": "15000",
-          "priceCurrency": "JPY",
           "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "15000",
+            "@type": "UnitPriceSpecification",
             "priceCurrency": "JPY",
+            "minPrice": "15000",
             "valueAddedTaxIncluded": true,
             "description": "¥15,000〜"
-          }
+          },
+          "availability": "https://schema.org/InStock"
         },
         {
           "@type": "Offer",
           "itemOffered": { "@type": "Service", "name": "日常メイク（ナチュラルメイク）" },
-          "price": "11000",
-          "priceCurrency": "JPY",
           "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "11000",
+            "@type": "UnitPriceSpecification",
             "priceCurrency": "JPY",
+            "minPrice": "11000",
             "valueAddedTaxIncluded": true,
             "description": "¥11,000〜"
-          }
+          },
+          "availability": "https://schema.org/InStock"
         },
         {
           "@type": "Offer",
           "itemOffered": { "@type": "Service", "name": "ヘアセット（ヘアアレンジ）" },
-          "price": "3300",
-          "priceCurrency": "JPY",
           "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "3300",
+            "@type": "UnitPriceSpecification",
             "priceCurrency": "JPY",
+            "minPrice": "3300",
             "valueAddedTaxIncluded": true,
             "description": "¥3,300〜"
-          }
+          },
+          "availability": "https://schema.org/InStock"
         }
       ]
     }
@@ -143,6 +141,12 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 外部埋込メディア用 preconnect -->
+  <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+  <link rel="preconnect" href="https://www.instagram.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+  <link rel="dns-prefetch" href="https://player.vimeo.com">
   <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="logo.png" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
